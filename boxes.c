@@ -5,7 +5,7 @@
 //
 //	boxes, 8x8@4, 
 //	+ palette 256 entries, not compressed
-//	+ 1 tiles not compressed
+//	+ 1 tiles not compresseda
 //	Total size: 512 + 32 = 544
 //
 //	Time-stamp: 2018-02-15, 15:19:12
