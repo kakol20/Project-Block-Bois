@@ -1,0 +1,10 @@
+MSYS-1.0.17 Build:2011-04-24 23:39
+Exception: STATUS_ACCESS_VIOLATION at eip=02886F36
+eax=00000000 ebx=0062EDA0 ecx=000004B8 edx=000D0000 esi=0A010178 edi=0A0216A0
+ebp=0062EEA8 esp=0062ED30 program=C:\devkitPro\msys\bin\make.exe
+cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
+Stack trace:
+Frame     Function  Args
+0062EEA8  02886F36  (0062F158, 3EE3F0DF, 0062F190, 0062EF18)
+0062F18C  0062F208  (00BF00BE, 00C100C0, 00C300C2, 00C500C4)
+ 145165 [main] make 19196 handle_exceptions: Error while dumping state (probably corrupted stack)

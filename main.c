@@ -1,16 +1,13 @@
+#include <tonc.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <tonc.h>
 
 #include "main.h"
 #include "stage1.h"
 #include "player.h"
 #include "stage1Floor.h"
 #include "boxes.h"
-
-#define NUMBER_BOXES 2
-
  
  // DECLARATIONS
 
@@ -27,8 +24,6 @@ OBJ_ATTR *simplePlayer= &obj_buffer[0];
 
 Box boxes[NUMBER_BOXES];
 Player player;
-
-//
 
 int player_width = 8;
 int player_height = 8;

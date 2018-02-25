@@ -19,9 +19,9 @@ LIBTONC	:= tonclib
 INCLUDE  := -I$(LIBTONC)/include
 LIBPATHS := -L$(LIBTONC)/lib
 
-LIBS    := -ltonc
+LIBS    :=  -ltonc
 
-COBJS   := $(PROJ).o stage1.o player.o stage1Floor.o boxes.o
+COBJS   := $(PROJ).o boxes.o player.o stage1.o stage1Floor.o
 
 OBJS    := $(COBJS)
 

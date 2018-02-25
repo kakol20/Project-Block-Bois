@@ -1,6 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#define NUMBER_BOXES 2
+
 typedef struct Box {
 	OBJ_ATTR *sprite;
 	int worldX;
