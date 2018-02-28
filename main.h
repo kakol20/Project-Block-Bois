@@ -18,6 +18,8 @@ typedef struct Player {
 	OBJ_ATTR *sprite;
 	int x;
 	int y;
+	int width;
+	int height;
 	u32 pb;
 	u32 tid;
 } Player;
