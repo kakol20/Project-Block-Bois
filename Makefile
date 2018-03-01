@@ -21,8 +21,8 @@ LIBPATHS := -L$(LIBTONC)/lib
 
 LIBS    := -ltonc
 
-COBJS   := $(PROJ).o player.o stage1.o stage1Floor.o boxes/BoxClear.o
-
+COBJS   := $(PROJ).o player.o stage1.o stage1Floor.o boxes/BoxClear.o boxes/Box1.o boxes/Box2.o boxes/Box3.o boxes/Box4.o boxes/Box5.o boxes/Box6.o boxes/Box7.o boxes/Box8.o boxes/Box9.o
+ 
 OBJS    := $(COBJS)
 
 # --- boot type (MB=0 : normal. MB=1 : multiboot) ---

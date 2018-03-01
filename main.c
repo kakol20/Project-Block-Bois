@@ -8,12 +8,20 @@
 #include "player.h"
 #include "stage1Floor.h"
 #include "boxes/BoxClear.h"
+#include "boxes/Box1.h"
+#include "boxes/Box2.h"
+#include "boxes/Box3.h"
+#include "boxes/Box4.h"
+#include "boxes/Box5.h"
+#include "boxes/Box6.h"
+#include "boxes/Box7.h"
+#include "boxes/Box8.h"
+#include "boxes/Box9.h"
 
 void draw();
-// void input();
 void update();
-// void init();
 void initStage1();
+int boxCollision(int x, int y);
 
 // VARTIABLES
 OBJ_ATTR obj_buffer[128];
@@ -35,11 +43,22 @@ int yDistance;
 
 unsigned short world_grid[32][32];
 
+int boxCollision(int x, int y) {
+	int i;
+	for (i = 0; i < NUMBER_BOXES;  i++) {
+		if ((x == boxes[i].worldX) && (y == boxes[i].worldY)) {
+			return i;
+		}
+	}
+	
+	return -1;
+}
+
 void initStage1() {
 	player.width = 8;
 	player.height = 8;
-	player.x = 15;
-	player.y = 5;
+	player.x = 4;
+	player.y = 4;
 
 	backgroundX = -116 + (8 * player.x);
 	backgroundY = -72 + (8 * player.y);
@@ -68,13 +87,44 @@ void initStage1() {
 
 	memcpy(&tile_mem[4][1 /*2*/], BoxClearTiles, BoxClearTilesLen);
 	memcpy(pal_obj_mem, BoxClearPal, BoxClearPalLen);
+	
+	memcpy(&tile_mem[4][2], Box1Tiles, Box1TilesLen);
+	memcpy(pal_obj_mem, Box1Pal, Box1PalLen);
+	
+	memcpy(&tile_mem[4][3], Box2Tiles, Box2TilesLen);
+	memcpy(pal_obj_mem, Box2Pal, Box2PalLen);
+	
+	memcpy(&tile_mem[4][4], Box3Tiles, Box3TilesLen);
+	memcpy(pal_obj_mem, Box3Pal, Box3PalLen);
+	
+	memcpy(&tile_mem[4][5], Box4Tiles, Box4TilesLen);
+	memcpy(pal_obj_mem, Box4Pal, Box4PalLen);
+	
+	memcpy(&tile_mem[4][6], Box5Tiles, Box5TilesLen);
+	memcpy(pal_obj_mem, Box5Pal, Box5PalLen);
+	
+	memcpy(&tile_mem[4][7], Box6Tiles, Box6TilesLen);
+	memcpy(pal_obj_mem, Box6Pal, Box6PalLen);
+	
+	memcpy(&tile_mem[4][8], Box7Tiles, Box7TilesLen);
+	memcpy(pal_obj_mem, Box7Pal, Box7PalLen);
+	
+	memcpy(&tile_mem[4][9], Box8Tiles, Box8TilesLen);
+	memcpy(pal_obj_mem, Box8Pal, Box8PalLen);
+	
+	memcpy(&tile_mem[4][10], Box9Tiles, Box9TilesLen);
+	memcpy(pal_obj_mem, Box9Pal, Box9PalLen);
+	
 	int i;
 	for (i = 0; i < NUMBER_BOXES; i++) {
 		boxes[i].sprite = &obj_buffer[i + 1];
 		boxes[i].pb = 1;
-		boxes[i].tid = 1;
+		
+		boxes[i].value = i;
+		boxes[i].tid = boxes[i].value + 1;
+			
 		boxes[i].worldX = 1 + (i * 3);
-		boxes[i].worldY = 1;
+		boxes[i].worldY = 1 + i;
 		boxes[i].screenX = (boxes[i].worldX * 8) - backgroundX;
 		boxes[i].screenY = (boxes[i].worldY * 8) - backgroundY;
 	}
@@ -97,18 +147,56 @@ void update() {
 	// INPUT 
 
 	key_poll();
-
-	if ((key_hit(KEY_UP)) && (!world_grid[player.x][player.y - 1]) /* && (player_y >  0) */) {
-		backgroundY -= 8;
-		player.y--;
+	
+	if (key_hit(KEY_UP)) {
+		bool move = false;
+		
+		if (!world_grid[player.x][player.y - 1]) {
+			if (key_held(KEY_A) && (boxCollision(player.x, player.y - 1) >= 0) && !world_grid[player.x][player.y - 2] && (boxCollision(player.x, player.y - 2) < 0)) {
+				boxes[boxCollision(player.x, player.y - 1)].worldY--;
+				
+				move = true;
+			} else if (key_held(KEY_B) && (boxCollision(player.x, player.y + 1) >= 0) && (boxCollision(player.x, player.y - 1) < 0)) {
+				boxes[boxCollision(player.x, player.y + 1)].worldY--;
+				
+				move = true;
+			} else if (boxCollision(player.x, player.y - 1) < 0) {
+				move = true;
+			}
+		}
+		
+		if (move) {
+			backgroundY -= 8;
+			player.y--;
+		}
 	}
-
-	if ((key_hit(KEY_DOWN)) && (!world_grid[player.x][player.y + 1]) && (player.y < 31)) {
-		backgroundY += 8;
-		player.y++;
+	
+	if (key_hit(KEY_DOWN)) {
+		bool move = false;
+		
+		if (!world_grid[player.x][player.y + 1]) {
+			if (key_held(KEY_A) && (boxCollision(player.x, player.y + 1) >= 0) && !world_grid[player.x][player.y + 2] && (boxCollision(player.x, player.y + 2) < 0)) {
+				boxes[boxCollision(player.x, player.y + 1)].worldY++;
+				
+				move = true;
+			} else if (key_held(KEY_B) && (boxCollision(player.x, player.y - 1) >= 0) && (boxCollision(player.x, player.y + 1) < 0)) {
+				boxes[boxCollision(player.x, player.y - 1)].worldY++;
+				
+				move = true;
+			} else if (boxCollision(player.x, player.y + 1) < 0) {
+				move = true;
+			}
+		}
+		
+		if (move) {
+			backgroundY += 8;
+			player.y++;
+		}
 	}
-
-	if ((key_hit(KEY_LEFT)) /* && (!world_grid[player_x - 1][player_y]) */) {
+	
+	if (key_hit(KEY_LEFT)) {
+		bool move = false;
+		
 		int ahead = player.x - 1;
 		
 		if (ahead < 0) {
@@ -116,12 +204,28 @@ void update() {
 		}
 		
 		if (!world_grid[ahead][player.y]) {
+			if (key_held(KEY_A) && (boxCollision(ahead, player.y) >= 0) && !world_grid[ahead - 1][player.y] && (boxCollision(ahead - 1, player.y) < 0)) {
+				boxes[boxCollision(ahead, player.y)].worldX--;;
+				
+				move = true;
+			} else if (key_held(KEY_B) && (boxCollision(player.x + 1, player.y) >= 0) && (boxCollision(ahead, player.y) < 0)) {
+				boxes[boxCollision(player.x + 1, player.y)].worldX--;
+				
+				move = true;
+			} else if (boxCollision(ahead, player.y) < 0) {
+				move = true;
+			}
+		}
+		
+		if (move) {
 			backgroundX -= 8;
 			player.x = ahead;
-		}	
+		}
 	}
 	
-	if ((key_hit(KEY_RIGHT)) /* && (!world_grid[player_x + 1][player_y]) && (player_x <= 31) */) {
+	if (key_hit(KEY_RIGHT)) {
+		bool move = false;
+		
 		int ahead = player.x + 1;
 		
 		if (ahead > 31) {
@@ -129,26 +233,26 @@ void update() {
 		}
 		
 		if (!world_grid[ahead][player.y]) {
+			if (key_held(KEY_A) && (boxCollision(player.x + 1, player.y) >= 0) && !world_grid[ahead + 1][player.y] && (boxCollision(ahead + 1, player.y) < 0)) {
+				boxes[boxCollision(player.x + 1, player.y)].worldX++;
+				
+				move = true;
+			} 
+			else if (key_held(KEY_B) && (boxCollision(player.x - 1, player.y) >= 0) && (boxCollision(player.x + 1, player.y) < 0)) {
+				boxes[boxCollision(player.x - 1, player.y)].worldX++;
+				
+				move = true;
+			}
+			else if (boxCollision(player.x + 1, player.y) < 0) {
+				move = true;
+			}
+		}
+		
+		if (move) {
 			backgroundX += 8;
 			player.x = ahead;
 		}
-	}
-	
-	if (key_hit(KEY_A)) {
-		if (boxes[0].pb == 6) {
-			boxes[0].pb = 1;
-		} else {
-			boxes[0].pb++;
-		}
-	}
-	
-	if (key_hit(KEY_B)) {
-		if (boxes[1].pb == 6) {
-			boxes[1].pb = 1;
-		} else {
-			boxes[1].pb++;
-		}
-	}
+	}	
 }
 
 void draw() {
@@ -181,15 +285,15 @@ void draw() {
 
 	// BACKGROUND
 
-	REG_BG1HOFS= backgroundX;
-	REG_BG1VOFS= backgroundY;
+	REG_BG1HOFS = backgroundX;
+	REG_BG1VOFS = backgroundY;
 	
 	REG_BG2HOFS = backgroundX;
 	REG_BG2VOFS = backgroundY;
 }
 
 int main() {
-	// initStage1();
+	initStage1();
 
 	while(1) {
 		switch(gameState) {
@@ -202,9 +306,7 @@ int main() {
 				if (key_hit(KEY_START)) {
 					if (menuSelection == 0) {
 						gameState = 1;
-
-						initStage1();
-
+						
 						REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 					}
 				}
@@ -245,7 +347,7 @@ int main() {
 				tte_write("#{es}");//clear the screens
 			
 				char coordinates[50];
-				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", boxes[0].screenX, yDistance);
+				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:0,0}");
 				tte_write(coordinates);
 				

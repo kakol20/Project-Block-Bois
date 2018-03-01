@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#define NUMBER_BOXES 2
+#define NUMBER_BOXES 10
 
 typedef struct Box {
 	OBJ_ATTR *sprite;
@@ -9,6 +9,7 @@ typedef struct Box {
 	int worldY;
 	int screenX;
 	int screenY;
+	int currentColor;
 	u32 pb;
 	u32 tid;
 	int value;
