@@ -4,9 +4,11 @@
 #include <string.h>
 
 #include "main.h"
-#include "stage1.h"
 #include "player.h"
+#include "stage1.h"
 #include "stage1Floor.h"
+#include "stage2.h"
+#include "stage2Floor.h"
 #include "boxes/BoxClear.h"
 #include "boxes/Box1.h"
 #include "boxes/Box2.h"
@@ -46,12 +48,12 @@ unsigned short world_grid[32][32];
 int boxCollision(int x, int y) {
 	int i;
 	for (i = 0; i < NUMBER_BOXES;  i++) {
-		if ((x == boxes[i].worldX) && (y == boxes[i].worldY)) {
-			return i;
+		if ((x == boxes[i].worldX) && (y == boxes[i].worldY)) { // Checks if there is a box on the x,y position
+			return i; // returns the index in the boxes[] array
 		}
 	}
 	
-	return -1;
+	return -1; // returns -1 if nothing was found
 }
 
 void initStage1() {
@@ -60,10 +62,10 @@ void initStage1() {
 	player.x = 4;
 	player.y = 4;
 
-	backgroundX = -116 + (8 * player.x);
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
 
-	// BACKGROUND
+	// BACKGROUND - adding background
 
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 
@@ -116,16 +118,16 @@ void initStage1() {
 	memcpy(pal_obj_mem, Box9Pal, Box9PalLen);
 	
 	int i;
-	for (i = 0; i < NUMBER_BOXES; i++) {
+	for (i = 0; i < NUMBER_BOXES; i++) { // creates NUMBER_BOXES amount of boxes
 		boxes[i].sprite = &obj_buffer[i + 1];
-		boxes[i].pb = 1;
+		boxes[i].pb = 1; // red color
 		
 		boxes[i].value = i;
-		boxes[i].tid = boxes[i].value + 1;
+		boxes[i].tid = boxes[i].value + 1; // this is temporary
 			
 		boxes[i].worldX = 1 + (i * 3);
 		boxes[i].worldY = 1 + i;
-		boxes[i].screenX = (boxes[i].worldX * 8) - backgroundX;
+		boxes[i].screenX = (boxes[i].worldX * 8) - backgroundX; // sets in position on the screen
 		boxes[i].screenY = (boxes[i].worldY * 8) - backgroundY;
 	}
 
@@ -138,7 +140,7 @@ void initStage1() {
 	int xx, yy;
 	for (yy = 0; yy < 32; yy++) {
 		for (xx = 0; xx < 32; xx++) {
-			world_grid[xx][yy] = stage1Map[xx + (yy * 32)];
+			world_grid[xx][yy] = stage1Map[xx + (yy * 32)]; // collision with the walls
 		}
 	}
 }
@@ -146,32 +148,39 @@ void initStage1() {
 void update() {
 	// INPUT 
 
-	key_poll();
+	key_poll(); // checks for key inputs
 	
 	if (key_hit(KEY_UP)) {
 		bool move = false;
+		// store the current box and the box ahead - store it's index
+		
 		
 		if (!world_grid[player.x][player.y - 1]) {
-			if (key_held(KEY_A) && (boxCollision(player.x, player.y - 1) >= 0) && !world_grid[player.x][player.y - 2] && (boxCollision(player.x, player.y - 2) < 0)) {
-				boxes[boxCollision(player.x, player.y - 1)].worldY--;
+			// check if the boxes are compatible
+			// red = 1, orange = 2, yellow = 3, green = 4, blue = 5, purple = 6 pallette bank
+			// if both are odd, they are compatible
+			// if statements
+			// x + y > 9 not compatible
+			if (key_held(KEY_A) && (boxCollision(player.x, player.y - 1) >= 0) && !world_grid[player.x][player.y - 2] && (boxCollision(player.x, player.y - 2) < 0)) { // checks if the player will be able to push the box, to check if there is an obstacle in the way
+				boxes[boxCollision(player.x, player.y - 1)].worldY--; // pushing
 				
 				move = true;
 			} else if (key_held(KEY_B) && (boxCollision(player.x, player.y + 1) >= 0) && (boxCollision(player.x, player.y - 1) < 0)) {
-				boxes[boxCollision(player.x, player.y + 1)].worldY--;
+				boxes[boxCollision(player.x, player.y + 1)].worldY--; // pulling
 				
 				move = true;
-			} else if (boxCollision(player.x, player.y - 1) < 0) {
+			} else if (boxCollision(player.x, player.y - 1) < 0) { // player can move if the there is nothing in the way
 				move = true;
 			}
 		}
 		
 		if (move) {
-			backgroundY -= 8;
+			backgroundY -= 8; 
 			player.y--;
 		}
 	}
 	
-	if (key_hit(KEY_DOWN)) {
+	if (key_hit(KEY_DOWN)) { // same as key up
 		bool move = false;
 		
 		if (!world_grid[player.x][player.y + 1]) {
@@ -194,7 +203,7 @@ void update() {
 		}
 	}
 	
-	if (key_hit(KEY_LEFT)) {
+	if (key_hit(KEY_LEFT)) { // same as key up
 		bool move = false;
 		
 		int ahead = player.x - 1;
@@ -223,7 +232,7 @@ void update() {
 		}
 	}
 	
-	if (key_hit(KEY_RIGHT)) {
+	if (key_hit(KEY_RIGHT)) { // same as key up
 		bool move = false;
 		
 		int ahead = player.x + 1;
@@ -261,10 +270,10 @@ void draw() {
 	int x = (screenWidth - player.width) / 2;
 	int y = (screenHeight / 2) - player.height;
 	obj_set_attr(player.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(player.pb) | player.tid);
-	obj_set_pos(player.sprite, x, y);
+	obj_set_pos(player.sprite, x, y); // idk
 
 	int i;
-	for (i = 0; i < NUMBER_BOXES; i++) {
+	for (i = 0; i < NUMBER_BOXES; i++) { // goes through boxes[] array and draws it onto the screen
 		obj_set_attr(boxes[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(boxes[i].pb) | boxes[i].tid);
 
 		xDistance = abs(boxes[i].worldX - player.x);
