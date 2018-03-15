@@ -19,10 +19,16 @@
 #include "boxes/Box7.h"
 #include "boxes/Box8.h"
 #include "boxes/Box9.h"
+#include "tempGate.h"
 
 void draw();
 void update();
+void nextLevel();
+void init();
 void initStage1();
+void initStage2();
+void createGrid(const unsigned short *map);
+void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap);
 int boxCollision(int x, int y);
 
 // VARTIABLES
@@ -32,6 +38,7 @@ OBJ_AFFINE *obj_aff_buffer = (OBJ_AFFINE*)obj_buffer;
 OBJ_ATTR *simplePlayer = &obj_buffer[0];
 Box boxes[NUMBER_BOXES];
 Player player;
+Gate gate;
 
 int screenWidth = 240;
 int screenHeight = 160;
@@ -42,6 +49,7 @@ int gameState = 0;
 int menuSelection = 0;
 int xDistance;
 int yDistance;
+int nextBuffer;
 
 unsigned short world_grid[32][32];
 
@@ -56,28 +64,28 @@ int boxCollision(int x, int y) {
 	return -1; // returns -1 if nothing was found
 }
 
-void initStage1() {
-	player.width = 8;
-	player.height = 8;
-	player.x = 4;
-	player.y = 4;
+void createGrid(const unsigned short *map) {
+	int xx, yy;
+	for (yy = 0; yy < 32; yy++) {
+		for (xx = 0; xx < 32; xx++) {
+			world_grid[xx][yy] = map[xx + (yy * 32)]; // collision with the walls
+		}
+	}
+}
 
-	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
-	backgroundY = -72 + (8 * player.y);
-
-	// BACKGROUND - adding background
-
-	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
-
-	memcpy(pal_bg_mem, stage1Pal, stage1PalLen);
-	memcpy(&tile_mem[1][0], stage1Tiles, stage1TilesLen);
-	memcpy(&se_mem[30][0], stage1Map, stage1MapLen);
+void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap) {
+	memcpy(pal_bg_mem, stage1Pal, stage1PalLen /* Should be the same for all levels*/);
+	memcpy(&tile_mem[1][0], wallTiles, stage1TilesLen /* Should be the same for all levels*/);
+	memcpy(&se_mem[30][0], wallMap, stage1MapLen /* Should be the same for all levels*/);
 	REG_BG1CNT = BG_CBB(1) | BG_SBB(30) | BG_4BPP | BG_REG_64x64;
+	
+	memcpy(&tile_mem[2][0], floorTiles, stage1FloorTilesLen /* Should be the same for all levels*/);
+	memcpy(&se_mem[25][0], floorMap, stage1FloorMapLen /* Should be the same for all levels*/);
+	REG_BG2CNT = BG_CBB(2) | BG_SBB(25) | BG_4BPP | BG_REG_64x64; // Using 64 x 64 despite map being 32 x 32 to avoid the map from being repeated
+}
 
-	memcpy(pal_bg_mem, stage1FloorPal, stage1FloorPalLen);
-	memcpy(&tile_mem[2][0], stage1FloorTiles, stage1FloorTilesLen);
-	memcpy(&se_mem[25][0], stage1FloorMap, stage1FloorMapLen);
-	REG_BG2CNT = BG_CBB(2) | BG_SBB(25) | BG_4BPP | BG_REG_64x64;
+void init() {
+	memcpy(pal_bg_mem, stage1Pal, stage1PalLen /* Should be the same for all levels*/);
 
 	// SPRITES
 
@@ -123,26 +131,68 @@ void initStage1() {
 		boxes[i].pb = 1; // red color
 		
 		boxes[i].value = i;
-		boxes[i].tid = boxes[i].value + 1; // this is temporary
-			
+		boxes[i].tid = boxes[i].value + 1;
+		
 		boxes[i].worldX = 1 + (i * 3);
 		boxes[i].worldY = 1 + i;
 		boxes[i].screenX = (boxes[i].worldX * 8) - backgroundX; // sets in position on the screen
 		boxes[i].screenY = (boxes[i].worldY * 8) - backgroundY;
+		nextBuffer = i + 2;
 	}
+	
+	memcpy(&tile_mem[4][11], tempGateTiles, tempGateTilesLen);
+	memcpy(pal_obj_mem, tempGatePal, tempGatePalLen);
+	gate.sprite = &obj_buffer[nextBuffer];
+	gate.pb = 0;
+	gate.tid = 11;
+	gate.worldX = 4;
+	gate.worldY = 19;
 
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_OBJ | DCNT_OBJ_1D;
 
 	oam_init(obj_buffer, 128);
+}
 
+void initStage1() { // replace any existing map with the this level
+	player.width = 8;
+	player.height = 8;
+	player.x = 4;
+	player.y = 4;
+
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+
+	// BACKGROUND - adding background
+	
+	addBackground(stage1Tiles, stage1Map, stage1FloorTiles, stage1FloorMap);
+	
 	// WORLD GRID
 
-	int xx, yy;
-	for (yy = 0; yy < 32; yy++) {
-		for (xx = 0; xx < 32; xx++) {
-			world_grid[xx][yy] = stage1Map[xx + (yy * 32)]; // collision with the walls
-		}
-	}
+	createGrid(stage1Map);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+}
+
+void initStage2() {
+	player.width = 8;
+	player.height = 8;
+	player.x = 4;
+	player.y = 4;
+
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+
+	// BACKGROUND - adding background
+
+	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
+	
+	addBackground(stage2Tiles, stage2Map, stage2FloorTiles, stage2FloorMap);
+	
+	// WORLD GRID
+
+	createGrid(stage2Map);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
 
 void update() {
@@ -261,27 +311,45 @@ void update() {
 			backgroundX += 8;
 			player.x = ahead;
 		}
-	}	
+	}
+
+	// MOVING TO ANOTHER MAP
+
+	if ((gate.worldX == player.x) && (gate.worldY == player.y)) { // tempory movement between maps - testing if the player walks over the gate, then it will go to another map
+		switch (gameState) {
+			case 1: // level 1 - gameState 0 is the main menu
+				gameState = 2;
+				initStage2();
+				
+				break;
+				
+			case 2:
+				gameState = 1;
+				initStage1();
+				
+				break;
+		}
+	}
 }
 
-void draw() {
-	// SPRITES
-
-	int x = (screenWidth - player.width) / 2;
+void draw() {	
+	int x = (screenWidth - player.width) / 2; // player sprite
 	int y = (screenHeight / 2) - player.height;
 	obj_set_attr(player.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(player.pb) | player.tid);
-	obj_set_pos(player.sprite, x, y); // idk
+	obj_set_pos(player.sprite, x, y); // puts the player on the screen
 
 	int i;
 	for (i = 0; i < NUMBER_BOXES; i++) { // goes through boxes[] array and draws it onto the screen
+		boxes[i].tid = boxes[i].value + 1;
+	
 		obj_set_attr(boxes[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(boxes[i].pb) | boxes[i].tid);
 
 		xDistance = abs(boxes[i].worldX - player.x);
 		yDistance = abs(boxes[i].worldY - player.y);
 
-		if ((xDistance > 16) || (yDistance > 16)) {
+		if ((xDistance > 16) || (yDistance > 16)) { // the box should not be on the screen if it's position is 16 away from the player's position
 			boxes[i].screenX = -8;
-			boxes[i].screenY = -8;
+			boxes[i].screenY = -8; // put it outside the screen
 		} else {
 			boxes[i].screenX = (boxes[i].worldX * 8) - backgroundX;
 			boxes[i].screenY = (boxes[i].worldY * 8) - backgroundY;
@@ -289,6 +357,18 @@ void draw() {
 
 		obj_set_pos(boxes[i].sprite, boxes[i].screenX, boxes[i].screenY);
 	}
+	
+	xDistance = abs(gate.worldX - player.x);
+	yDistance = abs(gate.worldY - player.y);
+	obj_set_attr(gate.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(gate.pb) | gate.tid);
+	if ((xDistance > 16) || (yDistance > 16)) {
+		gate.screenX = -8;
+		gate.screenY = -8;
+	} else {
+		gate.screenX = (gate.worldX * 8) - backgroundX;
+		gate.screenY = (gate.worldY * 8) - backgroundY;
+	}
+	obj_set_pos(gate.sprite, gate.screenX, gate.screenY);
 
 	oam_copy(oam_mem, obj_buffer, 128);
 
@@ -302,12 +382,19 @@ void draw() {
 }
 
 int main() {
-	initStage1();
+	gameState = 0;
+	
+	init();
+	char coordinates[50];
+	menuSelection = 0;
 
 	while(1) {
+	
 		switch(gameState) {
 			case 0:
 				REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_OBJ | DCNT_OBJ_1D;
+				
+				tte_init_se_default(0, BG_CBB(0)|BG_SBB(31));
 
 				vid_vsync();
 				key_poll();
@@ -315,8 +402,7 @@ int main() {
 				if (key_hit(KEY_START)) {
 					if (menuSelection == 0) {
 						gameState = 1;
-						
-						REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+						initStage1();
 					}
 				}
 
@@ -350,14 +436,13 @@ int main() {
 				}
 
 				break;
-
-			case 1:
+				
+			case 1: // stage 1 game state
 				vid_vsync();
 				tte_write("#{es}");//clear the screens
 			
-				char coordinates[50];
-				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
-				tte_write("#{P:0,0}");
+				sprintf(coordinates, "#{cx:0x0000}Level 1");
+				tte_write("#{P:1,1}");
 				tte_write(coordinates);
 				
 				// input();
@@ -365,6 +450,21 @@ int main() {
 				draw();
 				
 				break;
+				
+			case 2: // stage 2 game state
+				vid_vsync();
+				tte_write("#{es}");
+			
+				sprintf(coordinates, "#{cx:0x0000}Level 2");
+				tte_write("#{P:1,1}");
+				tte_write(coordinates);
+				
+				// input();
+				update();
+				draw();
+				
+				break;
+				
 		}
 	}
 
