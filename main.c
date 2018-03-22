@@ -29,7 +29,10 @@ void initStage1();
 void initStage2();
 void createGrid(const unsigned short *map);
 void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap);
-int boxCollision(int x, int y);
+void move(int changeX, int changeY);
+bool merge(int boxToMerge);
+bool isOdd(int n);
+int boxCollision(int x, int y, bool mergeBoxes);
 
 // VARTIABLES
 OBJ_ATTR obj_buffer[128];
@@ -49,19 +52,110 @@ int gameState = 0;
 int menuSelection = 0;
 int xDistance;
 int yDistance;
-int nextBuffer;
+int nextBuffer; // to keep count 
+int currBox;
 
 unsigned short world_grid[32][32];
 
-int boxCollision(int x, int y) {
+bool isOdd(int n) {
+	if ((n % 2) == 1) {
+		return true;
+	}
+	return false;
+}
+
+int boxCollision(int x, int y, bool mergeBoxes) {
+
 	int i;
 	for (i = 0; i < NUMBER_BOXES;  i++) {
 		if ((x == boxes[i].worldX) && (y == boxes[i].worldY)) { // Checks if there is a box on the x,y position
+			if (mergeBoxes) {
+				if (merge(i)) {
+					return -1; // return -1 to say that it can move
+				}
+			}
+		
 			return i; // returns the index in the boxes[] array
 		}
 	}
 	
 	return -1; // returns -1 if nothing was found
+}
+
+bool merge(int boxToMerge) {
+	// check if the boxes are compatible
+	// red = 1, orange = 2, yellow = 3, green = 4, blue = 5, purple = 6 pallette bank
+	// if both are odd, they are compatible
+	// x + y > 9 not compatible
+	
+	/* boxes can't merge if their sum value will be greater than 9*/
+	/* boxes can merge if they are the same colour*/
+	
+	if (((isOdd(boxes[boxToMerge].pb) && isOdd(boxes[currBox].pb) && (boxToMerge >= 0)) || (boxes[boxToMerge].pb == boxes[currBox].pb)) && ((boxes[currBox].value + boxes[boxToMerge].value) <= 9)) {
+		u32 newColour = boxes[boxToMerge].pb + boxes[currBox].pb;
+		
+		if (boxes[boxToMerge].pb == boxes[currBox].pb) {
+			newColour = boxes[currBox].pb;
+		}
+		
+		else if (newColour != 6) {
+			newColour = newColour / 2; // 1 + 5 makes purple, but 1 + 3 does not make orange, we instead half it
+		}
+		
+		boxes[currBox].pb = newColour;
+		
+		boxes[currBox].value = boxes[currBox].value + boxes[boxToMerge].value;
+		
+		
+		boxes[boxToMerge].worldX = -128; // move to out of the screen
+		boxes[boxToMerge].worldY = -128;
+		
+		
+		return true;
+	}
+	
+	return false; // return if they have been merged
+}
+
+void move(int changeX, int changeY) { // put in parameters how much the position of the player should change - example: moving up move(0, -1)
+	// key_poll(); // checks for key inputs
+
+	bool move = false;
+		
+	if (!world_grid[player.x + changeX][player.y + changeY]) {
+		if (key_held(KEY_A)) {		
+			currBox = boxCollision(player.x + changeX, player.y + changeY, false); // pushing
+			
+			if ((currBox >= 0) && !world_grid[player.x + changeX + changeX][player.y + changeY + changeY] && (boxCollision(player.x + changeX + changeX, player.y + changeY + changeY, true) < 0)) {
+				
+				// example move(0, 1)
+				// currBox = (player x position, player y position + 1)
+				// box ahea of currBox = (player x position, player y position + 2
+				
+				boxes[currBox].worldX += changeX;
+				boxes[currBox].worldY += changeY;	
+				move = true;
+			}
+		}  if (key_held(KEY_B)) { // pulling
+			currBox = boxCollision(player.x - changeX, player.y - changeY, false);
+			
+			if ((currBox >= 0) && (boxCollision(player.x + changeX, player.y + changeY, false) < 0)) {
+				boxes[currBox].worldX += changeX;
+				boxes[currBox].worldY += changeY;
+				move = true;
+			}
+		} else if (boxCollision(player.x + changeX, player.y + changeY, false) < 0){
+			move = true;
+		}
+	}
+	
+	if (move) {
+		backgroundX += changeX * 8;
+		backgroundY += changeY * 8;
+		
+		player.x += changeX;
+		player.y += changeY;
+	}
 }
 
 void createGrid(const unsigned short *map) {
@@ -128,9 +222,9 @@ void init() {
 	int i;
 	for (i = 0; i < NUMBER_BOXES; i++) { // creates NUMBER_BOXES amount of boxes
 		boxes[i].sprite = &obj_buffer[i + 1];
-		boxes[i].pb = 1; // red color
+		boxes[i].pb = (i % 6) + 1;
 		
-		boxes[i].value = i;
+		boxes[i].value = i % 10;
 		boxes[i].tid = boxes[i].value + 1;
 		
 		boxes[i].worldX = 1 + (i * 3);
@@ -200,119 +294,27 @@ void update() {
 
 	key_poll(); // checks for key inputs
 	
+	int changeX = 0;
+	int changeY = 0;
+	
 	if (key_hit(KEY_UP)) {
-		bool move = false;
-		// store the current box and the box ahead - store it's index
-		
-		
-		if (!world_grid[player.x][player.y - 1]) {
-			// check if the boxes are compatible
-			// red = 1, orange = 2, yellow = 3, green = 4, blue = 5, purple = 6 pallette bank
-			// if both are odd, they are compatible
-			// if statements
-			// x + y > 9 not compatible
-			if (key_held(KEY_A) && (boxCollision(player.x, player.y - 1) >= 0) && !world_grid[player.x][player.y - 2] && (boxCollision(player.x, player.y - 2) < 0)) { // checks if the player will be able to push the box, to check if there is an obstacle in the way
-				boxes[boxCollision(player.x, player.y - 1)].worldY--; // pushing
-				
-				move = true;
-			} else if (key_held(KEY_B) && (boxCollision(player.x, player.y + 1) >= 0) && (boxCollision(player.x, player.y - 1) < 0)) {
-				boxes[boxCollision(player.x, player.y + 1)].worldY--; // pulling
-				
-				move = true;
-			} else if (boxCollision(player.x, player.y - 1) < 0) { // player can move if the there is nothing in the way
-				move = true;
-			}
-		}
-		
-		if (move) {
-			backgroundY -= 8; 
-			player.y--;
-		}
+		changeY = -1;// parameters are how much should the player position change
 	}
 	
-	if (key_hit(KEY_DOWN)) { // same as key up
-		bool move = false;
-		
-		if (!world_grid[player.x][player.y + 1]) {
-			if (key_held(KEY_A) && (boxCollision(player.x, player.y + 1) >= 0) && !world_grid[player.x][player.y + 2] && (boxCollision(player.x, player.y + 2) < 0)) {
-				boxes[boxCollision(player.x, player.y + 1)].worldY++;
-				
-				move = true;
-			} else if (key_held(KEY_B) && (boxCollision(player.x, player.y - 1) >= 0) && (boxCollision(player.x, player.y + 1) < 0)) {
-				boxes[boxCollision(player.x, player.y - 1)].worldY++;
-				
-				move = true;
-			} else if (boxCollision(player.x, player.y + 1) < 0) {
-				move = true;
-			}
-		}
-		
-		if (move) {
-			backgroundY += 8;
-			player.y++;
-		}
+	if (key_hit(KEY_RIGHT)) {
+		changeX = 1;
 	}
 	
-	if (key_hit(KEY_LEFT)) { // same as key up
-		bool move = false;
-		
-		int ahead = player.x - 1;
-		
-		if (ahead < 0) {
-			ahead = 31;
-		}
-		
-		if (!world_grid[ahead][player.y]) {
-			if (key_held(KEY_A) && (boxCollision(ahead, player.y) >= 0) && !world_grid[ahead - 1][player.y] && (boxCollision(ahead - 1, player.y) < 0)) {
-				boxes[boxCollision(ahead, player.y)].worldX--;;
-				
-				move = true;
-			} else if (key_held(KEY_B) && (boxCollision(player.x + 1, player.y) >= 0) && (boxCollision(ahead, player.y) < 0)) {
-				boxes[boxCollision(player.x + 1, player.y)].worldX--;
-				
-				move = true;
-			} else if (boxCollision(ahead, player.y) < 0) {
-				move = true;
-			}
-		}
-		
-		if (move) {
-			backgroundX -= 8;
-			player.x = ahead;
-		}
+	if (key_hit(KEY_DOWN)) {
+		changeY = 1;
 	}
 	
-	if (key_hit(KEY_RIGHT)) { // same as key up
-		bool move = false;
-		
-		int ahead = player.x + 1;
-		
-		if (ahead > 31) {
-			ahead = 0;
-		}
-		
-		if (!world_grid[ahead][player.y]) {
-			if (key_held(KEY_A) && (boxCollision(player.x + 1, player.y) >= 0) && !world_grid[ahead + 1][player.y] && (boxCollision(ahead + 1, player.y) < 0)) {
-				boxes[boxCollision(player.x + 1, player.y)].worldX++;
-				
-				move = true;
-			} 
-			else if (key_held(KEY_B) && (boxCollision(player.x - 1, player.y) >= 0) && (boxCollision(player.x + 1, player.y) < 0)) {
-				boxes[boxCollision(player.x - 1, player.y)].worldX++;
-				
-				move = true;
-			}
-			else if (boxCollision(player.x + 1, player.y) < 0) {
-				move = true;
-			}
-		}
-		
-		if (move) {
-			backgroundX += 8;
-			player.x = ahead;
-		}
+	if (key_hit(KEY_LEFT)) {
+		changeX = -1;
 	}
-
+	
+	move(changeX, changeY);
+	
 	// MOVING TO ANOTHER MAP
 
 	if ((gate.worldX == player.x) && (gate.worldY == player.y)) { // tempory movement between maps - testing if the player walks over the gate, then it will go to another map
@@ -440,28 +442,28 @@ int main() {
 			case 1: // stage 1 game state
 				vid_vsync();
 				tte_write("#{es}");//clear the screens
-			
-				sprintf(coordinates, "#{cx:0x0000}Level 1");
-				tte_write("#{P:1,1}");
-				tte_write(coordinates);
 				
 				// input();
 				update();
 				draw();
+				
+				// sprintf(coordinates, "#{cx:0x0000}Level 1");
+				tte_write("#{P:8,8}");
+				tte_write(coordinates);
 				
 				break;
 				
 			case 2: // stage 2 game state
 				vid_vsync();
 				tte_write("#{es}");
-			
-				sprintf(coordinates, "#{cx:0x0000}Level 2");
-				tte_write("#{P:1,1}");
-				tte_write(coordinates);
 				
 				// input();
 				update();
 				draw();
+				
+				// sprintf(coordinates, "#{cx:0x0000}Level 2");
+				tte_write("#{P:8,8}");
+				tte_write(coordinates);
 				
 				break;
 				
