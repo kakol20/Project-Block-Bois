@@ -387,7 +387,7 @@ int main() {
 	gameState = 0;
 	
 	init();
-	char coordinates[50];
+	// char coordinates[50];
 	menuSelection = 0;
 
 	while(1) {
@@ -449,7 +449,7 @@ int main() {
 				
 				// sprintf(coordinates, "#{cx:0x0000}Level 1");
 				tte_write("#{P:8,8}");
-				tte_write(coordinates);
+				tte_write("#{cx:0x0000}Level 1");
 				
 				break;
 				
@@ -463,7 +463,7 @@ int main() {
 				
 				// sprintf(coordinates, "#{cx:0x0000}Level 2");
 				tte_write("#{P:8,8}");
-				tte_write(coordinates);
+				tte_write("#{cx:0x0000}Level 2");
 				
 				break;
 				
