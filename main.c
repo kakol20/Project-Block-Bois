@@ -448,7 +448,7 @@ int main() {
 				draw();
 				
 				// sprintf(coordinates, "#{cx:0x0000}Level 1");
-				tte_write("#{P:8,8}");
+				tte_write("#{cx:0x0000}Level 1");
 				tte_write(coordinates);
 				
 				break;
@@ -463,7 +463,7 @@ int main() {
 				
 				// sprintf(coordinates, "#{cx:0x0000}Level 2");
 				tte_write("#{P:8,8}");
-				tte_write(coordinates);
+				tte_write("#{cx:0x0000}Level 2");
 				
 				break;
 				
