@@ -224,16 +224,17 @@ void init() {
 	memcpy(&tile_mem[4][10], Box9Tiles, Box9TilesLen);
 	memcpy(pal_obj_mem, Box9Pal, Box9PalLen);
 	
+
 	int i;
 	for (i = 0; i < NUMBER_BOXES; i++) { // creates NUMBER_BOXES amount of boxes
 		boxes[i].sprite = &obj_buffer[i + 1];
 		boxes[i].pb = (i % 6) + 1;
 		
-		boxes[i].value = i % 10;
-		boxes[i].tid = boxes[i].value + 1;
+		boxes[i].value = 0;
+		boxes[i].tid = 1;
 		
-		boxes[i].worldX = 1 + (i * 3);
-		boxes[i].worldY = 1 + i;
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64 + i;
 		boxes[i].screenX = (boxes[i].worldX * 8) - backgroundX; // sets in position on the screen
 		boxes[i].screenY = (boxes[i].worldY * 8) - backgroundY;
 		nextBuffer = i + 2;
@@ -244,8 +245,8 @@ void init() {
 	gate.sprite = &obj_buffer[nextBuffer];
 	gate.pb = 0;
 	gate.tid = 11;
-	gate.worldX = 4;
-	gate.worldY = 19;
+	gate.worldX = -64;
+	gate.worldY = -64;
 
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_OBJ | DCNT_OBJ_1D;
 
@@ -253,6 +254,12 @@ void init() {
 }
 
 void initLevel1() { // replace any existing map with the this level
+	int i;
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+
 	player.width = 8;
 	player.height = 8;
 	player.x = 1;
@@ -265,6 +272,22 @@ void initLevel1() { // replace any existing map with the this level
 	
 	addBackground(level1_wallsTiles, level1_wallsMap, level1_floorTiles, level1_floorMap);
 	
+	boxes[0].worldX = 5;
+	boxes[0].worldY = 3;
+	boxes[0].pb = 1;
+	boxes[0].value = 0;
+	
+	boxes[1].worldX = 20;
+	boxes[1].worldY = 11;
+	boxes[1].pb = 3;
+	boxes[1].value = 0;
+	
+	boxes[2].worldX = 20;
+	boxes[2].worldY = 14;
+	boxes[2].pb = 5;
+	boxes[2].value = 0;
+	
+	
 	// WORLD GRID
 
 	createGrid(level1_wallsMap);
@@ -273,6 +296,12 @@ void initLevel1() { // replace any existing map with the this level
 }
 
 void initStage2() {
+	int i;
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+
 	player.width = 8;
 	player.height = 8;
 	player.x = 4;
