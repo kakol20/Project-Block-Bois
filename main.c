@@ -5,10 +5,15 @@
 
 #include "main.h"
 #include "player.h"
-#include "stage1.h"
-#include "stage1Floor.h"
+
 #include "stage2.h"
 #include "stage2Floor.h"
+
+// LEVELS
+#include "levels/level1_walls.h"
+#include "levels/level1_floor.h"
+
+// BOXES
 #include "boxes/BoxClear.h"
 #include "boxes/Box1.h"
 #include "boxes/Box2.h"
@@ -25,7 +30,7 @@ void draw();
 void update();
 void nextLevel();
 void init();
-void initStage1();
+void initLevel1();
 void initStage2();
 void createGrid(const unsigned short *map);
 void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap);
@@ -168,18 +173,18 @@ void createGrid(const unsigned short *map) {
 }
 
 void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap) {
-	memcpy(pal_bg_mem, stage1Pal, stage1PalLen /* Should be the same for all levels*/);
-	memcpy(&tile_mem[1][0], wallTiles, stage1TilesLen /* Should be the same for all levels*/);
-	memcpy(&se_mem[30][0], wallMap, stage1MapLen /* Should be the same for all levels*/);
-	REG_BG1CNT = BG_CBB(1) | BG_SBB(30) | BG_4BPP | BG_REG_64x64;
+	memcpy(pal_bg_mem, level1_wallsPal, level1_wallsPalLen /* Should be the same for all levels*/);
+	memcpy(&tile_mem[1][0], wallTiles, level1_wallsTilesLen /* Should be the same for all levels*/);
+	memcpy(&se_mem[30][0], wallMap, level1_wallsMapLen /* Should be the same for all levels*/);
+	REG_BG1CNT = BG_CBB(1) | BG_SBB(30) | BG_4BPP | BG_REG_64x64 | BG_PRIO(1);
 	
-	memcpy(&tile_mem[2][0], floorTiles, stage1FloorTilesLen /* Should be the same for all levels*/);
-	memcpy(&se_mem[25][0], floorMap, stage1FloorMapLen /* Should be the same for all levels*/);
-	REG_BG2CNT = BG_CBB(2) | BG_SBB(25) | BG_4BPP | BG_REG_64x64; // Using 64 x 64 despite map being 32 x 32 to avoid the map from being repeated
+	memcpy(&tile_mem[2][0], floorTiles,level1_floorTilesLen /* Should be the same for all levels*/);
+	memcpy(&se_mem[25][0], floorMap, level1_floorMapLen /* Should be the same for all levels*/);
+	REG_BG2CNT = BG_CBB(2) | BG_SBB(25) | BG_4BPP | BG_REG_64x64 | BG_PRIO(1); // Using 64 x 64 despite map being 32 x 32 to avoid the map from being repeated
 }
 
 void init() {
-	memcpy(pal_bg_mem, stage1Pal, stage1PalLen /* Should be the same for all levels*/);
+	memcpy(pal_bg_mem, level1_wallsPal, level1_wallsPalLen /* Should be the same for all levels*/);
 
 	// SPRITES
 
@@ -247,10 +252,10 @@ void init() {
 	oam_init(obj_buffer, 128);
 }
 
-void initStage1() { // replace any existing map with the this level
+void initLevel1() { // replace any existing map with the this level
 	player.width = 8;
 	player.height = 8;
-	player.x = 4;
+	player.x = 1;
 	player.y = 4;
 
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
@@ -258,11 +263,11 @@ void initStage1() { // replace any existing map with the this level
 
 	// BACKGROUND - adding background
 	
-	addBackground(stage1Tiles, stage1Map, stage1FloorTiles, stage1FloorMap);
+	addBackground(level1_wallsTiles, level1_wallsMap, level1_floorTiles, level1_floorMap);
 	
 	// WORLD GRID
 
-	createGrid(stage1Map);
+	createGrid(level1_wallsMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
@@ -327,7 +332,7 @@ void update() {
 				
 			case 2:
 				gameState = 1;
-				initStage1();
+				initLevel1();
 				
 				break;
 		}
@@ -337,14 +342,14 @@ void update() {
 void draw() {	
 	int x = (screenWidth - player.width) / 2; // player sprite
 	int y = (screenHeight / 2) - player.height;
-	obj_set_attr(player.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(player.pb) | player.tid);
+	obj_set_attr(player.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(player.pb) | player.tid | ATTR2_PRIO(1));
 	obj_set_pos(player.sprite, x, y); // puts the player on the screen
 
 	int i;
 	for (i = 0; i < NUMBER_BOXES; i++) { // goes through boxes[] array and draws it onto the screen
 		boxes[i].tid = boxes[i].value + 1;
 	
-		obj_set_attr(boxes[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(boxes[i].pb) | boxes[i].tid);
+		obj_set_attr(boxes[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(boxes[i].pb) | boxes[i].tid | ATTR2_PRIO(1));
 
 		xDistance = abs(boxes[i].worldX - player.x);
 		yDistance = abs(boxes[i].worldY - player.y);
@@ -362,7 +367,7 @@ void draw() {
 	
 	xDistance = abs(gate.worldX - player.x);
 	yDistance = abs(gate.worldY - player.y);
-	obj_set_attr(gate.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(gate.pb) | gate.tid);
+	obj_set_attr(gate.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(gate.pb) | gate.tid | ATTR2_PRIO(1));
 	if ((xDistance > 16) || (yDistance > 16)) {
 		gate.screenX = -8;
 		gate.screenY = -8;
@@ -387,7 +392,7 @@ int main() {
 	gameState = 0;
 	
 	init();
-	// char coordinates[50];
+	char coordinates[50];
 	menuSelection = 0;
 
 	while(1) {
@@ -404,7 +409,7 @@ int main() {
 				if (key_hit(KEY_START)) {
 					if (menuSelection == 0) {
 						gameState = 1;
-						initStage1();
+						initLevel1();
 					}
 				}
 
@@ -451,6 +456,10 @@ int main() {
 				tte_write("#{P:8,8}");
 				tte_write("#{cx:0x0000}Level 1");
 				
+				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				tte_write("#{P:8, 24}");
+				tte_write(coordinates);
+				
 				break;
 				
 			case 2: // stage 2 game state
@@ -464,6 +473,10 @@ int main() {
 				// sprintf(coordinates, "#{cx:0x0000}Level 2");
 				tte_write("#{P:8,8}");
 				tte_write("#{cx:0x0000}Level 2");
+				
+				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				tte_write("#{P:8, 24}");
+				tte_write(coordinates);
 				
 				break;
 				
