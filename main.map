@@ -193,7 +193,7 @@ Linker script and memory map
                 0x08000594                createGrid
                 0x080005c0                addBackground
                 0x0800063c                init
-                0x080008b8                initLevel1
+                0x080008b8                initTutorial
                 0x08000974                initStage2
                 0x08000a30                update
                 0x08000ab8                draw
@@ -211,8 +211,8 @@ Linker script and memory map
  .text          0x08000ccc        0x0 boxes/Box8.o
  .text          0x08000ccc        0x0 boxes/Box9.o
  .text          0x08000ccc        0x0 tempGate.o
- .text          0x08000ccc        0x0 levels/level1_walls.o
- .text          0x08000ccc        0x0 levels/level1_floor.o
+ .text          0x08000ccc        0x0 levels/tutorial_walls.o
+ .text          0x08000ccc        0x0 levels/tutorial_floor.o
  .text          0x08000ccc       0xac tonclib/lib\libtonc.a(tonc_input.o)
                 0x08000ccc                key_poll
                 0x08000d24                key_wait_till_hit
@@ -583,14 +583,14 @@ Linker script and memory map
  .rodata        0x0800cfb8      0x220 tempGate.o
                 0x0800cfb8                tempGatePal
                 0x0800d1b8                tempGateTiles
- .rodata        0x0800d1d8      0xa40 levels/level1_walls.o
-                0x0800d1d8                level1_wallsPal
-                0x0800d3d8                level1_wallsMap
-                0x0800dbd8                level1_wallsTiles
- .rodata        0x0800dc18      0xa40 levels/level1_floor.o
-                0x0800dc18                level1_floorPal
-                0x0800de18                level1_floorMap
-                0x0800e618                level1_floorTiles
+ .rodata        0x0800d1d8      0xa40 levels/tutorial_walls.o
+                0x0800d1d8                tutorial_wallsPal
+                0x0800d3d8                tutorial_wallsMap
+                0x0800dbd8                tutorial_wallsTiles
+ .rodata        0x0800dc18      0xa40 levels/tutorial_floor.o
+                0x0800dc18                tutorial_floorPal
+                0x0800de18                tutorial_floorMap
+                0x0800e618                tutorial_floorTiles
  .rodata        0x0800e658      0x1f0 tonclib/lib\libtonc.a(tte_main.o)
  .rodata        0x0800e848      0x318 tonclib/lib\libtonc.a(sys8.o)
                 0x0800e848                sys8Font
@@ -717,8 +717,8 @@ Linker script and memory map
  .bss           0x030000b0        0x0 boxes/Box8.o
  .bss           0x030000b0        0x0 boxes/Box9.o
  .bss           0x030000b0        0x0 tempGate.o
- .bss           0x030000b0        0x0 levels/level1_walls.o
- .bss           0x030000b0        0x0 levels/level1_floor.o
+ .bss           0x030000b0        0x0 levels/tutorial_walls.o
+ .bss           0x030000b0        0x0 levels/tutorial_floor.o
  .bss           0x030000b0        0x4 tonclib/lib\libtonc.a(tonc_input.o)
                 0x030000b0                __key_curr
                 0x030000b2                __key_prev
@@ -839,8 +839,8 @@ Linker script and memory map
  .data          0x030011bc        0x0 boxes/Box8.o
  .data          0x030011bc        0x0 boxes/Box9.o
  .data          0x030011bc        0x0 tempGate.o
- .data          0x030011bc        0x0 levels/level1_walls.o
- .data          0x030011bc        0x0 levels/level1_floor.o
+ .data          0x030011bc        0x0 levels/tutorial_walls.o
+ .data          0x030011bc        0x0 levels/tutorial_floor.o
  .data          0x030011bc        0x8 tonclib/lib\libtonc.a(tonc_input.o)
                 0x030011bc                __key_rpt
  .data          0x030011c4        0x0 tonclib/lib\libtonc.a(tonc_oam.o)
@@ -1089,8 +1089,8 @@ Linker script and memory map
  .comment       0x00000000       0x23 boxes/Box8.o
  .comment       0x00000000       0x23 boxes/Box9.o
  .comment       0x00000000       0x23 tempGate.o
- .comment       0x00000000       0x23 levels/level1_walls.o
- .comment       0x00000000       0x23 levels/level1_floor.o
+ .comment       0x00000000       0x23 levels/tutorial_walls.o
+ .comment       0x00000000       0x23 levels/tutorial_floor.o
  .comment       0x00000000       0x23 tonclib/lib\libtonc.a(tonc_input.o)
  .comment       0x00000000       0x23 tonclib/lib\libtonc.a(tonc_oam.o)
  .comment       0x00000000       0x23 tonclib/lib\libtonc.a(tte_init_se.o)
@@ -1242,9 +1242,9 @@ Linker script and memory map
  .ARM.attributes
                 0x00000318       0x32 tempGate.o
  .ARM.attributes
-                0x0000034a       0x32 levels/level1_walls.o
+                0x0000034a       0x32 levels/tutorial_walls.o
  .ARM.attributes
-                0x0000037c       0x32 levels/level1_floor.o
+                0x0000037c       0x32 levels/tutorial_floor.o
  .ARM.attributes
                 0x000003ae       0x32 tonclib/lib\libtonc.a(tonc_input.o)
  .ARM.attributes
@@ -1400,8 +1400,8 @@ LOAD boxes/Box7.o
 LOAD boxes/Box8.o
 LOAD boxes/Box9.o
 LOAD tempGate.o
-LOAD levels/level1_walls.o
-LOAD levels/level1_floor.o
+LOAD levels/tutorial_walls.o
+LOAD levels/tutorial_floor.o
 LOAD tonclib/lib\libtonc.a
 START GROUP
 LOAD q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a

@@ -10,8 +10,8 @@
 #include "stage2Floor.h"
 
 // LEVELS
-#include "levels/level1_walls.h"
-#include "levels/level1_floor.h"
+#include "levels/tutorial_walls.h"
+#include "levels/tutorial_floor.h"
 
 // BOXES
 #include "boxes/BoxClear.h"
@@ -30,7 +30,7 @@ void draw();
 void update();
 void nextLevel();
 void init();
-void initLevel1();
+void initTutorial();
 void initStage2();
 void createGrid(const unsigned short *map);
 void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap);
@@ -173,18 +173,18 @@ void createGrid(const unsigned short *map) {
 }
 
 void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap) {
-	memcpy(pal_bg_mem, level1_wallsPal, level1_wallsPalLen /* Should be the same for all levels*/);
-	memcpy(&tile_mem[1][0], wallTiles, level1_wallsTilesLen /* Should be the same for all levels*/);
-	memcpy(&se_mem[30][0], wallMap, level1_wallsMapLen /* Should be the same for all levels*/);
+	memcpy(pal_bg_mem, tutorial_wallsPal, tutorial_wallsPalLen /* Should be the same for all levels*/);
+	memcpy(&tile_mem[1][0], wallTiles, tutorial_wallsTilesLen /* Should be the same for all levels*/);
+	memcpy(&se_mem[30][0], wallMap, tutorial_wallsMapLen /* Should be the same for all levels*/);
 	REG_BG1CNT = BG_CBB(1) | BG_SBB(30) | BG_4BPP | BG_REG_64x64 | BG_PRIO(1);
 	
-	memcpy(&tile_mem[2][0], floorTiles,level1_floorTilesLen /* Should be the same for all levels*/);
-	memcpy(&se_mem[25][0], floorMap, level1_floorMapLen /* Should be the same for all levels*/);
+	memcpy(&tile_mem[2][0], floorTiles,tutorial_floorTilesLen /* Should be the same for all levels*/);
+	memcpy(&se_mem[25][0], floorMap, tutorial_floorMapLen /* Should be the same for all levels*/);
 	REG_BG2CNT = BG_CBB(2) | BG_SBB(25) | BG_4BPP | BG_REG_64x64 | BG_PRIO(1); // Using 64 x 64 despite map being 32 x 32 to avoid the map from being repeated
 }
 
 void init() {
-	memcpy(pal_bg_mem, level1_wallsPal, level1_wallsPalLen /* Should be the same for all levels*/);
+	memcpy(pal_bg_mem, tutorial_wallsPal, tutorial_wallsPalLen /* Should be the same for all levels*/);
 
 	// SPRITES
 
@@ -253,7 +253,7 @@ void init() {
 	oam_init(obj_buffer, 128);
 }
 
-void initLevel1() { // replace any existing map with the this level
+void initTutorial() { // replace any existing map with the this level
 	int i;
 	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
 		boxes[i].worldX = -64;
@@ -270,7 +270,7 @@ void initLevel1() { // replace any existing map with the this level
 
 	// BACKGROUND - adding background
 	
-	addBackground(level1_wallsTiles, level1_wallsMap, level1_floorTiles, level1_floorMap);
+	addBackground(tutorial_wallsTiles, tutorial_wallsMap, tutorial_floorTiles, tutorial_floorMap);
 	
 	boxes[0].worldX = 5;
 	boxes[0].worldY = 3;
@@ -290,7 +290,7 @@ void initLevel1() { // replace any existing map with the this level
 	
 	// WORLD GRID
 
-	createGrid(level1_wallsMap);
+	createGrid(tutorial_wallsMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
@@ -361,7 +361,7 @@ void update() {
 				
 			case 2:
 				gameState = 1;
-				initLevel1();
+				initTutorial();
 				
 				break;
 		}
@@ -438,7 +438,7 @@ int main() {
 				if (key_hit(KEY_START)) {
 					if (menuSelection == 0) {
 						gameState = 1;
-						initLevel1();
+						initTutorial();
 					}
 				}
 

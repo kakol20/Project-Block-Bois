@@ -1,21 +1,21 @@
 
-//{{BLOCK(level1_walls)
+//{{BLOCK(tutorial_walls)
 
 //======================================================================
 //
-//	level1_walls, 256x256@4, 
+//	tutorial_walls, 256x256@4, 
 //	+ palette 256 entries, not compressed
 //	+ 2 tiles (t|f|p reduced) not compressed
 //	+ regular map (in SBBs), not compressed, 32x32 
 //	Total size: 512 + 64 + 2048 = 2624
 //
-//	Time-stamp: 2018-04-12, 15:18:06
+//	Time-stamp: 2018-04-12, 16:59:00
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
 //======================================================================
 
-const unsigned short level1_wallsTiles[32] __attribute__((aligned(4)))=
+const unsigned short tutorial_wallsTiles[32] __attribute__((aligned(4)))=
 {
 	0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
 	0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
@@ -23,7 +23,7 @@ const unsigned short level1_wallsTiles[32] __attribute__((aligned(4)))=
 	0x3333,0x3333,0x2222,0x2232,0x2222,0x2232,0x2222,0x2232,
 };
 
-const unsigned short level1_wallsMap[1024] __attribute__((aligned(4)))=
+const unsigned short tutorial_wallsMap[1024] __attribute__((aligned(4)))=
 {
 	0x0000,0x0000,0x0001,0x0001,0x0001,0x0001,0x0001,0x0001,
 	0x0001,0x0000,0x0001,0x0001,0x0001,0x0001,0x0001,0x0001,
@@ -170,7 +170,7 @@ const unsigned short level1_wallsMap[1024] __attribute__((aligned(4)))=
 	0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
 };
 
-const unsigned short level1_wallsPal[256] __attribute__((aligned(4)))=
+const unsigned short tutorial_wallsPal[256] __attribute__((aligned(4)))=
 {
 	0x0000,0x001F,0x318C,0x4A52,0x14EC,0x0CAA,0x150E,0x6318,
 	0x4210,0x001F,0x03E0,0x03FF,0x7C00,0x7C1F,0x7FE0,0x7FFF,
@@ -209,4 +209,4 @@ const unsigned short level1_wallsPal[256] __attribute__((aligned(4)))=
 	0x6318,0x6739,0x6B5A,0x6F7B,0x739C,0x77BD,0x7BDE,0x7FFF,
 };
 
-//}}BLOCK(level1_walls)
+//}}BLOCK(tutorial_walls)
