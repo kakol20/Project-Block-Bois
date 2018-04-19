@@ -365,7 +365,7 @@ void initTutorial() { // replace any existing map with the this level
 	
 	addBackground(tutorial_wallsTiles, tutorial_wallsMap, tutorial_floorTiles, tutorial_floorMap);
 	
-	boxes[0].worldX = 5;
+	boxes[0].worldX = 5; // places the boxes
 	boxes[0].worldY = 3;
 	boxes[0].pb = 1;
 	boxes[0].value = 0;
@@ -380,10 +380,15 @@ void initTutorial() { // replace any existing map with the this level
 	boxes[2].pb = 5;
 	boxes[2].value = 0;
 	
-	end.worldX = 11;
+	for (i = 3; i < NUMBER_BOXES; i++) { // goes through the other boxes and places them out of the screen
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+	
+	end.worldX = 11; // places the end
 	end.worldY = 25;
 	
-	dropboxes[0].worldX = 5;
+	dropboxes[0].worldX = 5; // places the dropboxes
 	dropboxes[0].worldY = 6;
 	dropboxes[0].pb = 1;
 	dropboxes[0].value = 0;
@@ -393,24 +398,35 @@ void initTutorial() { // replace any existing map with the this level
 	dropboxes[1].pb = 3;
 	dropboxes[1].value = 0;
 	
+	for (i = 2; i < NUMBER_DBOXES; i++) { // goes through the other drop boxes and places them out of the screen
+		dropboxes[1].worldX = -64;
+		dropboxes[1].worldY = -64;
+	}
+	
 	int index = 0;
 	
 	int j;
 	
-	for (i = 11; i <= 16; i++) {
+	for (i = 11; i <= 16; i++) { // places the gates
 		for (j = 2; j <= 3; j++) {
 			gates[index].worldX = i;
-			gates[index].worldY = j; //(j == 2) ? 1 : 4; // moves the gates out of the way temporarily
+			gates[index].worldY = j; //(j == 2) ? 1 : 4;
 			
 			index++;
 		}
 	}
 	
 	for (i = 21; i <= 22; i++) {
-		gates[index].worldX = i; //(i == 21) ? 20 : 23; // moves the gates out of the way temporarily
+		gates[index].worldX = i; //(i == 21) ? 20 : 23;
 		gates[index].worldY = 20;
 		
 		index++;
+	}
+	
+	for (i = index; i < NUMBER_GATES; i++) { // goes through the other gates and places them out of the screen
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	
 	}
 	
 	// WORLD GRID
