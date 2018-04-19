@@ -27,7 +27,9 @@ DROPBOXES := dropbox/DBox1clear.o dropbox/DBox2clear.o dropbox/DBox3clear.o drop
 
 LEVELS := stage2.o stage2Floor.o levels/tutorial_floor.o levels/tutorial_walls.o
 
-COBJS   := $(PROJ).o player.o tempGate.o $(BOXES) $(DROPBOXES) $(LEVELS)
+MISC := other/EndZone.o player.o
+
+COBJS   := $(PROJ).o $(BOXES) $(DROPBOXES) $(LEVELS) $(MISC)
  
 OBJS    := $(COBJS)
 

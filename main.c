@@ -6,12 +6,11 @@
 #include "main.h"
 #include "player.h"
 
-#include "stage2.h"
-#include "stage2Floor.h"
-
 // LEVELS
 #include "levels/tutorial_walls.h"
 #include "levels/tutorial_floor.h"
+#include "stage2.h"
+#include "stage2Floor.h"
 
 // BOXES
 #include "boxes/BoxClear.h"
@@ -37,7 +36,8 @@
 #include "dropbox/DBox9Clear.h"
 #include "dropbox/DBoxClear.h"
 
-#include "tempGate.h"
+// MISC
+#include "other/EndZone.h"
 
 void draw();
 void update();
@@ -237,29 +237,26 @@ void init() {
 	memcpy(&tile_mem[4][10], Box9Tiles, Box9TilesLen);
 	memcpy(pal_obj_mem, Box9Pal, Box9PalLen);
 	
-
 	int i;
 	for (i = 0; i < NUMBER_BOXES; i++) { // creates NUMBER_BOXES amount of boxes
 		boxes[i].sprite = &obj_buffer[i + 1];
 		boxes[i].pb = (i % 6) + 1;
 		
 		boxes[i].value = 0;
-		boxes[i].tid = 1;
+		boxes[i].tid = boxes[i].value + 1;;
 		
 		boxes[i].worldX = -64;
 		boxes[i].worldY = -64 + i;
 		boxes[i].screenX = (boxes[i].worldX * 8) - backgroundX; // sets in position on the screen
 		boxes[i].screenY = (boxes[i].worldY * 8) - backgroundY;
 		nextBuffer = i + 2;
-	}
+	}	
 	
-	memcpy(&tile_mem[4][11], tempGateTiles, tempGateTilesLen);
-	memcpy(pal_obj_mem, tempGatePal, tempGatePalLen);
+	memcpy(&tile_mem[4][11], EndZoneTiles, EndZoneTilesLen);
+	memcpy(pal_obj_mem, EndZonePal, EndZonePalLen);
 	gate.sprite = &obj_buffer[nextBuffer];
-	gate.pb = 0;
+	gate.pb = 14;
 	gate.tid = 11;
-	gate.worldX = -64;
-	gate.worldY = -64;
 
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_OBJ | DCNT_OBJ_1D;
 
@@ -299,6 +296,9 @@ void initTutorial() { // replace any existing map with the this level
 	boxes[2].worldY = 14;
 	boxes[2].pb = 5;
 	boxes[2].value = 0;
+	
+	gate.worldX = 11;
+	gate.worldY = 25;
 	
 	
 	// WORLD GRID
