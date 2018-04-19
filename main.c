@@ -57,7 +57,10 @@ OBJ_ATTR obj_buffer[128];
 OBJ_AFFINE *obj_aff_buffer = (OBJ_AFFINE*)obj_buffer;
 
 OBJ_ATTR *simplePlayer = &obj_buffer[0];
+
 Box boxes[NUMBER_BOXES];
+Box dropboxes[NUMBER_DBOXES]; // dropboxes
+
 Player player;
 Gate gate;
 
@@ -240,13 +243,13 @@ void init() {
 	int i;
 	for (i = 0; i < NUMBER_BOXES; i++) { // creates NUMBER_BOXES amount of boxes
 		boxes[i].sprite = &obj_buffer[i + 1];
-		boxes[i].pb = (i % 6) + 1;
+		boxes[i].pb = 1;
 		
 		boxes[i].value = 0;
 		boxes[i].tid = boxes[i].value + 1;;
 		
 		boxes[i].worldX = -64;
-		boxes[i].worldY = -64 + i;
+		boxes[i].worldY = -64;
 		boxes[i].screenX = (boxes[i].worldX * 8) - backgroundX; // sets in position on the screen
 		boxes[i].screenY = (boxes[i].worldY * 8) - backgroundY;
 		nextBuffer = i + 2;
@@ -257,6 +260,53 @@ void init() {
 	gate.sprite = &obj_buffer[nextBuffer];
 	gate.pb = 14;
 	gate.tid = 11;
+	
+	nextBuffer++;
+	
+	memcpy(&tile_mem[4][12], DBoxclearTiles, DBoxclearTilesLen);
+	memcpy(pal_obj_mem, DBoxclearPal, DBoxclearPalLen);
+	
+	memcpy(&tile_mem[4][13], DBox1clearTiles, DBox1clearTilesLen);
+	memcpy(pal_obj_mem, DBox1clearPal, DBox1clearPalLen);
+	
+	memcpy(&tile_mem[4][14], DBox2clearTiles, DBox2clearTilesLen);
+	memcpy(pal_obj_mem, DBox2clearPal, DBox2clearPalLen);
+	
+	memcpy(&tile_mem[4][15], DBox3clearTiles, DBox3clearTilesLen);
+	memcpy(pal_obj_mem, DBox3clearPal, DBox3clearPalLen);
+	
+	memcpy(&tile_mem[4][16], DBox4clearTiles, DBox4clearTilesLen);
+	memcpy(pal_obj_mem, DBox4clearPal, DBox4clearPalLen);
+	
+	memcpy(&tile_mem[4][17], DBox5clearTiles, DBox5clearTilesLen);
+	memcpy(pal_obj_mem, DBox5clearPal, DBox5clearPalLen);
+	
+	memcpy(&tile_mem[4][18], DBox6clearTiles, DBox6clearTilesLen);
+	memcpy(pal_obj_mem, DBox6clearPal, DBox6clearPalLen);
+	
+	memcpy(&tile_mem[4][19], DBox7clearTiles, DBox7clearTilesLen);
+	memcpy(pal_obj_mem, DBox7clearPal, DBox7clearPalLen);
+	
+	memcpy(&tile_mem[4][20], DBox8clearTiles, DBox8clearTilesLen);
+	memcpy(pal_obj_mem, DBox8clearPal, DBox8clearPalLen);
+	
+	memcpy(&tile_mem[4][21], DBox9clearTiles, DBox9clearTilesLen);
+	memcpy(pal_obj_mem, DBox9clearPal, DBox9clearPalLen);
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].sprite = &obj_buffer[nextBuffer];
+		dropboxes[i].pb = 1;
+		
+		dropboxes[i].value = 0;
+		dropboxes[i].tid = 12 + dropboxes[i].value;
+		
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+		dropboxes[i].screenX = (dropboxes[i].worldX * 8) - backgroundX;
+		dropboxes[i].screenY = (dropboxes[i].worldY * 8) - backgroundY;
+		
+		nextBuffer++;
+	}
 
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_OBJ | DCNT_OBJ_1D;
 
@@ -299,6 +349,16 @@ void initTutorial() { // replace any existing map with the this level
 	
 	gate.worldX = 11;
 	gate.worldY = 25;
+	
+	dropboxes[0].worldX = 5;
+	dropboxes[0].worldY = 6;
+	dropboxes[0].pb = 1;
+	dropboxes[0].value = 0;
+	
+	dropboxes[1].worldX = 23;
+	dropboxes[1].worldY = 14;
+	dropboxes[1].pb = 3;
+	dropboxes[1].value = 0;
 	
 	
 	// WORLD GRID
@@ -405,6 +465,25 @@ void draw() {
 		}
 
 		obj_set_pos(boxes[i].sprite, boxes[i].screenX, boxes[i].screenY);
+	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].tid = dropboxes[i].value + 12;
+		
+		obj_set_attr(dropboxes[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(dropboxes[i].pb) | dropboxes[i].tid | ATTR2_PRIO(1));
+		
+		xDistance = abs(dropboxes[i].worldX - player.x);
+		yDistance = abs(dropboxes[i].worldY - player.y);
+		
+		if ((xDistance > 16) || (yDistance > 16)) {
+			dropboxes[i].screenX = -8;
+			dropboxes[i].screenY = -8;
+		} else {
+			dropboxes[i].screenX = (dropboxes[i].worldX * 8) - backgroundX;
+			dropboxes[i].screenY = (dropboxes[i].worldY * 8) - backgroundY;
+		}
+		
+		obj_set_pos(dropboxes[i].sprite, dropboxes[i].screenX, dropboxes[i].screenY);
 	}
 	
 	xDistance = abs(gate.worldX - player.x);

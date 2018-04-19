@@ -2,6 +2,7 @@
 #define MAIN_H
 
 #define NUMBER_BOXES 10
+#define NUMBER_DBOXES 10
 
 typedef struct Box {
 	OBJ_ATTR *sprite;
