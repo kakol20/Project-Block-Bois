@@ -1,21 +1,21 @@
 
-//{{BLOCK(_StageFloor)
+//{{BLOCK(Stage1Floor)
 
 //======================================================================
 //
-//	_StageFloor, 256x256@4, 
+//	Stage1Floor, 256x256@4, 
 //	+ palette 256 entries, not compressed
 //	+ 2 tiles (t|f|p reduced) not compressed
 //	+ regular map (in SBBs), not compressed, 32x32 
 //	Total size: 512 + 64 + 2048 = 2624
 //
-//	Time-stamp: 2018-04-19, 15:44:36
+//	Time-stamp: 2018-04-19, 16:09:53
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
 //======================================================================
 
-const unsigned short _StageFloorTiles[32] __attribute__((aligned(4)))=
+const unsigned short Stage1FloorTiles[32] __attribute__((aligned(4)))=
 {
 	0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
 	0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
@@ -23,7 +23,7 @@ const unsigned short _StageFloorTiles[32] __attribute__((aligned(4)))=
 	0x5564,0x4665,0x6564,0x6446,0x4646,0x5664,0x6454,0x5556,
 };
 
-const unsigned short _StageFloorMap[1024] __attribute__((aligned(4)))=
+const unsigned short Stage1FloorMap[1024] __attribute__((aligned(4)))=
 {
 	0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
 	0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
@@ -170,7 +170,7 @@ const unsigned short _StageFloorMap[1024] __attribute__((aligned(4)))=
 	0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
 };
 
-const unsigned short _StageFloorPal[256] __attribute__((aligned(4)))=
+const unsigned short Stage1FloorPal[256] __attribute__((aligned(4)))=
 {
 	0x0000,0x001F,0x318C,0x4A52,0x14EC,0x0CAA,0x150E,0x6318,
 	0x4210,0x001F,0x03E0,0x03FF,0x7C00,0x7C1F,0x7FE0,0x7FFF,
@@ -209,4 +209,4 @@ const unsigned short _StageFloorPal[256] __attribute__((aligned(4)))=
 	0x6318,0x6739,0x6B5A,0x6F7B,0x739C,0x77BD,0x7BDE,0x7FFF,
 };
 
-//}}BLOCK(_StageFloor)
+//}}BLOCK(Stage1Floor)

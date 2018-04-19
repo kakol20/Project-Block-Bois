@@ -9,8 +9,8 @@
 // LEVELS
 #include "levels/tutorial_walls.h"
 #include "levels/tutorial_floor.h"
-#include "levels/1StageFloor.h"
-#include "levels/1StageWall.h"
+#include "levels/Stage1Floor.h"
+#include "levels/Stage1Wall.h"
 
 // BOXES
 #include "boxes/BoxClear.h"
@@ -470,11 +470,11 @@ void initStage1() {
 
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(_StageWallTiles, _StageWallMap, _StageFloorTiles, _StageFloorMap);
+	addBackground(Stage1WallTiles, Stage1WallMap, Stage1FloorTiles, Stage1FloorMap);
 	
 	// WORLD GRID
 
-	createGrid(_StageWallMap);
+	createGrid(Stage1WallMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }

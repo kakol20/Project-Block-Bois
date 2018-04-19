@@ -221,8 +221,8 @@ Linker script and memory map
  .text          0x08001208        0x0 dropbox/DBoxclear.o
  .text          0x08001208        0x0 levels/tutorial_floor.o
  .text          0x08001208        0x0 levels/tutorial_walls.o
- .text          0x08001208        0x0 levels/1StageFloor.o
- .text          0x08001208        0x0 levels/1StageWall.o
+ .text          0x08001208        0x0 levels/Stage1Floor.o
+ .text          0x08001208        0x0 levels/Stage1Wall.o
  .text          0x08001208        0x0 other/EndZone.o
  .text          0x08001208        0x0 player.o
  .text          0x08001208        0x0 other/MovingBlocks.o
@@ -621,14 +621,14 @@ Linker script and memory map
                 0x0800ddd8                tutorial_wallsPal
                 0x0800dfd8                tutorial_wallsMap
                 0x0800e7d8                tutorial_wallsTiles
- .rodata        0x0800e818      0xa40 levels/1StageFloor.o
-                0x0800e818                _StageFloorPal
-                0x0800ea18                _StageFloorMap
-                0x0800f218                _StageFloorTiles
- .rodata        0x0800f258      0xa40 levels/1StageWall.o
-                0x0800f258                _StageWallPal
-                0x0800f458                _StageWallMap
-                0x0800fc58                _StageWallTiles
+ .rodata        0x0800e818      0xa40 levels/Stage1Floor.o
+                0x0800e818                Stage1FloorPal
+                0x0800ea18                Stage1FloorMap
+                0x0800f218                Stage1FloorTiles
+ .rodata        0x0800f258      0xa40 levels/Stage1Wall.o
+                0x0800f258                Stage1WallPal
+                0x0800f458                Stage1WallMap
+                0x0800fc58                Stage1WallTiles
  .rodata        0x0800fc98      0x220 other/EndZone.o
                 0x0800fc98                EndZonePal
                 0x0800fe98                EndZoneTiles
@@ -772,8 +772,8 @@ Linker script and memory map
  .bss           0x030000b0        0x0 dropbox/DBoxclear.o
  .bss           0x030000b0        0x0 levels/tutorial_floor.o
  .bss           0x030000b0        0x0 levels/tutorial_walls.o
- .bss           0x030000b0        0x0 levels/1StageFloor.o
- .bss           0x030000b0        0x0 levels/1StageWall.o
+ .bss           0x030000b0        0x0 levels/Stage1Floor.o
+ .bss           0x030000b0        0x0 levels/Stage1Wall.o
  .bss           0x030000b0        0x0 other/EndZone.o
  .bss           0x030000b0        0x0 player.o
  .bss           0x030000b0        0x0 other/MovingBlocks.o
@@ -907,8 +907,8 @@ Linker script and memory map
  .data          0x03001854        0x0 dropbox/DBoxclear.o
  .data          0x03001854        0x0 levels/tutorial_floor.o
  .data          0x03001854        0x0 levels/tutorial_walls.o
- .data          0x03001854        0x0 levels/1StageFloor.o
- .data          0x03001854        0x0 levels/1StageWall.o
+ .data          0x03001854        0x0 levels/Stage1Floor.o
+ .data          0x03001854        0x0 levels/Stage1Wall.o
  .data          0x03001854        0x0 other/EndZone.o
  .data          0x03001854        0x0 player.o
  .data          0x03001854        0x0 other/MovingBlocks.o
@@ -1167,8 +1167,8 @@ Linker script and memory map
  .comment       0x00000000       0x23 dropbox/DBoxclear.o
  .comment       0x00000000       0x23 levels/tutorial_floor.o
  .comment       0x00000000       0x23 levels/tutorial_walls.o
- .comment       0x00000000       0x23 levels/1StageFloor.o
- .comment       0x00000000       0x23 levels/1StageWall.o
+ .comment       0x00000000       0x23 levels/Stage1Floor.o
+ .comment       0x00000000       0x23 levels/Stage1Wall.o
  .comment       0x00000000       0x23 other/EndZone.o
  .comment       0x00000000       0x23 player.o
  .comment       0x00000000       0x23 other/MovingBlocks.o
@@ -1339,9 +1339,9 @@ Linker script and memory map
  .ARM.attributes
                 0x000004ae       0x32 levels/tutorial_walls.o
  .ARM.attributes
-                0x000004e0       0x32 levels/1StageFloor.o
+                0x000004e0       0x32 levels/Stage1Floor.o
  .ARM.attributes
-                0x00000512       0x32 levels/1StageWall.o
+                0x00000512       0x32 levels/Stage1Wall.o
  .ARM.attributes
                 0x00000544       0x32 other/EndZone.o
  .ARM.attributes
@@ -1511,8 +1511,8 @@ LOAD dropbox/DBox9clear.o
 LOAD dropbox/DBoxclear.o
 LOAD levels/tutorial_floor.o
 LOAD levels/tutorial_walls.o
-LOAD levels/1StageFloor.o
-LOAD levels/1StageWall.o
+LOAD levels/Stage1Floor.o
+LOAD levels/Stage1Wall.o
 LOAD other/EndZone.o
 LOAD player.o
 LOAD other/MovingBlocks.o
