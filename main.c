@@ -38,6 +38,7 @@
 
 // MISC
 #include "other/EndZone.h"
+#include "other/MovingBlocks.h"
 
 void draw();
 void update();
@@ -50,7 +51,7 @@ void addBackground(const unsigned short *wallTiles, const unsigned short *wallMa
 void move(int changeX, int changeY);
 bool merge(int boxToMerge);
 bool isOdd(int n);
-int boxCollision(int x, int y, bool mergeBoxes);
+int collision(int x, int y, bool mergeBoxes);
 
 // VARTIABLES
 OBJ_ATTR obj_buffer[128];
@@ -58,11 +59,12 @@ OBJ_AFFINE *obj_aff_buffer = (OBJ_AFFINE*)obj_buffer;
 
 OBJ_ATTR *simplePlayer = &obj_buffer[0];
 
-Box boxes[NUMBER_BOXES];
+Box boxes[NUMBER_BOXES]; // boxes
 Box dropboxes[NUMBER_DBOXES]; // dropboxes
 
 Player player;
-Gate gate;
+Sprite end;
+Sprite gates[NUMBER_GATES]; 
 
 int screenWidth = 240;
 int screenHeight = 160;
@@ -85,10 +87,10 @@ bool isOdd(int n) {
 	return false;
 }
 
-int boxCollision(int x, int y, bool mergeBoxes) {
+int collision(int x, int y, bool mergeBoxes) {
 
 	int i;
-	for (i = 0; i < NUMBER_BOXES;  i++) {
+	for (i = 0; i < NUMBER_BOXES; i++) {
 		if ((x == boxes[i].worldX) && (y == boxes[i].worldY)) { // Checks if there is a box on the x,y position
 			if (mergeBoxes) {
 				if (merge(i)) {
@@ -97,6 +99,12 @@ int boxCollision(int x, int y, bool mergeBoxes) {
 			}
 		
 			return i; // returns the index in the boxes[] array
+		}
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		if ((x == gates[i].worldX) && (y == gates[i].worldY)) {
+			return NUMBER_BOXES + 1; // returns NUMBER_BOXES + 1 if colliding with a gate
 		}
 	}
 	
@@ -145,27 +153,37 @@ void move(int changeX, int changeY) { // put in parameters how much the position
 		
 	if (!world_grid[player.x + changeX][player.y + changeY]) {
 		if (key_held(KEY_A)) {		
-			currBox = boxCollision(player.x + changeX, player.y + changeY, false); // pushing
+			currBox = collision(player.x + changeX, player.y + changeY, false); // pushing
 			
-			if ((currBox >= 0) && !world_grid[player.x + changeX + changeX][player.y + changeY + changeY] && (boxCollision(player.x + changeX + changeX, player.y + changeY + changeY, true) < 0)) {
+			if ((currBox >= 0) && !world_grid[player.x + changeX + changeX][player.y + changeY + changeY] && (collision(player.x + changeX + changeX, player.y + changeY + changeY, true) < 0)) {
 				
 				// example move(0, 1)
 				// currBox = (player x position, player y position + 1)
 				// box ahea of currBox = (player x position, player y position + 2
 				
-				boxes[currBox].worldX += changeX;
-				boxes[currBox].worldY += changeY;	
+				if (currBox < NUMBER_BOXES) { // can only push a box
+					boxes[currBox].worldX += changeX;
+					boxes[currBox].worldY += changeY;	
+				}
+				
 				move = true;
 			}
-		}  if (key_held(KEY_B)) { // pulling
-			currBox = boxCollision(player.x - changeX, player.y - changeY, false);
+		}
+		
+		if (key_held(KEY_B)) { // pulling
+			currBox = collision(player.x - changeX, player.y - changeY, false);
 			
-			if ((currBox >= 0) && (boxCollision(player.x + changeX, player.y + changeY, false) < 0)) {
-				boxes[currBox].worldX += changeX;
-				boxes[currBox].worldY += changeY;
+			if ((currBox >= 0) && (collision(player.x + changeX, player.y + changeY, false) < 0)) {
+				if (currBox < NUMBER_BOXES) { // can only pull a box
+					boxes[currBox].worldX += changeX;
+					boxes[currBox].worldY += changeY;
+				}
+				
+				move = true;
+			} else if (collision(player.x + changeX, player.y + changeY, false) < 0) {
 				move = true;
 			}
-		} else if (boxCollision(player.x + changeX, player.y + changeY, false) < 0){
+		} else if (collision(player.x + changeX, player.y + changeY, false) < 0){
 			move = true;
 		}
 	}
@@ -257,9 +275,9 @@ void init() {
 	
 	memcpy(&tile_mem[4][11], EndZoneTiles, EndZoneTilesLen);
 	memcpy(pal_obj_mem, EndZonePal, EndZonePalLen);
-	gate.sprite = &obj_buffer[nextBuffer];
-	gate.pb = 14;
-	gate.tid = 11;
+	end.sprite = &obj_buffer[nextBuffer];
+	end.pb = 14;
+	end.tid = 11;
 	
 	nextBuffer++;
 	
@@ -307,6 +325,21 @@ void init() {
 		
 		nextBuffer++;
 	}
+	
+	memcpy(&tile_mem[4][22], MovingBlocksTiles, MovingBlocksTilesLen);
+	memcpy(pal_obj_mem, MovingBlocksPal, MovingBlocksPalLen);
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		gates[i].sprite = &obj_buffer[nextBuffer];
+		gates[i].pb = 0;
+		gates[i].tid = 22;
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+		gates[i].screenX = (gates[i].worldX * 8) - backgroundX;
+		gates[i].screenY = (gates[i].worldY * 8) - backgroundY;
+		
+		nextBuffer++;	
+	}
 
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_OBJ | DCNT_OBJ_1D;
 
@@ -347,8 +380,8 @@ void initTutorial() { // replace any existing map with the this level
 	boxes[2].pb = 5;
 	boxes[2].value = 0;
 	
-	gate.worldX = 11;
-	gate.worldY = 25;
+	end.worldX = 11;
+	end.worldY = 25;
 	
 	dropboxes[0].worldX = 5;
 	dropboxes[0].worldY = 6;
@@ -360,6 +393,25 @@ void initTutorial() { // replace any existing map with the this level
 	dropboxes[1].pb = 3;
 	dropboxes[1].value = 0;
 	
+	int index = 0;
+	
+	int j;
+	
+	for (i = 11; i <= 16; i++) {
+		for (j = 2; j <= 3; j++) {
+			gates[index].worldX = i;
+			gates[index].worldY = j; //(j == 2) ? 1 : 4; // moves the gates out of the way temporarily
+			
+			index++;
+		}
+	}
+	
+	for (i = 21; i <= 22; i++) {
+		gates[index].worldX = i; //(i == 21) ? 20 : 23; // moves the gates out of the way temporarily
+		gates[index].worldY = 20;
+		
+		index++;
+	}
 	
 	// WORLD GRID
 
@@ -424,7 +476,7 @@ void update() {
 	
 	// MOVING TO ANOTHER MAP
 
-	if ((gate.worldX == player.x) && (gate.worldY == player.y)) { // tempory movement between maps - testing if the player walks over the gate, then it will go to another map
+	if ((end.worldX == player.x) && (end.worldY == player.y)) { // tempory movement between maps - testing if the player walks over the end, then it will go to another map
 		switch (gameState) {
 			case 1: // level 1 - gameState 0 is the main menu
 				gameState = 2;
@@ -486,17 +538,34 @@ void draw() {
 		obj_set_pos(dropboxes[i].sprite, dropboxes[i].screenX, dropboxes[i].screenY);
 	}
 	
-	xDistance = abs(gate.worldX - player.x);
-	yDistance = abs(gate.worldY - player.y);
-	obj_set_attr(gate.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(gate.pb) | gate.tid | ATTR2_PRIO(1));
-	if ((xDistance > 16) || (yDistance > 16)) {
-		gate.screenX = -8;
-		gate.screenY = -8;
-	} else {
-		gate.screenX = (gate.worldX * 8) - backgroundX;
-		gate.screenY = (gate.worldY * 8) - backgroundY;
+	for (i = 0; i < NUMBER_GATES; i++) {
+		obj_set_attr(gates[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(gates[i].pb) | gates[i].tid | ATTR2_PRIO(1));
+		
+		xDistance = abs(gates[i].worldX - player.x);
+		yDistance = abs(gates[i].worldY - player.y);
+		
+		if ((xDistance > 16) || (yDistance > 16)) {
+			gates[i].screenX = -8;
+			gates[i].screenY = -8;
+		} else {
+			gates[i].screenX = (gates[i].worldX * 8) - backgroundX;
+			gates[i].screenY = (gates[i].worldY * 8) - backgroundY;
+		}
+		
+		obj_set_pos(gates[i].sprite, gates[i].screenX, gates[i].screenY);
 	}
-	obj_set_pos(gate.sprite, gate.screenX, gate.screenY);
+	
+	xDistance = abs(end.worldX - player.x);
+	yDistance = abs(end.worldY - player.y);
+	obj_set_attr(end.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(end.pb) | end.tid | ATTR2_PRIO(1));
+	if ((xDistance > 16) || (yDistance > 16)) {
+		end.screenX = -8;
+		end.screenY = -8;
+	} else {
+		end.screenX = (end.worldX * 8) - backgroundX;
+		end.screenY = (end.worldY * 8) - backgroundY;
+	}
+	obj_set_pos(end.sprite, end.screenX, end.screenY);
 
 	oam_copy(oam_mem, obj_buffer, 128);
 

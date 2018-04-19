@@ -1,8 +1,9 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#define NUMBER_BOXES 10
-#define NUMBER_DBOXES 10
+#define NUMBER_BOXES 16
+#define NUMBER_DBOXES 16
+#define NUMBER_GATES 32
 
 typedef struct Box {
 	OBJ_ATTR *sprite;
@@ -26,7 +27,7 @@ typedef struct Player {
 	u32 tid;
 } Player;
 
-typedef struct Gate {
+typedef struct Sprite {
 	OBJ_ATTR *sprite;
 	int worldX;
 	int worldY;
@@ -34,6 +35,6 @@ typedef struct Gate {
 	int screenY;
 	u32 pb;
 	u32 tid;
-} Gate;
+} Sprite;
 
 #endif // MAIN_H
