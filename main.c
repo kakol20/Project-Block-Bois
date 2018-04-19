@@ -9,8 +9,8 @@
 // LEVELS
 #include "levels/tutorial_walls.h"
 #include "levels/tutorial_floor.h"
-#include "stage2.h"
-#include "stage2Floor.h"
+#include "levels/1StageFloor.h"
+#include "levels/1StageWall.h"
 
 // BOXES
 #include "boxes/BoxClear.h"
@@ -45,7 +45,7 @@ void update();
 void nextLevel();
 void init();
 void initTutorial();
-void initStage2();
+void initStage1();
 void createGrid(const unsigned short *map);
 void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap);
 void move(int changeX, int changeY);
@@ -365,6 +365,8 @@ void initTutorial() { // replace any existing map with the this level
 	
 	addBackground(tutorial_wallsTiles, tutorial_wallsMap, tutorial_floorTiles, tutorial_floorMap);
 	
+	// Sprites
+	
 	boxes[0].worldX = 5; // places the boxes
 	boxes[0].worldY = 3;
 	boxes[0].pb = 1;
@@ -399,8 +401,8 @@ void initTutorial() { // replace any existing map with the this level
 	dropboxes[1].value = 0;
 	
 	for (i = 2; i < NUMBER_DBOXES; i++) { // goes through the other drop boxes and places them out of the screen
-		dropboxes[1].worldX = -64;
-		dropboxes[1].worldY = -64;
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
 	}
 	
 	int index = 0;
@@ -410,14 +412,14 @@ void initTutorial() { // replace any existing map with the this level
 	for (i = 11; i <= 16; i++) { // places the gates
 		for (j = 2; j <= 3; j++) {
 			gates[index].worldX = i;
-			gates[index].worldY = j; //(j == 2) ? 1 : 4;
+			gates[index].worldY = (j == 2) ? 1 : 4;
 			
 			index++;
 		}
 	}
 	
 	for (i = 21; i <= 22; i++) {
-		gates[index].worldX = i; //(i == 21) ? 20 : 23;
+		gates[index].worldX = (i == 21) ? 20 : 23;
 		gates[index].worldY = 20;
 		
 		index++;
@@ -436,17 +438,30 @@ void initTutorial() { // replace any existing map with the this level
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
 
-void initStage2() {
+void initStage1() {
 	int i;
 	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
 		boxes[i].worldX = -64;
 		boxes[i].worldY = -64;
 	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	}
 
 	player.width = 8;
 	player.height = 8;
-	player.x = 4;
-	player.y = 4;
+	player.x = 1;
+	player.y = 5;
+	
+	end.worldX = 6;
+	end.worldY = 11;
 
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
@@ -455,11 +470,11 @@ void initStage2() {
 
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(stage2Tiles, stage2Map, stage2FloorTiles, stage2FloorMap);
+	addBackground(_StageWallTiles, _StageWallMap, _StageFloorTiles, _StageFloorMap);
 	
 	// WORLD GRID
 
-	createGrid(stage2Map);
+	createGrid(_StageWallMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
@@ -496,7 +511,7 @@ void update() {
 		switch (gameState) {
 			case 1: // level 1 - gameState 0 is the main menu
 				gameState = 2;
-				initStage2();
+				initStage1();
 				
 				break;
 				
@@ -650,7 +665,7 @@ int main() {
 
 				break;
 				
-			case 1: // stage 1 game state
+			case 1: // tutorial game state
 				vid_vsync();
 				tte_write("#{es}");//clear the screens
 				
@@ -668,7 +683,7 @@ int main() {
 				
 				break;
 				
-			case 2: // stage 2 game state
+			case 2: // stage 1 game state
 				vid_vsync();
 				tte_write("#{es}");
 				
