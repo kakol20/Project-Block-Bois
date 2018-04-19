@@ -1,25 +1,25 @@
 
-//{{BLOCK(tempGate)
+//{{BLOCK(DBox4clear)
 
 //======================================================================
 //
-//	tempGate, 8x8@4, 
+//	DBox4clear, 8x8@4, 
 //	+ palette 256 entries, not compressed
 //	+ 1 tiles not compressed
 //	Total size: 512 + 32 = 544
 //
-//	Time-stamp: 2018-03-15, 14:59:12
+//	Time-stamp: 2018-04-19, 12:13:54
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
 //======================================================================
 
-const unsigned int tempGateTiles[8] __attribute__((aligned(4)))=
+const unsigned int DBox4clearTiles[8] __attribute__((aligned(4)))=
 {
-	0x00000000,0x00000000,0x44444444,0x43333334,0x43333334,0x44444444,0x00000000,0x00000000,
+	0x21122112,0x11111111,0x11131311,0x21131312,0x21333312,0x11131111,0x11131111,0x21122112,
 };
 
-const unsigned int tempGatePal[128] __attribute__((aligned(4)))=
+const unsigned int DBox4clearPal[128] __attribute__((aligned(4)))=
 {
 	0x03DF0000,0x02107EC0,0x40104000,0x63184200,0x001F4210,0x03FF03E0,0x7C1F7C00,0x7FFF7FE0,
 	0x001F0000,0x0000294A,0x00170013,0x001F001B,0x00E00080,0x01E00160,0x02E00260,0x03E00360,
@@ -40,4 +40,4 @@ const unsigned int tempGatePal[128] __attribute__((aligned(4)))=
 	0x46314210,0x4E734A52,0x56B55294,0x5EF75AD6,0x67396318,0x6F7B6B5A,0x77BD739C,0x7FFF0000,
 };
 
-//}}BLOCK(tempGate)
+//}}BLOCK(DBox4clear)

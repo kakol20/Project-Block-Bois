@@ -24,6 +24,19 @@
 #include "boxes/Box7.h"
 #include "boxes/Box8.h"
 #include "boxes/Box9.h"
+
+// DROPBOXES
+#include "dropbox/DBox1Clear.h"
+#include "dropbox/DBox2Clear.h"
+#include "dropbox/DBox3Clear.h"
+#include "dropbox/DBox4Clear.h"
+#include "dropbox/DBox5Clear.h"
+#include "dropbox/DBox6Clear.h"
+#include "dropbox/DBox7Clear.h"
+#include "dropbox/DBox8Clear.h"
+#include "dropbox/DBox9Clear.h"
+#include "dropbox/DBoxClear.h"
+
 #include "tempGate.h"
 
 void draw();

@@ -21,7 +21,13 @@ LIBPATHS := -L$(LIBTONC)/lib
 
 LIBS    := -ltonc
 
-COBJS   := $(PROJ).o player.o stage2.o stage2Floor.o boxes/BoxClear.o boxes/Box1.o boxes/Box2.o boxes/Box3.o boxes/Box4.o boxes/Box5.o boxes/Box6.o boxes/Box7.o boxes/Box8.o boxes/Box9.o tempGate.o levels/tutorial_walls.o levels/tutorial_floor.o
+BOXES := boxes/BoxClear.o boxes/Box1.o boxes/Box2.o boxes/Box3.o boxes/Box4.o boxes/Box5.o boxes/Box6.o boxes/Box7.o boxes/Box8.o boxes/Box9.o
+
+DROPBOXES := dropbox/DBox1clear.o dropbox/DBox2clear.o dropbox/DBox3clear.o dropbox/DBox4clear.o dropbox/DBox5clear.o dropbox/DBox6clear.o dropbox/DBox7clear.o dropbox/DBox8clear.o dropbox/DBox9clear.o dropbox/DBoxclear.o
+
+LEVELS := stage2.o stage2Floor.o levels/tutorial_floor.o levels/tutorial_walls.o
+
+COBJS   := $(PROJ).o player.o tempGate.o $(BOXES) $(DROPBOXES) $(LEVELS)
  
 OBJS    := $(COBJS)
 
