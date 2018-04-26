@@ -11,6 +11,8 @@
 #include "levels/tutorial_floor.h"
 #include "levels/Stage1Floor.h"
 #include "levels/Stage1Wall.h"
+#include "levels/Stage2Floor.h"
+#include "levels/Stage2Wall.h"
 
 // BOXES
 #include "boxes/BoxClear.h"
@@ -43,9 +45,12 @@
 void draw();
 void update();
 void nextLevel();
+
 void init();
 void initTutorial();
 void initStage1();
+void initStage2();
+
 void createGrid(const unsigned short *map);
 void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap);
 void move(int changeX, int changeY);
@@ -227,6 +232,8 @@ void init() {
 	player.sprite = &obj_buffer[0];
 	player.pb = 0;
 	player.tid = 0;
+	player.width = 8;
+	player.height = 8;
 
 	memcpy(&tile_mem[4][1 /*2*/], BoxClearTiles, BoxClearTilesLen);
 	memcpy(pal_obj_mem, BoxClearPal, BoxClearPalLen);
@@ -348,22 +355,12 @@ void init() {
 
 void initTutorial() { // replace any existing map with the this level
 	int i;
-	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
-		boxes[i].worldX = -64;
-		boxes[i].worldY = -64;
-	}
 
-	player.width = 8;
-	player.height = 8;
 	player.x = 1;
 	player.y = 4;
 
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
-
-	// BACKGROUND - adding background
-	
-	addBackground(tutorial_wallsTiles, tutorial_wallsMap, tutorial_floorTiles, tutorial_floorMap);
 	
 	// Sprites
 	
@@ -431,6 +428,10 @@ void initTutorial() { // replace any existing map with the this level
 	
 	}
 	
+	// BACKGROUND - adding background
+	
+	addBackground(tutorial_wallsTiles, tutorial_wallsMap, tutorial_floorTiles, tutorial_floorMap);
+	
 	// WORLD GRID
 
 	createGrid(tutorial_wallsMap);
@@ -455,8 +456,6 @@ void initStage1() {
 		gates[i].worldY = -64;
 	}
 
-	player.width = 8;
-	player.height = 8;
 	player.x = 1;
 	player.y = 5;
 	
@@ -477,6 +476,46 @@ void initStage1() {
 	createGrid(Stage1WallMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+}
+
+void initStage2() {
+	int i;
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	}
+	
+	player.x = 3;
+	player.y = 3;
+	
+	end.worldX = 16;
+	end.worldY = 16;
+	
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+	
+	// BACKGROUND
+	
+	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
+	
+	addBackground(Stage2WallTiles, Stage2WallMap, Stage2FloorTiles, Stage2FloorMap);
+	
+	// WORLD GRID
+
+	createGrid(Stage2WallMap);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+	
 }
 
 void update() {
@@ -509,13 +548,17 @@ void update() {
 
 	if ((end.worldX == player.x) && (end.worldY == player.y)) { // tempory movement between maps - testing if the player walks over the end, then it will go to another map
 		switch (gameState) {
-			case 1: // level 1 - gameState 0 is the main menu
+			case 1: // tutorial - gameState 0 is the main menu
 				gameState = 2;
 				initStage1();
 				
 				break;
+			case 2: // level 1
+				gameState = 3;
+				initStage2();
 				
-			case 2:
+				break;
+			case 3: // level 2
 				gameState = 1;
 				initTutorial();
 				
@@ -675,7 +718,7 @@ int main() {
 				
 				// sprintf(coordinates, "#{cx:0x0000}Level 1");
 				tte_write("#{P:8,8}");
-				tte_write("#{cx:0x0000}Level 1");
+				tte_write("#{cx:0x0000}Tutorial");
 				
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
@@ -693,7 +736,25 @@ int main() {
 				
 				// sprintf(coordinates, "#{cx:0x0000}Level 2");
 				tte_write("#{P:8,8}");
-				tte_write("#{cx:0x0000}Level 2");
+				tte_write("#{cx:0x0000}Stage 1");
+				
+				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				tte_write("#{P:8, 24}");
+				tte_write(coordinates);
+				
+				break;
+				
+			case 3: // stage 2 game state
+				vid_vsync();
+				tte_write("#{es}");
+				
+				// input();
+				update();
+				draw();
+				
+				// sprintf(coordinates, "#{cx:0x0000}Level 2");
+				tte_write("#{P:8,8}");
+				tte_write("#{cx:0x0000}Stage 2");
 				
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
