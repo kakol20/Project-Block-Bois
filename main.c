@@ -234,18 +234,18 @@ void createGrid(const unsigned short *map) {
 }
 
 void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap) {
-	memcpy(pal_bg_mem, tutorial_wallsPal, tutorial_wallsPalLen /* Should be the same for all levels*/);
-	memcpy(&tile_mem[1][0], wallTiles, tutorial_wallsTilesLen /* Should be the same for all levels*/);
-	memcpy(&se_mem[30][0], wallMap, tutorial_wallsMapLen /* Should be the same for all levels*/);
+	memcpy(pal_bg_mem, StageTutPnPWALLSPal, StageTutPnPWALLSPalLen /* Should be the same for all levels*/);
+	memcpy(&tile_mem[1][0], wallTiles, StageTutPnPWALLSTilesLen /* Should be the same for all levels*/);
+	memcpy(&se_mem[30][0], wallMap, StageTutPnPWALLSMapLen /* Should be the same for all levels*/);
 	REG_BG1CNT = BG_CBB(1) | BG_SBB(30) | BG_4BPP | BG_REG_64x64 | BG_PRIO(1);
 	
-	memcpy(&tile_mem[2][0], floorTiles,tutorial_floorTilesLen /* Should be the same for all levels*/);
-	memcpy(&se_mem[25][0], floorMap, tutorial_floorMapLen /* Should be the same for all levels*/);
+	memcpy(&tile_mem[2][0], floorTiles,StageTutPnPTilesLen /* Should be the same for all levels*/);
+	memcpy(&se_mem[25][0], floorMap, StageTutPnPMapLen /* Should be the same for all levels*/);
 	REG_BG2CNT = BG_CBB(2) | BG_SBB(25) | BG_4BPP | BG_REG_64x64 | BG_PRIO(1); // Using 64 x 64 despite map being 32 x 32 to avoid the map from being repeated
 }
 
 void init() {
-	memcpy(pal_bg_mem, tutorial_wallsPal, tutorial_wallsPalLen /* Should be the same for all levels*/);
+	memcpy(pal_bg_mem, StageTutPnPWALLSPal, StageTutPnPWALLSPalLen /* Should be the same for all levels*/);
 
 	// SPRITES
 
@@ -405,7 +405,7 @@ void initTutorial() { // replace any existing map with the this level
 
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(StageTutPnPWALLSTiles, StageTutPnPWALLSMap, StageTutPnPTiles, StageTutPnPTilesMap);
+	addBackground(StageTutPnPWALLSTiles, StageTutPnPWALLSMap, StageTutPnPTiles, StageTutPnPMap);
 	
 	// WORLD GRID
 
@@ -483,7 +483,7 @@ void initStage2() {
 	
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(Stage2ColorComboWALLTiles, Stage2ColorComboWALLMap, Stage2ColorTiles, Stage2ColorMap);
+	addBackground(Stage2ColorComboWALLTiles, Stage2ColorComboWALLMap, Stage2ColorComboTiles, Stage2ColorComboMap);
 	
 	// WORLD GRID
 
@@ -598,7 +598,7 @@ void initStage9(){
 	
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(Stage9BothWallsTiles, Stage9BothWallsMap, Stage9BothTiles, Stage9BothMap);
+	addBackground(Stage9WallsTiles, Stage9WallsMap, Stage9BothTiles, Stage9BothMap);
 	
 	// WORLD GRID
 
@@ -637,7 +637,7 @@ void initStage3() {
 	
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(Stage3NumberComboWallsLTiles, Stage3NumberComboWallsMap, Stage3NumberComboTiles, Stage3NumberComboMap);
+	addBackground(Stage3NumberComboWallsTiles, Stage3NumberComboWallsMap, Stage3NumberComboTiles, Stage3NumberComboMap);
 	
 	// WORLD GRID
 
@@ -676,7 +676,7 @@ void initStage4() {
 	
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(Stage4WallsLTiles, Stage4WallsMap, Stage4Tiles, Stage4Map);
+	addBackground(Stage4WallsTiles, Stage4WallsMap, Stage4Tiles, Stage4Map);
 	
 	// WORLD GRID
 
@@ -715,7 +715,7 @@ void initStage5() {
 	
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(Stage5newWallsLTiles, Stage5newWallsMap, Stage5newTiles, Stage5newMap);
+	addBackground(Stage5newWallsTiles, Stage5newWallsMap, Stage5newTiles, Stage5newMap);
 	
 	// WORLD GRID
 
