@@ -51,10 +51,6 @@ void initTutorial();
 void initStage1();
 void initStage2();
 
-void initStage3();
-void initStage4();
-void initStage5();
-
 void createGrid(const unsigned short *map);
 void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap);
 void move(int changeX, int changeY);
