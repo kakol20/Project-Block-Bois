@@ -742,83 +742,83 @@ int main() {
 						}
 						
 						if (levelSelection == 2) { // tutorial level
-							tte_write("#{P: 112, 48}");
-							tte_write("#{cx:0x0000}>T<");
+							tte_write("#{P: 96, 48}");
+							tte_write("#{cx:0x0000}>Tut <");
 						} else {
-							tte_write("#{P: 120, 48}");
-							tte_write("#{cx:0x0000}T");
+							tte_write("#{P: 104, 48}");
+							tte_write("#{cx:0x0000}Tut");
 						}
 						
 						if (levelSelection == 11) { // level 1 stage 1
-							tte_write("#{P: 72, 64}");
-							tte_write("#{cx:0x0000}>1.1<");
+							tte_write("#{P: 56, 64}");
+							tte_write("#{cx:0x0000}>Lvl1<");
 						} else {
-							tte_write("#{P: 80, 64}");
-							tte_write("#{cx:0x0000}1.1");
+							tte_write("#{P: 64, 64}");
+							tte_write("#{cx:0x0000}Lvl1");
 						}
 						
 						if (levelSelection == 12) { // level 1 stage 2
-							tte_write("#{P: 104, 64}");
-							tte_write("#{cx:0x0000}>1.2<");
+							tte_write("#{P: 96, 64}");
+							tte_write("#{cx:0x0000}>Lvl2<");
 						} else {
-							tte_write("#{P: 112, 64}");
-							tte_write("#{cx:0x0000}1.2");
+							tte_write("#{P: 104, 64}");
+							tte_write("#{cx:0x0000}Lvl2");
 						}
 						
 						if (levelSelection == 13) { // level 1 stage 3
 							tte_write("#{P: 136, 64}");
-							tte_write("#{cx:0x0000}>1.3<");
+							tte_write("#{cx:0x0000}>Lvl3<");
 						} else {
 							tte_write("#{P: 144, 64}");
-							tte_write("#{cx:0x0000}1.3");
+							tte_write("#{cx:0x0000}Lvl3");
 						}
 						
 						if (levelSelection == 21) { // level 2 stage 1
-							tte_write("#{P: 72, 80}");
-							tte_write("#{cx:0x0000}>2.1<");
+							tte_write("#{P: 56, 80}");
+							tte_write("#{cx:0x0000}>Lvl4<");
 						} else {
-							tte_write("#{P: 80, 80}");
-							tte_write("#{cx:0x0000}2.1");
+							tte_write("#{P: 64, 80}");
+							tte_write("#{cx:0x0000}Lvl4");
 						}
 						
 						if (levelSelection == 22) { // level 2 stage 2
-							tte_write("#{P: 104, 80}");
-							tte_write("#{cx:0x0000}>2.2<");
+							tte_write("#{P: 96, 80}");
+							tte_write("#{cx:0x0000}>Lvl5<");
 						} else {
-							tte_write("#{P: 112, 80}");
-							tte_write("#{cx:0x0000}2.2");
+							tte_write("#{P: 104, 80}");
+							tte_write("#{cx:0x0000}Lvl5");
 						}
 						
 						if (levelSelection == 23) { // level 2 stage 3
 							tte_write("#{P: 136, 80}");
-							tte_write("#{cx:0x0000}>2.3<");
+							tte_write("#{cx:0x0000}>Lvl6<");
 						} else {
 							tte_write("#{P: 144, 80}");
-							tte_write("#{cx:0x0000}2.3");
+							tte_write("#{cx:0x0000}Lvl6");
 						}
 						
 						if (levelSelection == 31) {
-							tte_write("#{P: 72, 96}");
-							tte_write("#{cx:0x0000}>3.1<");
+							tte_write("#{P: 56, 96}");
+							tte_write("#{cx:0x0000}>Lvl7<");
 						} else {
-							tte_write("#{P: 80, 96}");
-							tte_write("#{cx:0x0000}3.1");
+							tte_write("#{P: 64, 96}");
+							tte_write("#{cx:0x0000}Lvl7");
 						}
 						
 						if (levelSelection == 32) {
-							tte_write("#{P: 104, 96}");
-							tte_write("#{cx:0x0000}>3.2<");
+							tte_write("#{P: 96, 96}");
+							tte_write("#{cx:0x0000}>Lvl8<");
 						} else {
-							tte_write("#{P: 112, 96}");
-							tte_write("#{cx:0x0000}3.2");
+							tte_write("#{P: 104, 96}");
+							tte_write("#{cx:0x0000}Lvl8");
 						}
 						
 						if (levelSelection == 33) {
-							tte_write("#{P: 136, 96}");
-							tte_write("#{cx:0x0000}>3.3<");
+							tte_write("#{P: 136s, 96}");
+							tte_write("#{cx:0x0000}>Lvl9<");
 						} else {
 							tte_write("#{P: 144, 96}");
-							tte_write("#{cx:0x0000}3.3");
+							tte_write("#{cx:0x0000}Lvl9");
 						}
 						
 						if (key_hit(KEY_START)) {
@@ -896,7 +896,6 @@ int main() {
 				tte_write(coordinates);
 				
 				break;
-				
 		}
 	}
 

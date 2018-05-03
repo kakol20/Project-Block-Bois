@@ -552,7 +552,7 @@ Linker script and memory map
  .fini          0x0800ad2c        0x8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtn.o
                 0x0800ad34                . = ALIGN (0x4)
 
-.rodata         0x0800ad38     0x8004
+.rodata         0x0800ad38     0x802c
  *(.rodata)
  .rodata        0x0800ad38      0x220 boxes/BoxClear.o
                 0x0800ad38                BoxClearPal
@@ -672,65 +672,65 @@ Linker script and memory map
  *(.roda)
  *(.rodata.*)
  .rodata.str1.4
-                0x080127cc      0x3e8 main.o
+                0x080127cc      0x410 main.o
  .rodata.str1.4
-                0x08012bb4        0x6 tonclib/lib\libtonc.a(tonc_sbmp16.o)
+                0x08012bdc        0x6 tonclib/lib\libtonc.a(tonc_sbmp16.o)
                                   0x8 (size before relaxing)
- *fill*         0x08012bba        0x2 ff
+ *fill*         0x08012be2        0x2 ff
  .rodata.str1.4
-                0x08012bbc       0x42 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfprintf.o)
+                0x08012be4       0x42 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfprintf.o)
                                  0x44 (size before relaxing)
- *fill*         0x08012bfe        0x2 ff
+ *fill*         0x08012c26        0x2 ff
  .rodata.str1.4
-                0x08012c00       0x10 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-dtoa.o)
+                0x08012c28       0x10 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-dtoa.o)
                                  0x14 (size before relaxing)
  .rodata.str1.4
-                0x08012c10        0x2 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-impure.o)
+                0x08012c38        0x2 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-impure.o)
                                   0x4 (size before relaxing)
- *fill*         0x08012c12        0x2 ff
+ *fill*         0x08012c3a        0x2 ff
  .rodata.str1.4
-                0x08012c14      0x128 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-locale.o)
+                0x08012c3c      0x128 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-locale.o)
                                 0x130 (size before relaxing)
  .rodata.str1.4
                 0x00000000       0x30 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfiprintf.o)
  *(.gnu.linkonce.r*)
-                0x08012d3c                . = ALIGN (0x4)
+                0x08012d64                . = ALIGN (0x4)
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x08012d3c                __exidx_start = .
+                0x08012d64                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x08012d3c                __exidx_end = .
+                0x08012d64                __exidx_end = .
 
-.ctors          0x08012d3c        0x0
+.ctors          0x08012d64        0x0
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *(.ctors)
-                0x08012d3c                . = ALIGN (0x4)
+                0x08012d64                . = ALIGN (0x4)
 
-.dtors          0x08012d3c        0x0
+.dtors          0x08012d64        0x0
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *(.dtors)
-                0x08012d3c                . = ALIGN (0x4)
+                0x08012d64                . = ALIGN (0x4)
 
-.eh_frame       0x08012d3c        0x4
+.eh_frame       0x08012d64        0x4
  *(.eh_frame)
- .eh_frame      0x08012d3c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
- .eh_frame      0x08012d3c        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
-                0x08012d40                . = ALIGN (0x4)
+ .eh_frame      0x08012d64        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
+ .eh_frame      0x08012d64        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
+                0x08012d68                . = ALIGN (0x4)
 
 .gcc_except_table
-                0x08012d40        0x0
+                0x08012d68        0x0
  *(.gcc_except_table)
-                0x08012d40                . = ALIGN (0x4)
-                0x08012d40                __iwram_lma = .
+                0x08012d68                . = ALIGN (0x4)
+                0x08012d68                __iwram_lma = .
 
-.iwram          0x03000000       0x84 load address 0x08012d40
+.iwram          0x03000000       0x84 load address 0x08012d68
                 0x03000000                __iwram_start__ = ABSOLUTE (.)
  *(.iwram)
  .iwram         0x03000000       0x38 tonclib/lib\libtonc.a(tonc_memcpy.o)
@@ -740,9 +740,9 @@ Linker script and memory map
  *iwram.*(.text)
                 0x03000084                . = ALIGN (0x4)
                 0x03000084                __iwram_end__ = ABSOLUTE (.)
-                0x08012dc4                __data_lma = (__iwram_lma + SIZEOF (.iwram))
+                0x08012dec                __data_lma = (__iwram_lma + SIZEOF (.iwram))
 
-.rel.dyn        0x03000084        0x0 load address 0x08012dc4
+.rel.dyn        0x03000084        0x0 load address 0x08012dec
  .rel.iplt      0x00000000        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb/gba_crt0.o
 
 .bss            0x03000084     0x17bc
@@ -884,7 +884,7 @@ Linker script and memory map
                 0x03001840                . = ALIGN (0x4)
                 0x03001840                __bss_end__ = ABSOLUTE (.)
 
-.data           0x03001840      0x9f4 load address 0x08012dc4
+.data           0x03001840      0x9f4 load address 0x08012dec
                 0x03001840                __data_start__ = ABSOLUTE (.)
  *(.data)
  .data          0x03001840        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb/gba_crt0.o
@@ -1009,53 +1009,53 @@ Linker script and memory map
  *(.data.*)
  *(.gnu.linkonce.d*)
                 0x03002234                . = ALIGN (0x4)
-                0x080137b8                __preinit_lma = (__data_lma + SIZEOF (.data))
+                0x080137e0                __preinit_lma = (__data_lma + SIZEOF (.data))
 
-.igot.plt       0x03002234        0x0 load address 0x080137b8
+.igot.plt       0x03002234        0x0 load address 0x080137e0
  .igot.plt      0x00000000        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb/gba_crt0.o
 
 .tm_clone_table
-                0x03002234        0x0 load address 0x080137b8
+                0x03002234        0x0 load address 0x080137e0
  .tm_clone_table
                 0x03002234        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
  .tm_clone_table
                 0x03002234        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
 
-.preinit_array  0x03002234        0x0 load address 0x080137b8
+.preinit_array  0x03002234        0x0 load address 0x080137e0
                 0x03002234                __preinit_array_start = ABSOLUTE (.)
  *(.preinit_array)
                 0x03002234                __preinit_array_end = ABSOLUTE (.)
-                0x080137b8                __init_lma = (__preinit_lma + SIZEOF (.preinit_array))
+                0x080137e0                __init_lma = (__preinit_lma + SIZEOF (.preinit_array))
 
-.init_array     0x03002234        0x4 load address 0x080137b8
+.init_array     0x03002234        0x4 load address 0x080137e0
                 0x03002234                __init_array_start = ABSOLUTE (.)
  *(SORT(.init_array.*))
  *(.init_array)
  .init_array    0x03002234        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
                 0x03002238                __init_array_end = ABSOLUTE (.)
-                0x080137bc                __fini_lma = (__init_lma + SIZEOF (.init_array))
+                0x080137e4                __fini_lma = (__init_lma + SIZEOF (.init_array))
 
-.fini_array     0x03002238        0x4 load address 0x080137bc
+.fini_array     0x03002238        0x4 load address 0x080137e4
                 0x03002238                __fini_array_start = ABSOLUTE (.)
  *(SORT(.fini_array.*))
  *(.fini_array)
  .fini_array    0x03002238        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
                 0x0300223c                __fini_array_end = ABSOLUTE (.)
-                0x080137c0                __jcr_lma = (__fini_lma + SIZEOF (.fini_array))
+                0x080137e8                __jcr_lma = (__fini_lma + SIZEOF (.fini_array))
 
-.jcr            0x0300223c        0x4 load address 0x080137c0
+.jcr            0x0300223c        0x4 load address 0x080137e8
  *(.jcr)
  .jcr           0x0300223c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
  .jcr           0x0300223c        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
                 0x03002240                __data_end__ = ABSOLUTE (.)
-                0x080137c4                __iwram_overlay_lma = (__jcr_lma + SIZEOF (.jcr))
+                0x080137ec                __iwram_overlay_lma = (__jcr_lma + SIZEOF (.jcr))
                 0x03002240                __iwram_overlay_start = .
 
-.iwram0         0x03002240        0x0 load address 0x080137c4
+.iwram0         0x03002240        0x0 load address 0x080137ec
  *(.iwram0)
                 0x03002240                . = ALIGN (0x4)
-                0x080137c4                PROVIDE (__load_start_iwram0, LOADADDR (.iwram0))
-                0x080137c4                PROVIDE (__load_stop_iwram0, (LOADADDR (.iwram0) + SIZEOF (.iwram0)))
+                0x080137ec                PROVIDE (__load_start_iwram0, LOADADDR (.iwram0))
+                0x080137ec                PROVIDE (__load_stop_iwram0, (LOADADDR (.iwram0) + SIZEOF (.iwram0)))
 
 .iwram1         0x03002240        0x0
  *(.iwram1)
@@ -1111,17 +1111,17 @@ Linker script and memory map
                 0x03002240                PROVIDE (__load_start_iwram9, LOADADDR (.iwram9))
                 0x03002240                PROVIDE (__load_stop_iwram9, (LOADADDR (.iwram9) + SIZEOF (.iwram9)))
                 0x03002240                __iwram_overlay_end = .
-                0x080137c4                __ewram_lma = (__iwram_overlay_lma + (__iwram_overlay_end - __iwram_overlay_start))
+                0x080137ec                __ewram_lma = (__iwram_overlay_lma + (__iwram_overlay_end - __iwram_overlay_start))
                 0x03002240                __iheap_start = .
                 0x02000000                __ewram_start = ORIGIN (ewram)
 
-.ewram          0x02000000       0x14 load address 0x080137c4
+.ewram          0x02000000       0x14 load address 0x080137ec
  *(.ewram)
  .ewram         0x02000000       0x14 tonclib/lib\libtonc.a(tonc_sbmp16.o)
                 0x02000000                m5_surface
                 0x02000014                . = ALIGN (0x4)
                 0x02000014                __ewram_end = ABSOLUTE (.)
-                0x080137d8                __pad_lma = (__ewram_lma + SIZEOF (.ewram))
+                0x08013800                __pad_lma = (__ewram_lma + SIZEOF (.ewram))
 
 .sbss           0x02000014        0x0
                 0x02000014                __sbss_start__ = ABSOLUTE (.)
@@ -1131,11 +1131,11 @@ Linker script and memory map
                 0x02000014                __end__ = ABSOLUTE (.)
                 0x02000014                __eheap_start = ABSOLUTE (.)
 
-.pad            0x02000014        0x8 load address 0x080137d8
+.pad            0x02000014        0x8 load address 0x08013800
                 0x02000014        0x4 LONG 0x52416b64
                 0x02000018        0x4 LONG 0x4d
                 0x0200001c                . = ALIGN (0x4)
-                0x080137e0                __rom_end__ = (__pad_lma + SIZEOF (.pad))
+                0x08013808                __rom_end__ = (__pad_lma + SIZEOF (.pad))
 
 .stab
  *(.stab)
