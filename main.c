@@ -14,6 +14,17 @@
 #include "levels/Stage2Floor.h"
 #include "levels/Stage2Wall.h"
 
+#include "levels/Stage1Color.h"
+#include "levels/Stage1ColorWalls.h"
+#include "levels/Stage2ColorCombo.h"
+#include "levels/Stage2ColorComboWALL.h"
+#include "levels/Stage3NumberCombo.h"
+#include "levels/Stage3NumberComboWalls.h"
+#include "levels/Stage4.h"
+#include "levels/Stage4Walls.h"
+#include "levels/Stage5new.h"
+#include "levels/Stage4newWalls.h"
+
 // BOXES
 #include "boxes/BoxClear.h"
 #include "boxes/Box1.h"
