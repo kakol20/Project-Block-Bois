@@ -14,6 +14,15 @@
 #include "levels/Stage2Floor.h"
 #include "levels/Stage2Wall.h"
 
+#include "level/Stage6Both.h"
+#include "level/Stage6BothWalls.h"
+#include "level/Stage7Both.h"
+#include "level/Stage7BothWalls.h"
+#include "level/Stage9Both.h"
+#include "level/Stage9Walls.h"
+#include "level/StageTutPnP.h"
+#include "level/StageTutPnPWALLS.h"
+
 // BOXES
 #include "boxes/BoxClear.h"
 #include "boxes/Box1.h"
@@ -50,6 +59,11 @@ void init();
 void initTutorial();
 void initStage1();
 void initStage2();
+
+void initStage5();
+void initStage6();
+void initStage7();
+void initStage9();
 
 void createGrid(const unsigned short *map);
 void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap);
@@ -356,86 +370,39 @@ void init() {
 
 void initTutorial() { // replace any existing map with the this level
 	int i;
-
-	player.x = 1;
-	player.y = 4;
-
-	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
-	backgroundY = -72 + (8 * player.y);
-	
-	// Sprites
-	
-	boxes[0].worldX = 5; // places the boxes
-	boxes[0].worldY = 3;
-	boxes[0].pb = 1;
-	boxes[0].value = 0;
-	
-	boxes[1].worldX = 20;
-	boxes[1].worldY = 11;
-	boxes[1].pb = 3;
-	boxes[1].value = 0;
-	
-	boxes[2].worldX = 20;
-	boxes[2].worldY = 14;
-	boxes[2].pb = 5;
-	boxes[2].value = 0;
-	
-	for (i = 3; i < NUMBER_BOXES; i++) { // goes through the other boxes and places them out of the screen
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
 		boxes[i].worldX = -64;
 		boxes[i].worldY = -64;
 	}
 	
-	end.worldX = 11; // places the end
-	end.worldY = 25;
-	
-	dropboxes[0].worldX = 5; // places the dropboxes
-	dropboxes[0].worldY = 6;
-	dropboxes[0].pb = 1;
-	dropboxes[0].value = 0;
-	
-	dropboxes[1].worldX = 23;
-	dropboxes[1].worldY = 14;
-	dropboxes[1].pb = 3;
-	dropboxes[1].value = 0;
-	
-	for (i = 2; i < NUMBER_DBOXES; i++) { // goes through the other drop boxes and places them out of the screen
+	for (i = 0; i < NUMBER_DBOXES; i++) {
 		dropboxes[i].worldX = -64;
 		dropboxes[i].worldY = -64;
 	}
 	
-	int index = 0;
-	
-	int j;
-	
-	for (i = 11; i <= 16; i++) { // places the gates
-		for (j = 2; j <= 3; j++) {
-			gates[index].worldX = i;
-			gates[index].worldY = (j == 2) ? 1 : 4;
-			
-			index++;
-		}
-	}
-	
-	for (i = 21; i <= 22; i++) {
-		gates[index].worldX = (i == 21) ? 20 : 23;
-		gates[index].worldY = 20;
-		
-		index++;
-	}
-	
-	for (i = index; i < NUMBER_GATES; i++) { // goes through the other gates and places them out of the screen
+	for (i = 0; i < NUMBER_GATES; i++) {
 		gates[i].worldX = -64;
 		gates[i].worldY = -64;
-	
 	}
+
+	player.x = 1;
+	player.y = 5;
 	
+	end.worldX = 6;
+	end.worldY = 11;
+
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+
 	// BACKGROUND - adding background
+
+	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(tutorial_wallsTiles, tutorial_wallsMap, tutorial_floorTiles, tutorial_floorMap);
+	addBackground(StageTutPnPWALLSTiles, StageTutPnPWALLSMap, StageTutPnPTiles, StageTutPnPTilesMap);
 	
 	// WORLD GRID
 
-	createGrid(tutorial_wallsMap);
+	createGrid(StageTutPnPWALLSMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
@@ -517,6 +484,120 @@ void initStage2() {
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 	
+}
+void initStage6(){
+	int i;
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	}
+	
+	player.x = 3;
+	player.y = 3;
+	
+	end.worldX = 16;
+	end.worldY = 16;
+	
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+	
+	// BACKGROUND
+	
+	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
+	
+	addBackground(Stage6BothWallsTiles, Stage6BothWallsMap, Stage6BothTiles, Stage6BothMap);
+	
+	// WORLD GRID
+
+	createGrid(Stage6BothMap);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+}
+void initStage7(){
+	int i;
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	}
+	
+	player.x = 3;
+	player.y = 3;
+	
+	end.worldX = 16;
+	end.worldY = 16;
+	
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+	
+	// BACKGROUND
+	
+	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
+	
+	addBackground(Stage7BothWallsTiles, Stage7BothWallsMap, Stage7BothTiles, Stage7BothMap);
+	
+	// WORLD GRID
+
+	createGrid(Stage7BothMap);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+}
+void initStage9(){
+	int i;
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	}
+	
+	player.x = 3;
+	player.y = 3;
+	
+	end.worldX = 16;
+	end.worldY = 16;
+	
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+	
+	// BACKGROUND
+	
+	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
+	
+	addBackground(Stage9BothWallsTiles, Stage9BothWallsMap, Stage9BothTiles, Stage9BothMap);
+	
+	// WORLD GRID
+
+	createGrid(Stage9BothMap);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
 
 void update() {
