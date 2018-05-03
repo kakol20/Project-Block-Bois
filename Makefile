@@ -21,7 +21,7 @@ LIBS     := -ltonc
 
 BOXES     := boxes/BoxClear.o boxes/Box1.o boxes/Box2.o boxes/Box3.o boxes/Box4.o boxes/Box5.o boxes/Box6.o boxes/Box7.o boxes/Box8.o boxes/Box9.o
 DROPBOXES := dropbox/DBox1clear.o dropbox/DBox2clear.o dropbox/DBox3clear.o dropbox/DBox4clear.o dropbox/DBox5clear.o dropbox/DBox6clear.o dropbox/DBox7clear.o dropbox/DBox8clear.o dropbox/DBox9clear.o dropbox/DBoxclear.o
-LEVELS    := levels/tutorial_floor.o levels/tutorial_walls.o levels/Stage1Floor.o levels/Stage1Wall.o
+LEVELS    := levels/tutorial_floor.o levels/tutorial_walls.o levels/Stage1Floor.o levels/Stage1Wall.o levels/Stage2Floor.o levels/Stage2Wall.o
 MISC      := other/EndZone.o player.o other/MovingBlocks.o
 
 COBJS := $(PROJ).o $(BOXES) $(DROPBOXES) $(LEVELS) $(MISC)
