@@ -448,7 +448,7 @@ void initStage1() {
 	
 	// WORLD GRID
 
-	createGrid(StageTutPnPWALLSMap);
+	createGrid(Stage1ColorWallsMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
@@ -526,7 +526,7 @@ void initStage6(){
 	
 	// WORLD GRID
 
-	createGrid(Stage6BothMap);
+	createGrid(Stage6BothWallsMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
@@ -564,7 +564,7 @@ void initStage7(){
 	
 	// WORLD GRID
 
-	createGrid(Stage7BothMap);
+	createGrid(Stage7BothWallsMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
@@ -602,7 +602,7 @@ void initStage9(){
 	
 	// WORLD GRID
 
-	createGrid(Stage9BothMap);
+	createGrid(Stage9WallsMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
