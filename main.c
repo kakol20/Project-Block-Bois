@@ -60,7 +60,6 @@ void initTutorial();
 void initStage1();
 void initStage2();
 
-void initStage5();
 void initStage6();
 void initStage7();
 void initStage9();
