@@ -436,11 +436,11 @@ void initStage1() {
 
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(Stage1WallTiles, Stage1WallMap, Stage1FloorTiles, Stage1FloorMap);
+	addBackground(Stage1ColorWallsTiles, Stage1ColorWallsMap, Stage1ColorTiles, Stage1ColorMap);
 	
 	// WORLD GRID
 
-	createGrid(Stage1WallMap);
+	createGrid(StageTutPnPWALLSMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
@@ -475,11 +475,11 @@ void initStage2() {
 	
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(Stage2WallTiles, Stage2WallMap, Stage2FloorTiles, Stage2FloorMap);
+	addBackground(Stage2ColorComboWALLTiles, Stage2ColorComboWALLMap, Stage2ColorTiles, Stage2ColorMap);
 	
 	// WORLD GRID
 
-	createGrid(Stage2WallMap);
+	createGrid(Stage2ColorComboWALLMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 	
@@ -597,6 +597,124 @@ void initStage9(){
 	createGrid(Stage9BothMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+}
+
+void initStage3() {
+	int i;
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	}
+	
+	player.x = 3;
+	player.y = 3;
+	
+	end.worldX = 16;
+	end.worldY = 16;
+	
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+	
+	// BACKGROUND
+	
+	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
+	
+	addBackground(Stage3NumberComboWallsLTiles, Stage3NumberComboWallsMap, Stage3NumberComboTiles, Stage3NumberComboMap);
+	
+	// WORLD GRID
+
+	createGrid(Stage3NumberComboWallsMap);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+}
+
+void initStage4() {
+	int i;
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	}
+	
+	player.x = 3;
+	player.y = 3;
+	
+	end.worldX = 16;
+	end.worldY = 16;
+	
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+	
+	// BACKGROUND
+	
+	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
+	
+	addBackground(Stage4WallsLTiles, Stage4WallsMap, Stage4Tiles, Stage4Map);
+	
+	// WORLD GRID
+
+	createGrid(Stage4WallsMap);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+}
+
+void initStage5() {
+	int i;
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	}
+	
+	player.x = 3;
+	player.y = 3;
+	
+	end.worldX = 16;
+	end.worldY = 16;
+	
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+	
+	// BACKGROUND
+	
+	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
+	
+	addBackground(Stage5newWallsLTiles, Stage5newWallsMap, Stage5newTiles, Stage5newMap);
+	
+	// WORLD GRID
+
+	createGrid(Stage5newWallsMap);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+
 }
 
 void update() {
