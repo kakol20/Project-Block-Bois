@@ -14,6 +14,16 @@
 #include "levels/Stage2Floor.h"
 #include "levels/Stage2Wall.h"
 
+#include "level/Stage1Color.h"
+#include "level/Stage1ColorWalls.h"
+#include "level/Stage2ColorCombo.h"
+#include "level/Stage2ColorComboWALL.h"
+#include "level/Stage3NumberCombo.h"
+#include "level/Stage4.h"
+#include "level/Stage4Walls.h"
+#include "level/Stage5new.h"
+#include "level/Stage5newWalls.h"
+
 #include "level/Stage6Both.h"
 #include "level/Stage6BothWalls.h"
 #include "level/Stage7Both.h"
@@ -59,6 +69,10 @@ void init();
 void initTutorial();
 void initStage1();
 void initStage2();
+
+void initStage3();
+void initStage4();
+void initStage5();
 
 void initStage6();
 void initStage7();
