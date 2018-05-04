@@ -915,8 +915,39 @@ void update() {
 				
 				break;
 			case 3: // level 2
-				gameState = 1;
-				initTutorial();
+				gameState = 4;
+				initStage3();
+				
+				break;
+				
+			case 4: // level 3
+				gameState = 5;
+				initStage4();
+				
+				break;
+			case 5: // level 4
+				gameState = 6;
+				initStage5();
+				
+				break;
+				
+			case 6: // level 5
+				gameState = 7;
+				initStage6();
+				
+				break;
+			case 7: // level 6
+				gameState = 8;
+				initStage7();
+				
+				break;
+			case 8: // level 7
+				gameState = 9;
+				initStage9();
+				
+				break;
+			case 9: // level 9
+				// end game
 				
 				break;
 		}
@@ -1191,6 +1222,30 @@ int main() {
 								gameState = 3;
 								initStage2();
 							}
+							if (levelSelection == 13) {
+								gameState = 4;
+								initStage3();
+							}
+							if (levelSelection == 21) {
+								gameState = 5;
+								initStage4();
+							}
+							if (levelSelection == 22) {
+								gameState = 6;
+								initStage5();
+							}
+							if (levelSelection == 23) {
+								gameState = 7;
+								initStage6();
+							}
+							if (levelSelection == 31) {
+								gameState = 8;
+								initStage7();
+							}
+							if (levelSelection == 32) {
+								gameState = 9;
+								initStage9();
+							}
 						}
 						
 						break;
@@ -1206,7 +1261,6 @@ int main() {
 				update();
 				draw();
 				
-				// sprintf(coordinates, "#{cx:0x0000}Level 1");
 				tte_write("#{P:8,8}");
 				tte_write("#{cx:0x0000}Tutorial");
 				
@@ -1215,8 +1269,7 @@ int main() {
 				tte_write(coordinates);
 				
 				break;
-				
-			case 2: // stage 1 game state
+			case 2:
 				vid_vsync();
 				tte_write("#{es}");
 				
@@ -1224,17 +1277,15 @@ int main() {
 				update();
 				draw();
 				
-				// sprintf(coordinates, "#{cx:0x0000}Level 2");
 				tte_write("#{P:8,8}");
-				tte_write("#{cx:0x0000}Stage 1");
+				tte_write("#{cx:0x0000}Level 1");
 				
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
 				
 				break;
-				
-			case 3: // stage 2 game state
+			case 3:
 				vid_vsync();
 				tte_write("#{es}");
 				
@@ -1242,9 +1293,105 @@ int main() {
 				update();
 				draw();
 				
-				// sprintf(coordinates, "#{cx:0x0000}Level 2");
 				tte_write("#{P:8,8}");
-				tte_write("#{cx:0x0000}Stage 2");
+				tte_write("#{cx:0x0000}Level 2");
+				
+				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				tte_write("#{P:8, 24}");
+				tte_write(coordinates);
+				
+				break;
+			case 4:
+				vid_vsync();
+				tte_write("#{es}");
+				
+				// input();
+				update();
+				draw();
+				
+				tte_write("#{P:8,8}");
+				tte_write("#{cx:0x0000}Level 3");
+				
+				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				tte_write("#{P:8, 24}");
+				tte_write(coordinates);
+				
+				break;
+			
+			case 5:
+				vid_vsync();
+				tte_write("#{es}");
+				
+				// input();
+				update();
+				draw();
+				
+				tte_write("#{P:8,8}");
+				tte_write("#{cx:0x0000}Level 4");
+				
+				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				tte_write("#{P:8, 24}");
+				tte_write(coordinates);
+				
+				break;
+			case 6:
+				vid_vsync();
+				tte_write("#{es}");
+				
+				// input();
+				update();
+				draw();
+				
+				tte_write("#{P:8,8}");
+				tte_write("#{cx:0x0000}Level 5");
+				
+				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				tte_write("#{P:8, 24}");
+				tte_write(coordinates);
+				
+				break;
+			case 7:
+				vid_vsync();
+				tte_write("#{es}");
+				
+				// input();
+				update();
+				draw();
+				
+				tte_write("#{P:8,8}");
+				tte_write("#{cx:0x0000}Level 6");
+				
+				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				tte_write("#{P:8, 24}");
+				tte_write(coordinates);
+				
+				break;
+			case 8:
+				vid_vsync();
+				tte_write("#{es}");
+				
+				// input();
+				update();
+				draw();
+				
+				tte_write("#{P:8,8}");
+				tte_write("#{cx:0x0000}Level 7");
+				
+				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				tte_write("#{P:8, 24}");
+				tte_write(coordinates);
+				
+				break;
+			case 9:
+				vid_vsync();
+				tte_write("#{es}");
+				
+				// input();
+				update();
+				draw();
+				
+				tte_write("#{P:8,8}");
+				tte_write("#{cx:0x0000}Level 8");
 				
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
