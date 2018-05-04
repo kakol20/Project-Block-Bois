@@ -234,18 +234,18 @@ void createGrid(const unsigned short *map) {
 }
 
 void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap) {
-	memcpy(pal_bg_mem, tutorial_wallsPal, tutorial_wallsPalLen /* Should be the same for all levels*/);
-	memcpy(&tile_mem[1][0], wallTiles, tutorial_wallsTilesLen /* Should be the same for all levels*/);
-	memcpy(&se_mem[30][0], wallMap, tutorial_wallsMapLen /* Should be the same for all levels*/);
+	memcpy(pal_bg_mem, StageTutPnPWALLSPal, StageTutPnPWALLSPalLen /* Should be the same for all levels*/);
+	memcpy(&tile_mem[1][0], wallTiles, StageTutPnPWALLSTilesLen /* Should be the same for all levels*/);
+	memcpy(&se_mem[30][0], wallMap, StageTutPnPWALLSMapLen /* Should be the same for all levels*/);
 	REG_BG1CNT = BG_CBB(1) | BG_SBB(30) | BG_4BPP | BG_REG_64x64 | BG_PRIO(1);
 	
-	memcpy(&tile_mem[2][0], floorTiles,tutorial_floorTilesLen /* Should be the same for all levels*/);
-	memcpy(&se_mem[25][0], floorMap, tutorial_floorMapLen /* Should be the same for all levels*/);
+	memcpy(&tile_mem[2][0], floorTiles,StageTutPnPTilesLen /* Should be the same for all levels*/);
+	memcpy(&se_mem[25][0], floorMap, StageTutPnPMapLen /* Should be the same for all levels*/);
 	REG_BG2CNT = BG_CBB(2) | BG_SBB(25) | BG_4BPP | BG_REG_64x64 | BG_PRIO(1); // Using 64 x 64 despite map being 32 x 32 to avoid the map from being repeated
 }
 
 void init() {
-	memcpy(pal_bg_mem, tutorial_wallsPal, tutorial_wallsPalLen /* Should be the same for all levels*/);
+	memcpy(pal_bg_mem, StageTutPnPWALLSPal, StageTutPnPWALLSPalLen /* Should be the same for all levels*/);
 
 	// SPRITES
 
@@ -392,11 +392,43 @@ void initTutorial() { // replace any existing map with the this level
 		gates[i].worldY = -64;
 	}
 
-	player.x = 1;
-	player.y = 5;
+	player.x = 4;
+	player.y = 6;
 	
-	end.worldX = 6;
-	end.worldY = 11;
+	boxes[0].worldX = 7;
+	boxes[0].worldY = 4;
+	boxes[0].pb = 1;
+	boxes[0].value = 0;
+	
+	boxes[1].worldX = 7;
+	boxes[1].worldY = 7;
+	boxes[1].pb = 3;
+	boxes[1].value = 0;
+	
+	dropboxes[0].worldX = 13;
+	dropboxes[0].worldY = 3;
+	dropboxes[0].pb = 1;
+	dropboxes[0].value = 0;
+	
+	dropboxes[1].worldX = 13;
+	dropboxes[1].worldY = 8;
+	dropboxes[1].pb = 3;
+	dropboxes[1].value = 0;
+	
+	gates[0].worldX = 14;
+	gates[0].worldY = 5;
+	
+	gates[1].worldX = 14;
+	gates[1].worldY = 6;
+	
+	gates[2].worldX = 16;
+	gates[2].worldY = 5;
+	
+	gates[3].worldX = 16;
+	gates[3].worldY = 6;
+	
+	end.worldX = 18;
+	end.worldY = 5;
 
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
@@ -405,7 +437,7 @@ void initTutorial() { // replace any existing map with the this level
 
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(StageTutPnPWALLSTiles, StageTutPnPWALLSMap, StageTutPnPTiles, StageTutPnPTilesMap);
+	addBackground(StageTutPnPWALLSTiles, StageTutPnPWALLSMap, StageTutPnPTiles, StageTutPnPMap);
 	
 	// WORLD GRID
 
@@ -431,11 +463,53 @@ void initStage1() {
 		gates[i].worldY = -64;
 	}
 
-	player.x = 1;
-	player.y = 5;
+	player.x = 3;
+	player.y = 9;
 	
-	end.worldX = 6;
-	end.worldY = 11;
+	boxes[0].worldX = 9;
+	boxes[0].worldY = 5;
+	boxes[0].pb = 1;
+	boxes[0].value = 0;
+	
+	boxes[1].worldX = 11;
+	boxes[1].worldY = 5;
+	boxes[1].pb = 1;
+	boxes[1].value = 0;
+	
+	boxes[2].worldX = 17;
+	boxes[2].worldY = 5;
+	boxes[2].pb = 1;
+	boxes[2].value = 0;
+	
+	boxes[3].worldX = 17;
+	boxes[3].worldY = 6;
+	boxes[3].pb = 1;
+	boxes[3].value = 0;
+	
+	boxes[4].worldX = 12;
+	boxes[4].worldY = 9;
+	boxes[4].pb = 5;
+	boxes[4].value = 0;
+	
+	dropboxes[0].worldX = 17;
+	dropboxes[0].worldY = 4;
+	dropboxes[0].pb = 5;
+	dropboxes[0].value = 0;
+	
+	gates[0].worldX = 14;
+	gates[0].worldY = 11;
+	
+	gates[1].worldX = 15;
+	gates[1].worldY = 11;
+	
+	gates[2].worldX = 14;
+	gates[2].worldY = 12;
+	
+	gates[3].worldX = 15;
+	gates[3].worldY = 12;
+	
+	end.worldX = 14;
+	end.worldY = 15;
 
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
@@ -448,7 +522,7 @@ void initStage1() {
 	
 	// WORLD GRID
 
-	createGrid(StageTutPnPWALLSMap);
+	createGrid(Stage1ColorWallsMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
@@ -470,11 +544,86 @@ void initStage2() {
 		gates[i].worldY = -64;
 	}
 	
-	player.x = 3;
-	player.y = 3;
+	player.x = 2;
+	player.y = 4;
 	
-	end.worldX = 16;
-	end.worldY = 16;
+	boxes[0].worldX = 6;
+	boxes[0].worldY = 4;
+	boxes[0].pb = 1;
+	boxes[0].value = 0;
+	
+	boxes[1].worldX = 9;
+	boxes[1].worldY = 4;
+	boxes[1].pb = 3;
+	boxes[1].value = 0;
+	
+	boxes[2].worldX = 13;
+	boxes[2].worldY = 12;
+	boxes[2].pb = 3;
+	boxes[2].value = 0;
+	
+	boxes[3].worldX = 12;
+	boxes[3].worldY = 11;
+	boxes[3].pb = 5;
+	boxes[3].value = 0;
+	
+	boxes[4].worldX = 8;
+	boxes[4].worldY = 9;
+	boxes[4].pb = 1;
+	boxes[4].value = 0;
+	
+	boxes[5].worldX = 11;
+	boxes[5].worldY = 14;
+	boxes[5].pb = 5;
+	boxes[5].value = 0;
+	
+	boxes[6].worldX = 9;
+	boxes[6].worldY = 14;
+	boxes[6].pb = 3;
+	boxes[6].value = 0;
+	
+	boxes[7].worldX = 8;
+	boxes[7].worldY = 10;
+	boxes[7].pb = 1;
+	boxes[7].value = 0;
+	
+	dropboxes[0].worldX = 13;
+	dropboxes[0].worldY = 4;
+	dropboxes[0].pb = 2;
+	dropboxes[0].value = 0;
+	
+	dropboxes[1].worldX = 12;
+	dropboxes[1].worldY = 8;
+	dropboxes[1].pb = 4;
+	dropboxes[1].value = 0;
+	
+	dropboxes[2].worldX = 10;
+	dropboxes[2].worldY = 8;
+	dropboxes[2].pb = 6;
+	dropboxes[2].value = 0;
+	
+	dropboxes[3].worldX = 8;
+	dropboxes[3].worldY = 8;
+	dropboxes[3].pb = 2;
+	dropboxes[3].value = 0;
+	
+	gates[0].worldX = 17;
+	gates[0].worldY = 4;
+	
+	gates[1].worldX = 18;
+	gates[1].worldY = 5;
+	
+	gates[2].worldX = 11;
+	gates[2].worldY = 13;
+	
+	gates[3].worldX = 9;
+	gates[3].worldY = 13;
+	
+	gates[4].worldX = 6;
+	gates[4].worldY = 11;
+	
+	end.worldX = 6;
+	end.worldY = 15;
 	
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
@@ -483,7 +632,7 @@ void initStage2() {
 	
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(Stage2ColorComboWALLTiles, Stage2ColorComboWALLMap, Stage2ColorTiles, Stage2ColorMap);
+	addBackground(Stage2ColorComboWALLTiles, Stage2ColorComboWALLMap, Stage2ColorComboTiles, Stage2ColorComboMap);
 	
 	// WORLD GRID
 
@@ -526,7 +675,7 @@ void initStage6(){
 	
 	// WORLD GRID
 
-	createGrid(Stage6BothMap);
+	createGrid(Stage6BothWallsMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
@@ -564,7 +713,7 @@ void initStage7(){
 	
 	// WORLD GRID
 
-	createGrid(Stage7BothMap);
+	createGrid(Stage7BothWallsMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
@@ -598,11 +747,11 @@ void initStage9(){
 	
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(Stage9BothWallsTiles, Stage9BothWallsMap, Stage9BothTiles, Stage9BothMap);
+	addBackground(Stage9WallsTiles, Stage9WallsMap, Stage9BothTiles, Stage9BothMap);
 	
 	// WORLD GRID
 
-	createGrid(Stage9BothMap);
+	createGrid(Stage9WallsMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
@@ -637,7 +786,7 @@ void initStage3() {
 	
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(Stage3NumberComboWallsLTiles, Stage3NumberComboWallsMap, Stage3NumberComboTiles, Stage3NumberComboMap);
+	addBackground(Stage3NumberComboWallsTiles, Stage3NumberComboWallsMap, Stage3NumberComboTiles, Stage3NumberComboMap);
 	
 	// WORLD GRID
 
@@ -676,7 +825,7 @@ void initStage4() {
 	
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(Stage4WallsLTiles, Stage4WallsMap, Stage4Tiles, Stage4Map);
+	addBackground(Stage4WallsTiles, Stage4WallsMap, Stage4Tiles, Stage4Map);
 	
 	// WORLD GRID
 
@@ -715,7 +864,7 @@ void initStage5() {
 	
 	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
 	
-	addBackground(Stage5newWallsLTiles, Stage5newWallsMap, Stage5newTiles, Stage5newMap);
+	addBackground(Stage5newWallsTiles, Stage5newWallsMap, Stage5newTiles, Stage5newMap);
 	
 	// WORLD GRID
 
