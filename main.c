@@ -658,11 +658,132 @@ void initStage6(){
 		gates[i].worldY = -64;
 	}
 	
-	player.x = 3;
-	player.y = 3;
+	player.x = 2;
+	player.y = 7;
+	//Up
+	boxes[0].worldX = 6;
+	boxes[0].worldY = 4;
+	boxes[0].pb = 1;
+	boxes[0].value = 3;
 	
-	end.worldX = 16;
-	end.worldY = 16;
+	boxes[1].worldX = 7;
+	boxes[1].worldY = 6;
+	boxes[1].pb = 3;
+	boxes[1].value = 4;
+	
+	dropboxes[0].worldX = 10;
+	dropboxes[0].worldY = 6;
+	dropboxes[0].pb = 2;
+	dropboxes[0].value = 7;
+	
+	gates[0].worldX = 10;
+	gates[0].worldY = 3;
+	
+	gates[1].worldX = 9;
+	gates[1].worldY = 4;
+	//Down
+	boxes[2].worldX = 6;
+	boxes[2].worldY = 10;
+	boxes[2].pb = 3;
+	boxes[2].value = 2;
+	
+	boxes[3].worldX = 10;
+	boxes[3].worldY = 8;
+	boxes[3].pb = 5;
+	boxes[3].value = 3;
+	
+	dropboxes[1].worldX = 12;
+	dropboxes[1].worldY = 1;
+	dropboxes[1].pb = 4;
+	dropboxes[1].value = 5;
+	
+	gates[2].worldX = 10;
+	gates[2].worldY = 11;
+	
+	gates[3].worldX = 9;
+	gates[3].worldY = 10;
+	//Right
+	boxes[4].worldX = 12;
+	boxes[4].worldY = 8;
+	boxes[4].pb = 5;
+	boxes[4].value = 3;
+	
+	boxes[5].worldX = 12;
+	boxes[5].worldY = 6;
+	boxes[5].pb = 1;
+	boxes[5].value = 5;
+	
+	boxes[6].worldX = 16;
+	boxes[6].worldY = 7;
+	boxes[6].pb = 1;
+	boxes[6].value = 0;
+	
+	dropboxes[2].worldX = 12;
+	dropboxes[2].worldY = 13;
+	dropboxes[2].pb = 6;
+	dropboxes[2].value = 8;
+	
+	gates[4].worldX = 17;
+	gates[4].worldY = 7;
+	
+	gates[5].worldX = 16;
+	gates[5].worldY = 6;
+	
+	gates[6].worldX = 16;
+	gates[6].worldY = 8;
+	//Last Room
+	
+	boxes[7].worldX = 20;
+	boxes[7].worldY = 15;
+	boxes[7].pb = 3;
+	boxes[7].value = 1;
+	
+	boxes[8].worldX = 20;
+	boxes[8].worldY = 16;
+	boxes[8].pb = 3;
+	boxes[8].value = 1;
+	
+	boxes[9].worldX = 16;
+	boxes[9].worldY = 15;
+	boxes[9].pb = 1;
+	boxes[9].value = 3;
+	
+	boxes[10].worldX = 17;
+	boxes[10].worldY = 15;
+	boxes[10].pb = 5;
+	boxes[10].value = 3;
+	
+	boxes[11].worldX = 15;
+	boxes[11].worldY = 20;
+	boxes[11].pb = 5;
+	boxes[11].value = 6;
+	
+	boxes[12].worldX = 14;
+	boxes[12].worldY = 20;
+	boxes[12].pb = 1;
+	boxes[12].value = 3;
+	
+	dropboxes[3].worldX = 18;
+	dropboxes[3].worldY = 21;
+	dropboxes[3].pb = 2;
+	dropboxes[3].value = 4;
+	
+	dropboxes[4].worldX = 13;
+	dropboxes[4].worldY = 15;
+	dropboxes[4].pb = 6;
+	dropboxes[4].value = 9;
+	
+	gates[7].worldX = 17;
+	gates[7].worldY = 19;
+	
+	gates[8].worldX = 15;
+	gates[8].worldY = 17;
+	
+	gates[9].worldX = 11;
+	gates[9].worldY = 19;
+	
+	end.worldX = 11;
+	end.worldY = 21;
 	
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
@@ -773,11 +894,78 @@ void initStage3() {
 		gates[i].worldY = -64;
 	}
 	
-	player.x = 3;
-	player.y = 3;
+	player.x = 2;
+	player.y = 4;
+	//first room
+	boxes[0].worldX = 6;
+	boxes[0].worldY = 4;
+	boxes[0].pb = 1;
+	boxes[0].value = 1;
 	
-	end.worldX = 16;
-	end.worldY = 16;
+	boxes[1].worldX = 9;
+	boxes[1].worldY = 4;
+	boxes[1].pb = 1;
+	boxes[1].value = 1;
+	//Corridor
+	boxes[2].worldX = 21;
+	boxes[2].worldY = 7;
+	boxes[2].pb = 1;
+	boxes[2].value = 1;
+	
+	boxes[3].worldX = 22;
+	boxes[3].worldY = 7;
+	boxes[3].pb = 3;
+	boxes[3].value = 3;
+	//Left
+	boxes[4].worldX = 21;
+	boxes[4].worldY = 11;
+	boxes[4].pb = 3;
+	boxes[4].value = 4;
+	
+	boxes[5].worldX = 18;
+	boxes[5].worldY = 12;
+	boxes[5].pb = 5;
+	boxes[5].value = 4;
+	//Right
+	boxes[6].worldX = 26;
+	boxes[6].worldY = 11;
+	boxes[6].pb = 1;
+	boxes[6].value = 3;
+	
+	boxes[7].worldX = 27;
+	boxes[7].worldY = 11;
+	boxes[7].pb = 3;
+	boxes[7].value = 3;
+	//First
+	dropboxes[0].worldX = 13;
+	dropboxes[0].worldY = 4;
+	dropboxes[0].pb = 1;
+	dropboxes[0].value = 2;
+	//Left
+	dropboxes[1].worldX = 16;
+	dropboxes[1].worldY = 11;
+	dropboxes[1].pb = 4;
+	dropboxes[1].value = 8;
+	//Right
+	dropboxes[2].worldX = 28;
+	dropboxes[2].worldY = 11;
+	dropboxes[2].pb = 2;
+	dropboxes[2].value = 6;
+	
+	gates[0].worldX = 17;
+	gates[0].worldY = 4;
+	
+	gates[1].worldX = 24;
+	gates[1].worldY = 11;
+	
+	gates[2].worldX = 24;
+	gates[2].worldY = 13;
+	
+	gates[3].worldX = 20;
+	gates[3].worldY = 13;
+	
+	end.worldX = 22;
+	end.worldY = 19;
 	
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
@@ -853,6 +1041,105 @@ void initStage5() {
 	
 	player.x = 3;
 	player.y = 3;
+	//R1
+	boxes[0].worldX = 3;
+	boxes[0].worldY = 4;
+	boxes[0].pb = 3;
+	boxes[0].value = 0;
+	
+	boxes[1].worldX = 3;
+	boxes[1].worldY = 6;
+	boxes[1].pb = 1;
+	boxes[1].value = 0;
+	
+	dropboxes[0].worldX = 4;
+	dropboxes[0].worldY = 3;
+	dropboxes[0].pb = 2;
+	dropboxes[0].value = 0;
+	
+	gates[0].worldX = 7;
+	gates[0].worldY = 4;
+	
+	gates[1].worldX = 7;
+	gates[1].worldY = 5;
+	//R2
+	boxes[3].worldX = 9;
+	boxes[3].worldY = 3;
+	boxes[3].pb = 3;
+	boxes[3].value = 1;
+	
+	boxes[4].worldX = 10;
+	boxes[4].worldY = 4;
+	boxes[4].pb = 3;
+	boxes[4].value = 3;
+	
+	boxes[5].worldX = 9;
+	boxes[5].worldY = 6;
+	boxes[5].pb = 5;
+	boxes[5].value = 6;
+	
+	dropboxes[1].worldX = 10;
+	dropboxes[1].worldY = 3;
+	dropboxes[1].pb = 3;
+	dropboxes[1].value = 4;
+	
+	gates[2].worldX = 13;
+	gates[2].worldY = 4;
+	
+	gates[3].worldX = 13;
+	gates[3].worldY = 5;
+	//R3
+	boxes[6].worldX = 16;
+	boxes[6].worldY = 3;
+	boxes[6].pb = 3;
+	boxes[6].value = 2;
+	
+	dropboxes[2].worldX = 17;
+	dropboxes[2].worldY = 6;
+	dropboxes[2].pb = 6;
+	dropboxes[2].value = 8;
+	
+	gates[4].worldX = 19;
+	gates[4].worldY = 4;
+	
+	gates[5].worldX = 19;
+	gates[5].worldY = 5;
+	//R4
+	boxes[7].worldX = 24;
+	boxes[7].worldY = 4;
+	boxes[7].pb = 3;
+	boxes[7].value = 0;
+	
+	boxes[8].worldX = 24;
+	boxes[8].worldY = 5;
+	boxes[8].pb = 3;
+	boxes[8].value = 0;
+	
+	//AAa
+	boxes[9].worldX = 22;
+	boxes[9].worldY = 12;
+	boxes[9].pb = 1;
+	boxes[9].value = 0;
+	
+	boxes[10].worldX = 19;
+	boxes[10].worldY = 12;
+	boxes[10].pb = 3;
+	boxes[10].value = 0;
+	
+	boxes[11].worldX = 18;
+	boxes[11].worldY = 12;
+	boxes[11].pb = 1;
+	boxes[11].value = 0;
+	
+	boxes[12].worldX = 15;
+	boxes[12].worldY = 12;
+	boxes[12].pb = 1;
+	boxes[12].value = 0;
+	
+	boxes[13].worldX = 12;
+	boxes[13].worldY = 13;
+	boxes[13].pb = 1;
+	boxes[13].value = 0;
 	
 	end.worldX = 16;
 	end.worldY = 16;
