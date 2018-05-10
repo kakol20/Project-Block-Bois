@@ -1317,7 +1317,10 @@ void update() {
 			break;
 			
 		case 3:
-			if (correctBox(boxes[0], dropboxes[0]) || correctBox(boxes[1], dropboxes[0])) {
+			if (correctBox(boxes[0], dropboxes[0]) || correctBox(boxes[1], dropboxes[0])) { // all possible boxes must be checked
+				// player can push box0 into box1 - box1 gets deleted and box0 becomes the new box
+				// same thing happens for pushing box1 into box0
+			
 				gates[0].worldX = 17;
 				gates[0].worldY = 3;
 				
