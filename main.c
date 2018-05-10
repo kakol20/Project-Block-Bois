@@ -1272,6 +1272,12 @@ void update() {
 				
 				gates[1].worldX = 14;
 				gates[1].worldY = 7;
+			} else {
+				gates[0].worldX = 14;
+				gates[0].worldY = 5;
+				
+				gates[1].worldX = 14;
+				gates[1].worldY = 6;
 			}
 		
 			break;
