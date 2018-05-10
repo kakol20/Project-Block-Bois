@@ -79,6 +79,8 @@ bool merge(int boxToMerge);
 bool isOdd(int n);
 int collision(int x, int y, bool mergeBoxes);
 
+bool correctBox(Box box, Box dropbox);
+
 // VARTIABLES
 OBJ_ATTR obj_buffer[128];
 OBJ_AFFINE *obj_aff_buffer = (OBJ_AFFINE*)obj_buffer;
@@ -230,6 +232,14 @@ void createGrid(const unsigned short *map) {
 		for (xx = 0; xx < 32; xx++) {
 			world_grid[xx][yy] = map[xx + (yy * 32)]; // collision with the walls
 		}
+	}
+}
+
+bool correctBox(Box box, Box dropbox) {
+	if ((box.worldX == dropbox.worldX) && (box.worldY == dropbox.worldY) && (box.pb == dropbox.pb) && (box.value == dropbox.value)) {
+		return true;
+	} else {
+		return false;
 	}
 }
 
@@ -641,242 +651,6 @@ void initStage2() {
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 	
 }
-void initStage6(){
-	int i;
-	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
-		boxes[i].worldX = -64;
-		boxes[i].worldY = -64;
-	}
-	
-	for (i = 0; i < NUMBER_DBOXES; i++) {
-		dropboxes[i].worldX = -64;
-		dropboxes[i].worldY = -64;
-	}
-	
-	for (i = 0; i < NUMBER_GATES; i++) {
-		gates[i].worldX = -64;
-		gates[i].worldY = -64;
-	}
-	
-	player.x = 2;
-	player.y = 7;
-	//Up
-	boxes[0].worldX = 6;
-	boxes[0].worldY = 4;
-	boxes[0].pb = 1;
-	boxes[0].value = 3;
-	
-	boxes[1].worldX = 7;
-	boxes[1].worldY = 6;
-	boxes[1].pb = 3;
-	boxes[1].value = 4;
-	
-	dropboxes[0].worldX = 10;
-	dropboxes[0].worldY = 6;
-	dropboxes[0].pb = 2;
-	dropboxes[0].value = 7;
-	
-	gates[0].worldX = 10;
-	gates[0].worldY = 3;
-	
-	gates[1].worldX = 9;
-	gates[1].worldY = 4;
-	//Down
-	boxes[2].worldX = 6;
-	boxes[2].worldY = 10;
-	boxes[2].pb = 3;
-	boxes[2].value = 2;
-	
-	boxes[3].worldX = 10;
-	boxes[3].worldY = 8;
-	boxes[3].pb = 5;
-	boxes[3].value = 3;
-	
-	dropboxes[1].worldX = 12;
-	dropboxes[1].worldY = 1;
-	dropboxes[1].pb = 4;
-	dropboxes[1].value = 5;
-	
-	gates[2].worldX = 10;
-	gates[2].worldY = 11;
-	
-	gates[3].worldX = 9;
-	gates[3].worldY = 10;
-	//Right
-	boxes[4].worldX = 12;
-	boxes[4].worldY = 8;
-	boxes[4].pb = 5;
-	boxes[4].value = 3;
-	
-	boxes[5].worldX = 12;
-	boxes[5].worldY = 6;
-	boxes[5].pb = 1;
-	boxes[5].value = 5;
-	
-	boxes[6].worldX = 16;
-	boxes[6].worldY = 7;
-	boxes[6].pb = 1;
-	boxes[6].value = 0;
-	
-	dropboxes[2].worldX = 12;
-	dropboxes[2].worldY = 13;
-	dropboxes[2].pb = 6;
-	dropboxes[2].value = 8;
-	
-	gates[4].worldX = 17;
-	gates[4].worldY = 7;
-	
-	gates[5].worldX = 16;
-	gates[5].worldY = 6;
-	
-	gates[6].worldX = 16;
-	gates[6].worldY = 8;
-	//Last Room
-	
-	boxes[7].worldX = 20;
-	boxes[7].worldY = 15;
-	boxes[7].pb = 3;
-	boxes[7].value = 1;
-	
-	boxes[8].worldX = 20;
-	boxes[8].worldY = 16;
-	boxes[8].pb = 3;
-	boxes[8].value = 1;
-	
-	boxes[9].worldX = 16;
-	boxes[9].worldY = 15;
-	boxes[9].pb = 1;
-	boxes[9].value = 3;
-	
-	boxes[10].worldX = 17;
-	boxes[10].worldY = 15;
-	boxes[10].pb = 5;
-	boxes[10].value = 3;
-	
-	boxes[11].worldX = 15;
-	boxes[11].worldY = 20;
-	boxes[11].pb = 5;
-	boxes[11].value = 6;
-	
-	boxes[12].worldX = 14;
-	boxes[12].worldY = 20;
-	boxes[12].pb = 1;
-	boxes[12].value = 3;
-	
-	dropboxes[3].worldX = 18;
-	dropboxes[3].worldY = 21;
-	dropboxes[3].pb = 2;
-	dropboxes[3].value = 4;
-	
-	dropboxes[4].worldX = 13;
-	dropboxes[4].worldY = 15;
-	dropboxes[4].pb = 6;
-	dropboxes[4].value = 9;
-	
-	gates[7].worldX = 17;
-	gates[7].worldY = 19;
-	
-	gates[8].worldX = 15;
-	gates[8].worldY = 17;
-	
-	gates[9].worldX = 11;
-	gates[9].worldY = 19;
-	
-	end.worldX = 11;
-	end.worldY = 21;
-	
-	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
-	backgroundY = -72 + (8 * player.y);
-	
-	// BACKGROUND
-	
-	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
-	
-	addBackground(Stage6BothWallsTiles, Stage6BothWallsMap, Stage6BothTiles, Stage6BothMap);
-	
-	// WORLD GRID
-
-	createGrid(Stage6BothWallsMap);
-	
-	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
-}
-void initStage7(){
-	int i;
-	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
-		boxes[i].worldX = -64;
-		boxes[i].worldY = -64;
-	}
-	
-	for (i = 0; i < NUMBER_DBOXES; i++) {
-		dropboxes[i].worldX = -64;
-		dropboxes[i].worldY = -64;
-	}
-	
-	for (i = 0; i < NUMBER_GATES; i++) {
-		gates[i].worldX = -64;
-		gates[i].worldY = -64;
-	}
-	
-	player.x = 3;
-	player.y = 3;
-	
-	end.worldX = 16;
-	end.worldY = 16;
-	
-	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
-	backgroundY = -72 + (8 * player.y);
-	
-	// BACKGROUND
-	
-	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
-	
-	addBackground(Stage7BothWallsTiles, Stage7BothWallsMap, Stage7BothTiles, Stage7BothMap);
-	
-	// WORLD GRID
-
-	createGrid(Stage7BothWallsMap);
-	
-	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
-}
-void initStage9(){
-	int i;
-	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
-		boxes[i].worldX = -64;
-		boxes[i].worldY = -64;
-	}
-	
-	for (i = 0; i < NUMBER_DBOXES; i++) {
-		dropboxes[i].worldX = -64;
-		dropboxes[i].worldY = -64;
-	}
-	
-	for (i = 0; i < NUMBER_GATES; i++) {
-		gates[i].worldX = -64;
-		gates[i].worldY = -64;
-	}
-	
-	player.x = 3;
-	player.y = 3;
-	
-	end.worldX = 16;
-	end.worldY = 16;
-	
-	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
-	backgroundY = -72 + (8 * player.y);
-	
-	// BACKGROUND
-	
-	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
-	
-	addBackground(Stage9WallsTiles, Stage9WallsMap, Stage9BothTiles, Stage9BothMap);
-	
-	// WORLD GRID
-
-	createGrid(Stage9WallsMap);
-	
-	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
-}
-
 void initStage3() {
 	int i;
 	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
@@ -1160,6 +934,241 @@ void initStage5() {
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 
 }
+void initStage6(){
+	int i;
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	}
+	
+	player.x = 2;
+	player.y = 7;
+	//Up
+	boxes[0].worldX = 6;
+	boxes[0].worldY = 4;
+	boxes[0].pb = 1;
+	boxes[0].value = 3;
+	
+	boxes[1].worldX = 7;
+	boxes[1].worldY = 6;
+	boxes[1].pb = 3;
+	boxes[1].value = 4;
+	
+	dropboxes[0].worldX = 10;
+	dropboxes[0].worldY = 6;
+	dropboxes[0].pb = 2;
+	dropboxes[0].value = 7;
+	
+	gates[0].worldX = 10;
+	gates[0].worldY = 3;
+	
+	gates[1].worldX = 9;
+	gates[1].worldY = 4;
+	//Down
+	boxes[2].worldX = 6;
+	boxes[2].worldY = 10;
+	boxes[2].pb = 3;
+	boxes[2].value = 2;
+	
+	boxes[3].worldX = 10;
+	boxes[3].worldY = 8;
+	boxes[3].pb = 5;
+	boxes[3].value = 3;
+	
+	dropboxes[1].worldX = 12;
+	dropboxes[1].worldY = 1;
+	dropboxes[1].pb = 4;
+	dropboxes[1].value = 5;
+	
+	gates[2].worldX = 10;
+	gates[2].worldY = 11;
+	
+	gates[3].worldX = 9;
+	gates[3].worldY = 10;
+	//Right
+	boxes[4].worldX = 12;
+	boxes[4].worldY = 8;
+	boxes[4].pb = 5;
+	boxes[4].value = 3;
+	
+	boxes[5].worldX = 12;
+	boxes[5].worldY = 6;
+	boxes[5].pb = 1;
+	boxes[5].value = 5;
+	
+	boxes[6].worldX = 16;
+	boxes[6].worldY = 7;
+	boxes[6].pb = 1;
+	boxes[6].value = 0;
+	
+	dropboxes[2].worldX = 12;
+	dropboxes[2].worldY = 13;
+	dropboxes[2].pb = 6;
+	dropboxes[2].value = 8;
+	
+	gates[4].worldX = 17;
+	gates[4].worldY = 7;
+	
+	gates[5].worldX = 16;
+	gates[5].worldY = 6;
+	
+	gates[6].worldX = 16;
+	gates[6].worldY = 8;
+	//Last Room
+	
+	boxes[7].worldX = 20;
+	boxes[7].worldY = 15;
+	boxes[7].pb = 3;
+	boxes[7].value = 1;
+	
+	boxes[8].worldX = 20;
+	boxes[8].worldY = 16;
+	boxes[8].pb = 3;
+	boxes[8].value = 1;
+	
+	boxes[9].worldX = 16;
+	boxes[9].worldY = 15;
+	boxes[9].pb = 1;
+	boxes[9].value = 3;
+	
+	boxes[10].worldX = 17;
+	boxes[10].worldY = 15;
+	boxes[10].pb = 5;
+	boxes[10].value = 3;
+	
+	boxes[11].worldX = 15;
+	boxes[11].worldY = 20;
+	boxes[11].pb = 5;
+	boxes[11].value = 6;
+	
+	boxes[12].worldX = 14;
+	boxes[12].worldY = 20;
+	boxes[12].pb = 1;
+	boxes[12].value = 3;
+	
+	dropboxes[3].worldX = 18;
+	dropboxes[3].worldY = 21;
+	dropboxes[3].pb = 2;
+	dropboxes[3].value = 4;
+	
+	dropboxes[4].worldX = 13;
+	dropboxes[4].worldY = 15;
+	dropboxes[4].pb = 6;
+	dropboxes[4].value = 9;
+	
+	gates[7].worldX = 17;
+	gates[7].worldY = 19;
+	
+	gates[8].worldX = 15;
+	gates[8].worldY = 17;
+	
+	gates[9].worldX = 11;
+	gates[9].worldY = 19;
+	
+	end.worldX = 11;
+	end.worldY = 21;
+	
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+	
+	// BACKGROUND
+	
+	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
+	
+	addBackground(Stage6BothWallsTiles, Stage6BothWallsMap, Stage6BothTiles, Stage6BothMap);
+	
+	// WORLD GRID
+
+	createGrid(Stage6BothWallsMap);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+}
+void initStage7(){
+	int i;
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	}
+	
+	player.x = 3;
+	player.y = 3;
+	
+	end.worldX = 16;
+	end.worldY = 16;
+	
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+	
+	// BACKGROUND
+	
+	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
+	
+	addBackground(Stage7BothWallsTiles, Stage7BothWallsMap, Stage7BothTiles, Stage7BothMap);
+	
+	// WORLD GRID
+
+	createGrid(Stage7BothWallsMap);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+}
+void initStage9(){
+	int i;
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	}
+	
+	player.x = 3;
+	player.y = 3;
+	
+	end.worldX = 16;
+	end.worldY = 16;
+	
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+	
+	// BACKGROUND
+	
+	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
+	
+	addBackground(Stage9WallsTiles, Stage9WallsMap, Stage9BothTiles, Stage9BothMap);
+	
+	// WORLD GRID
+
+	createGrid(Stage9WallsMap);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+}
 
 void update() {
 	// INPUT 
@@ -1239,6 +1248,69 @@ void update() {
 				break;
 		}
 	}
+	
+	// OPENING GATES
+	switch (gameState) {
+		case 1:
+			if (correctBox(boxes[1], dropboxes[1])) {
+				gates[2].worldX = 16;
+				gates[2].worldY = 4;
+				
+				gates[3].worldX = 16;
+				gates[3].worldY = 7;
+			} else {
+				gates[2].worldX = 16;
+				gates[2].worldY = 5;
+				
+				gates[3].worldX = 16;
+				gates[3].worldY = 6;
+			}
+			
+			if (correctBox(boxes[0], dropboxes[0])) {
+				gates[0].worldX = 14;
+				gates[0].worldY = 4;
+				
+				gates[1].worldX = 14;
+				gates[1].worldY = 7;
+			}
+		
+			break;
+			
+		case 2: 
+			if (correctBox(boxes[4], dropboxes[0])) {
+				gates[0].worldX = 13;
+				gates[0].worldY = 11;
+				
+				gates[1].worldX = 16;
+				gates[1].worldY = 11;
+				
+				gates[2].worldX = 13;
+				gates[2].worldY = 12;
+				
+				gates[3].worldX = 16;
+				gates[3].worldY = 12;
+			} else {
+				gates[0].worldX = 14;
+				gates[0].worldY = 11;
+				
+				gates[1].worldX = 15;
+				gates[1].worldY = 11;
+				
+				gates[2].worldX = 14;
+				gates[2].worldY = 12;
+				
+				gates[3].worldX = 15;
+				gates[3].worldY = 12;
+			}
+			
+			break;
+			
+		case 3:
+			
+			
+			break;
+	}
+	
 }
 
 void draw() {	
