@@ -637,6 +637,9 @@ void initStage2() {
 	
 	gates[4].worldX = 6;
 	gates[4].worldY = 11;
+
+	gates[5].worldX = 10;
+	gates[5].worldY = 9;
 	
 	end.worldX = 6;
 	end.worldY = 15;
@@ -1272,6 +1275,8 @@ void update() {
 	// OPENING GATES
 	switch (gameState) {
 		case 1:
+		
+			// checking if the correct box has been placed on the dropbox
 			if (correctBox(boxes[1], dropboxes[1])) {
 				gates[2].worldX = 16;
 				gates[2].worldY = 4;
@@ -1332,7 +1337,85 @@ void update() {
 			break;
 			
 		case 3:
+			if (correctBox(boxes[0], dropboxes[0]) || correctBox(boxes[1], dropboxes[0])) { // all possible boxes must be checked
+				// player can push box0 into box1 - box1 gets deleted and box0 becomes the new box
+				// same thing happens for pushing box1 into box0
 			
+				gates[0].worldX = 17;
+				gates[0].worldY = 3;
+				
+				gates[1].worldX = 19;
+				gates[1].worldY = 5;
+			} else {
+				gates[0].worldX = 17;
+				gates[0].worldY = 4;
+				
+				gates[1].worldX = 18;
+				gates[1].worldY = 5;
+			}
+			
+			if (correctBox(boxes[3], dropboxes[1]) || correctBox(boxes[2], dropboxes[1])) {
+				gates[5].worldX = 11;
+				gates[5].worldY = 9;
+				
+				gates[2].worldX = 12;
+				gates[2].worldY = 13;
+			} else {
+				gates[5].worldX = 10;
+				gates[5].worldY = 9;
+				
+				gates[2].worldX = 11;
+				gates[2].worldY = 13;
+			}
+			
+			if (correctBox(boxes[5], dropboxes[2]) || correctBox(boxes[7], dropboxes[2]) || correctBox(boxes[4], dropboxes[2])) {
+				gates[3].worldX = 10 ;
+				gates[3].worldY = 13;
+			} else {
+				gates[3].worldX = 9;
+				gates[3].worldY = 13;
+			}
+			
+			if (correctBox(boxes[7], dropboxes[3]) || correctBox(boxes[4], dropboxes[3]) || correctBox(boxes[6], dropboxes[3])) {
+				gates[4].worldX = 7;
+				gates[4].worldY = 11;
+			} else {
+				gates[4].worldX = 6;
+				gates[4].worldY = 11;
+			}
+			
+			break;
+			
+		case 4:
+			if (correctBox(boxes[0], dropboxes[0]) || correctBox(boxes[1], dropboxes[0])) {
+				gates[0].worldX = 17;
+				gates[0].worldY = 3;
+			} else {
+				gates[0].worldX = 17;
+				gates[0].worldY = 4;
+			}
+			
+			if (correctBox(boxes[4], dropboxes[1]) || correctBox(boxes[5], dropboxes[1])) {
+				gates[1].worldX = 23;
+				gates[1].worldY = 11;
+			} else {
+				gates[1].worldX = 24;
+				gates[1].worldY = 11;
+			}
+			
+			if (correctBox(boxes[6], dropboxes[2]) || correctBox(boxes[7], dropboxes[2])) {
+				gates[2].worldX = 23;
+				gates[2].worldY = 13;
+				
+				gates[3].worldX = 21;
+				gates[3].worldY = 13;
+			} else {
+				gates[2].worldX = 24;
+				gates[2].worldY = 13;
+				
+				gates[3].worldX = 20;
+				gates[3].worldY = 13;
+			}
 			
 			break;
 		
