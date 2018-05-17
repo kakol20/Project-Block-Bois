@@ -79,11 +79,6 @@ bool merge(int boxToMerge);
 bool isOdd(int n);
 int collision(int x, int y, bool mergeBoxes);
 
-int pScore = 0;
-int numStep = 0;
-int hScore = 0;
-int currentState = 0;
-
 bool correctBox(Box box, Box dropbox);
 
 // VARTIABLES
@@ -106,7 +101,7 @@ int backgroundY = 0;
 
 int gameState = 0;
 int menuSelection = 0;
-int levelSelection = 2;
+int levelSelection = 11;
 int xDistance;
 int yDistance;
 int nextBuffer; // to keep count 
@@ -228,7 +223,6 @@ void move(int changeX, int changeY) { // put in parameters how much the position
 		
 		player.x += changeX;
 		player.y += changeY;
-		
 	}
 }
 
@@ -1187,34 +1181,20 @@ void update() {
 	int changeX = 0;
 	int changeY = 0;
 	
-	if(key_hit(KEY_SELECT))
-	{
-	
-		currentState = gameState;
-	
-		gameState = 10;
-		
-	}
-	
-	
 	if (key_hit(KEY_UP)) {
 		changeY = -1;// parameters are how much should the player position change
-		numStep++;
 	}
 	
 	if (key_hit(KEY_RIGHT)) {
 		changeX = 1;
-		numStep++;
 	}
 	
 	if (key_hit(KEY_DOWN)) {
 		changeY = 1;
-		numStep++;
 	}
 	
 	if (key_hit(KEY_LEFT)) {
 		changeX = -1;
-		numStep++;
 	}
 	
 	move(changeX, changeY);
@@ -1223,34 +1203,35 @@ void update() {
 
 	if ((end.worldX == player.x) && (end.worldY == player.y)) { // tempory movement between maps - testing if the player walks over the end, then it will go to another map
 		switch (gameState) {
-			case 1: // tutorial - gameState 0 is the main menu
+			case 1: // level 1
 				gameState = 2;
 				initStage1();
 				
 				break;
-			case 2: // level 1
+			case 2: // level 2
 				gameState = 3;
 				initStage2();
 				
 				break;
-			case 3: // level 2
+			case 3: // level 3
 				gameState = 4;
 				initStage3();
 				
 				break;
 				
-			case 4: // level 3
+			case 4: // level 4
 				gameState = 5;
 				initStage4();
 				
 				break;
-			case 5: // level 4
+			case 5: // level 5
 				gameState = 6;
 				initStage5();
 				
 				break;
 				
-			case 6: // level 5
+			/*	
+			case 6: // level 6
 				gameState = 7;
 				initStage6();
 				
@@ -1268,7 +1249,7 @@ void update() {
 			case 9: // level 9
 				// end game
 				
-				break;
+				break; */
 		}
 	}
 	
@@ -1418,7 +1399,6 @@ void update() {
 			}
 			
 			break;
-		
 	}
 	
 }
@@ -1512,13 +1492,10 @@ int main() {
 	gameState = 0;
 	
 	init();
-	
-	char Score[20];
-	char coordinates[20];
+	char coordinates[50];
 	menuSelection = 0;
 	
 	int menuState= 0;
-	
 
 	while(1) {
 	
@@ -1574,38 +1551,42 @@ int main() {
 						tte_write("#{es}");
 						
 						if (levelSelection != 2) {
-							if (key_hit(KEY_UP)) {
-								if ((levelSelection > 20) || (levelSelection == 12)) {
-									levelSelection -= 10;
-								}
-							}
 							
-							if (key_hit(KEY_RIGHT)) {
-								if ((levelSelection % 10) < 3) {
-									levelSelection++;
-								}
-							}
 							
-							if (key_hit(KEY_LEFT)) {
-								if ((levelSelection % 10) > 1) {
-									levelSelection--;
-								}
+						}
+						
+						if (key_hit(KEY_UP)) {
+							if ((levelSelection > 20) /* || (levelSelection == 12) */) {
+								levelSelection -= 10;
 							}
 						}
 						
+						if (key_hit(KEY_RIGHT)) {
+							if ((levelSelection % 10) < 3) {
+								levelSelection++;
+							}
+						}
+						
+						if (key_hit(KEY_LEFT)) {
+							if ((levelSelection % 10) > 1) {
+								levelSelection--;
+							}
+						}
+					
 						if (key_hit(KEY_DOWN)) {
-							if (levelSelection < 30) {
+							if (levelSelection < 20) {
 								levelSelection += 10;
 							}
 						}
 						
+						/*
 						if (levelSelection == 2) { // tutorial level
 							tte_write("#{P: 96, 48}");
 							tte_write("#{cx:0x0000}>Tut <");
 						} else {
 							tte_write("#{P: 104, 48}");
 							tte_write("#{cx:0x0000}Tut");
-						}
+						} */
 						
 						if (levelSelection == 11) { // level 1 stage 1
 							tte_write("#{P: 56, 64}");
@@ -1655,6 +1636,7 @@ int main() {
 							tte_write("#{cx:0x0000}Lvl6");
 						}
 						
+						/*
 						if (levelSelection == 31) {
 							tte_write("#{P: 56, 96}");
 							tte_write("#{cx:0x0000}>Lvl7<");
@@ -1677,37 +1659,38 @@ int main() {
 						} else {
 							tte_write("#{P: 144, 96}");
 							tte_write("#{cx:0x0000}Lvl9");
-						}
+						} */
 						
 						if (key_hit(KEY_START)) {
-							if (levelSelection == 2) {
+							if (levelSelection == 11) {
 								gameState = 1;
 								initTutorial();
 							}
 							
-							if (levelSelection == 11) {
+							if (levelSelection == 12) {
 								gameState = 2;
 								initStage1();
 							}
 							
-							if (levelSelection == 12) {
+							if (levelSelection == 13) {
 								gameState = 3;
 								initStage2();
 							}
-							if (levelSelection == 13) {
+							if (levelSelection == 21) {
 								gameState = 4;
 								initStage3();
 							}
-							if (levelSelection == 21) {
+							if (levelSelection == 22) {
 								gameState = 5;
 								initStage4();
 							}
-							if (levelSelection == 22) {
+							if (levelSelection == 23) {
 								gameState = 6;
 								initStage5();
 							}
+							/*
 							if (levelSelection == 23) {
-								gameState = 7;
+								gameState = 6;
 								initStage6();
 							}
 							if (levelSelection == 31) {
@@ -1717,7 +1700,7 @@ int main() {
 							if (levelSelection == 32) {
 								gameState = 9;
 								initStage9();
-							}
+							} */
 						}
 						
 						break;
@@ -1733,21 +1716,12 @@ int main() {
 				update();
 				draw();
 				
-				
 				tte_write("#{P:8,8}");
 				tte_write("#{cx:0x0000}Tutorial");
 				
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
-				
-				
-				
-				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
-				tte_write(Score);
-				
-
 				
 				break;
 			case 2:
@@ -1765,10 +1739,6 @@ int main() {
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
 				
-				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
-				tte_write(Score);
-				
 				break;
 			case 3:
 				vid_vsync();
@@ -1785,10 +1755,6 @@ int main() {
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
 				
-				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
-				tte_write(Score);
-				
 				break;
 			case 4:
 				vid_vsync();
@@ -1804,10 +1770,6 @@ int main() {
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
-				
-				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
-				tte_write(Score);
 				
 				break;
 			
@@ -1826,10 +1788,6 @@ int main() {
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
 				
-				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
-				tte_write(Score);
-				
 				break;
 			case 6:
 				vid_vsync();
@@ -1845,10 +1803,6 @@ int main() {
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
-				
-				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
-				tte_write(Score);
 				
 				break;
 			case 7:
@@ -1866,10 +1820,6 @@ int main() {
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
 				
-				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
-				tte_write(Score);
-				
 				break;
 			case 8:
 				vid_vsync();
@@ -1885,10 +1835,6 @@ int main() {
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
-				
-				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
-				tte_write(Score);
 				
 				break;
 			case 9:
@@ -1906,36 +1852,6 @@ int main() {
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
 				
-				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
-				tte_write(Score);
-				
-				break;
-				
-				case 10:
-				vid_vsync();
-				tte_write("#{es}");
-				
-				key_poll(); // checks for key inputs
-				
-				draw();
-				
-					tte_write("#{P:104,56}");//56: 72
-					tte_write("#{cx:0x0000}Pause");
-					
-					tte_write("#{P:64,72}");//104: 48
-					tte_write("#{cx:0x0000}Enter to Resume");
-					
-					tte_write("#{P:48,120}");//152: 48
-					tte_write("#{cx:0x0000}? Main menu");
-					
-					//Have to set the key for "Back to main menu".
-					//and set the proper position.
-			
-					if(key_hit(KEY_START))
-					{
-						gameState = currentState;
-					}
 				break;
 		}
 	}
