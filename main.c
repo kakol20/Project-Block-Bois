@@ -568,12 +568,12 @@ void initStage2() {
 	boxes[0].worldX = 6;
 	boxes[0].worldY = 4;
 	
-	boxes[1].pb = 1;
+	boxes[1].pb = 3;
 	boxes[1].value = 0;
 	boxes[1].worldX = 9;
 	boxes[1].worldY = 4;
 	
-	dropboxes[0].pb = 4;
+	dropboxes[0].pb = 2;
 	dropboxes[0].value = 0;
 	dropboxes[0].worldX = 12;
 	dropboxes[0].worldY = 4;
@@ -1480,7 +1480,7 @@ void update() {
 				gates[5].worldY = 9;
 				
 				gates[2].worldX = 11;
-			gates[2].worldY = 13;
+				gates[2].worldY = 13;
 			}
 			
 			if (correctBox(boxes[5], dropboxes[2]) || correctBox(boxes[7], dropboxes[2]) || correctBox(boxes[4], dropboxes[2])) {
@@ -1488,7 +1488,7 @@ void update() {
 				gates[3].worldY = 13;
 			} else {
 				gates[3].worldX = 9;
-			gates[3].worldY = 13;
+				gates[3].worldY = 13;
 			}
 			
 			if (correctBox(boxes[7], dropboxes[3]) || correctBox(boxes[4], dropboxes[3]) || correctBox(boxes[6], dropboxes[3])) {
@@ -1525,11 +1525,23 @@ void update() {
 				gates[3].worldX = 21;
 				gates[3].worldY = 13;
 			} else {
-			gates[2].worldX = 24;
+				gates[2].worldX = 24;
 				gates[2].worldY = 13;
 				
 				gates[3].worldX = 20;
 				gates[3].worldY = 13;
+			}
+			
+			if (correctBox(boxes[6], dropboxes[2]) || correctBox(boxes[7], dropboxes[2])) {
+				
+				gates[4].worldX = 5;
+				gates[4].worldY = 11;
+				
+			} else {
+			
+				gates[4].worldX = 6;
+				gates[4].worldY = 11;
+				
 			}
 			
 			break;
