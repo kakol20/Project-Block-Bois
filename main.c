@@ -105,10 +105,11 @@ int xDistance;
 int yDistance;
 int nextBuffer; // to keep count 
 int currBox;
+int menuState = 0;
 
 int pScore = 0;
 int numStep = 0;
-int hScore = 0;
+int hScore = 99999;
 int currentState = 0;
 
 unsigned short world_grid[32][32];
@@ -1193,6 +1194,8 @@ void initStage6(){
 	
 	end.worldX = 11;
 	end.worldY = 21;
+	end.worldX = 16;
+	end.worldY = 16;
 	
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
@@ -1209,7 +1212,7 @@ void initStage6(){
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
-void initStage7(){
+/*void initStage7(){
 	int i;
 	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
 		boxes[i].worldX = -64;
@@ -1284,7 +1287,7 @@ void initStage9(){
 	createGrid(Stage9WallsMap);
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
-}
+}*/
 
 
 void update() {
@@ -1361,11 +1364,18 @@ void update() {
 				
 				break;
 			case 7: //level 6
-				gameState = 6;
-				initStage7();
+				if (hScore > numStep) {
+					hScore = numStep;
+				}
+				
+				gameState = 0;
+				menuState = 0;
+				numStep = 0;
+				
+				// END OF GAME
 				
 				break;
-			case 9: //level 9
+			/*case 9: //level 9
 				
 				
 				break;
@@ -1373,7 +1383,7 @@ void update() {
 				gameState = 6;
 				initStage9();
 				
-				break;
+				break;*/
 		}
 	}
 
@@ -1817,9 +1827,8 @@ int main() {
 	init();
 	char Score[20];
 	char coordinates[20];
+	char highScore[20];
 	menuSelection = 0;
-	
-	int menuState= 0;
 
 	while(1) {
 	
@@ -1835,40 +1844,21 @@ int main() {
 				switch (menuState) {
 					case 0: // Main Menu
 						if (key_hit(KEY_START)) {
-							if (menuSelection == 0) {
-								menuState = 1;
-								
-							}
-						}
-
-						if (key_hit(KEY_DOWN)) {
-							menuSelection = 1;
-						}
-
-						if (key_hit(KEY_UP)) {
-							menuSelection = 0;
-						}
-
-						
-						if (menuSelection == 0) {
-							tte_write("#{es}");//clear the screen
-							tte_write("#{P:52,68}");
-							tte_write("#{cx:0x0000}Project Block Boi");
-							tte_write("#{P:52,84}");
-							tte_write("#{cx:0x0000}->Level Select <-");
-							tte_write("#{P:42,100}");
-							tte_write("#{cx:0x0000}   Leaderboard");
-						} else if (menuSelection == 1) {
-							tte_write("#{es}");//clear the screen
-							
-							tte_write("#{P:52,68}");
-							tte_write("#{cx:0x0000}Project Block Boi");
-							tte_write("#{P:52,84}");
-							tte_write("#{cx:0x0000}  Level Select");
-							tte_write("#{P:52,100}");
-							tte_write("#{cx:0x0000}->Leaderboard  <-");
+							menuState = 1;
 						}
 						
+						tte_write("#{es}");//clear the screen
+						tte_write("#{P:56,68}");
+						tte_write("#{cx:0x0000}Project Block Boi");
+						tte_write("#{P:56,84}");
+						tte_write("#{cx:0x0000}->Level Select<-");
+
+						tte_write("#{P:56,100}");
+						sprintf(highScore, "#{cx:0x0000}Highscore: %d", hScore);
+						
+						tte_write(highScore);
+						
+					
 						break;
 						
 					case 1: 
@@ -1895,68 +1885,68 @@ int main() {
 						}
 						
 						if (key_hit(KEY_DOWN)) {
-							if (levelSelection < 30) {
+							if (levelSelection < 20) {
 								levelSelection += 10;
 							}
 						}
 						
-						if (levelSelection == 2) { // tutorial level
-							tte_write("#{P: 96, 48}");
+						if (levelSelection == 2) {
+							tte_write("#{P: 96, 56}");
 							tte_write("#{cx:0x0000}>Tut <");
 						} else {
-							tte_write("#{P: 104, 48}");
+							tte_write("#{P: 104, 56}");
 							tte_write("#{cx:0x0000}Tut");
 						}
 						
-						if (levelSelection == 11) { // level 1 stage 1
-							tte_write("#{P: 56, 64}");
+						if (levelSelection == 11) {
+							tte_write("#{P: 56, 72}");
 							tte_write("#{cx:0x0000}>Lvl1<");
 						} else {
-							tte_write("#{P: 64, 64}");
+							tte_write("#{P: 64, 72}");
 							tte_write("#{cx:0x0000}Lvl1");
 						}
 						
-						if (levelSelection == 12) { // level 1 stage 2
-							tte_write("#{P: 96, 64}");
+						if (levelSelection == 12) {
+							tte_write("#{P: 96, 72}");
 							tte_write("#{cx:0x0000}>Lvl2<");
 						} else {
-							tte_write("#{P: 104, 64}");
+							tte_write("#{P: 104, 72}");
 							tte_write("#{cx:0x0000}Lvl2");
 						}
 						
-						if (levelSelection == 13) { // level 1 stage 3
-							tte_write("#{P: 136, 64}");
+						if (levelSelection == 13) {
+							tte_write("#{P: 136, 72}");
 							tte_write("#{cx:0x0000}>Lvl3<");
 						} else {
-							tte_write("#{P: 144, 64}");
+							tte_write("#{P: 144, 72}");
 							tte_write("#{cx:0x0000}Lvl3");
 						}
 						
-						if (levelSelection == 21) { // level 2 stage 1
-							tte_write("#{P: 56, 80}");
+						if (levelSelection == 21) {
+							tte_write("#{P: 56, 88}");
 							tte_write("#{cx:0x0000}>Lvl4<");
 						} else {
-							tte_write("#{P: 64, 80}");
+							tte_write("#{P: 64, 88}");
 							tte_write("#{cx:0x0000}Lvl4");
 						}
 						
-						if (levelSelection == 22) { // level 2 stage 2
-							tte_write("#{P: 96, 80}");
+						if (levelSelection == 22) {
+							tte_write("#{P: 96, 88}");
 							tte_write("#{cx:0x0000}>Lvl5<");
 						} else {
-							tte_write("#{P: 104, 80}");
+							tte_write("#{P: 104, 88}");
 							tte_write("#{cx:0x0000}Lvl5");
 						}
 						
-						if (levelSelection == 23) { // level 2 stage 3
-							tte_write("#{P: 136, 80}");
+						if (levelSelection == 23) {
+							tte_write("#{P: 136, 88}");
 							tte_write("#{cx:0x0000}>Lvl6<");
 						} else {
-							tte_write("#{P: 144, 80}");
+							tte_write("#{P: 144, 88}");
 							tte_write("#{cx:0x0000}Lvl6");
 						}
 						
-						if (levelSelection == 31) {
+						/*if (levelSelection == 31) {
 							tte_write("#{P: 56, 96}");
 							tte_write("#{cx:0x0000}>Lvl7<");
 						} else {
@@ -1978,7 +1968,7 @@ int main() {
 						} else {
 							tte_write("#{P: 144, 96}");
 							tte_write("#{cx:0x0000}Lvl9");
-						}
+						}*/
 						
 						if (key_hit(KEY_START)) {
 							if (levelSelection == 2) {
@@ -2016,7 +2006,7 @@ int main() {
 								initStage6();
 							}
 							
-							if (levelSelection == 31) {
+							/*if (levelSelection == 31) {
 								gameState = 8;
 								initStage7();
 							}
@@ -2024,42 +2014,11 @@ int main() {
 							if (levelSelection == 32) {
 								gameState = 9;
 								initStage9();
-							}
+							}*/
 						}
 						
 						break;
 				}
-				
-				int i;
-				for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
-					boxes[i].screenX= -64;
-					boxes[i].screenY = -64;
-					
-					obj_set_pos(boxes[i].sprite, boxes[i].screenX, boxes[i].screenY);
-					obj_set_attr(boxes[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(boxes[i].pb) | boxes[i].tid | ATTR2_PRIO(1));
-				}
-				
-				for (i = 0; i < NUMBER_DBOXES; i++) {
-					dropboxes[i].screenX = -64;
-					dropboxes[i].screenY = -64;
-					
-					obj_set_pos(dropboxes[i].sprite, dropboxes[i].screenX, dropboxes[i].screenY);
-					obj_set_attr(dropboxes[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(dropboxes[i].pb) | dropboxes[i].tid | ATTR2_PRIO(1));
-				}
-				
-				for (i = 0; i < NUMBER_GATES; i++) {
-					gates[i].screenX = -64;
-					gates[i].screenY = -64;
-					
-					obj_set_pos(gates[i].sprite, gates[i].screenX, gates[i].screenY);
-					obj_set_attr(gates[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(gates[i].pb) | gates[i].tid | ATTR2_PRIO(1));
-				}
-				
-				obj_set_pos(player.sprite, -64, -64);
-				obj_set_attr(player.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(player.pb) | player.tid | ATTR2_PRIO(1));
-				
-				obj_set_pos(end.sprite, -64, -64);
-				obj_set_attr(end.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(end.pb) | end.tid | ATTR2_PRIO(1));
 				
 				break;
 				
@@ -2207,7 +2166,7 @@ int main() {
 				tte_write(Score);
 				
 				break;
-			case 8: // stage 7 game state
+			/*case 8: // stage 7 game state
 				vid_vsync();
 				tte_write("#{es}");
 				
@@ -2246,9 +2205,9 @@ int main() {
 				tte_write("#{P:8,40}");
 				tte_write(Score);
 				
-				break;
+				break;*/
 				
-				case 10:
+			case 10:
 				vid_vsync();
 				tte_write("#{es}");
 				
