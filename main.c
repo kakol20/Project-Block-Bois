@@ -872,7 +872,7 @@ void initStage6(){
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
-/*void initStage7(){
+/*svoid initStage7(){
 	int i;
 	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
 		boxes[i].worldX = -64;
@@ -1405,20 +1405,8 @@ int main() {
 				switch (menuState) {
 					case 0: // Main Menu
 						if (key_hit(KEY_START)) {
-							if (menuSelection == 0) {
-								menuState = 1;
-								
-							}
+							menuState = 1;
 						}
-
-						if (key_hit(KEY_DOWN)) {
-							menuSelection = 1;
-						}
-
-						if (key_hit(KEY_UP)) {
-							menuSelection = 0;
-						}
-
 						
 						tte_write("#{es}");//clear the screen
 						tte_write("#{P:56,68}");
