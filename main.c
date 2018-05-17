@@ -77,6 +77,7 @@ void addBackground(const unsigned short *wallTiles, const unsigned short *wallMa
 void move(int changeX, int changeY);
 bool merge(int boxToMerge);
 bool isOdd(int n);
+bool correctBox(Box box, Box dropbox);
 int collision(int x, int y, bool mergeBoxes);
 
 // VARTIABLES
@@ -104,6 +105,11 @@ int xDistance;
 int yDistance;
 int nextBuffer; // to keep count 
 int currBox;
+
+int pScore = 0;
+int numStep = 0;
+int hScore = 0;
+int currentState = 0;
 
 unsigned short world_grid[32][32];
 
@@ -171,6 +177,14 @@ bool merge(int boxToMerge) {
 	}
 	
 	return false; // return if they have been merged
+}
+
+bool correctBox(Box box, Box dropbox) {
+	if ((box.worldX == dropbox.worldX) && (box.worldY == dropbox.worldY) && (box.pb == dropbox.pb) && (box.value == dropbox.value)) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 void move(int changeX, int changeY) { // put in parameters how much the position of the player should change - example: moving up move(0, -1)
@@ -943,21 +957,34 @@ void update() {
 	
 	int changeX = 0;
 	int changeY = 0;
+
+	if(key_hit(KEY_SELECT))
+	{
+	
+		currentState = gameState;
+	
+		gameState = 10;
+		
+	}
 	
 	if (key_hit(KEY_UP)) {
 		changeY = -1;// parameters are how much should the player position change
+		numStep++;
 	}
 	
 	if (key_hit(KEY_RIGHT)) {
 		changeX = 1;
+		numStep++;
 	}
 	
 	if (key_hit(KEY_DOWN)) {
 		changeY = 1;
+		numStep++;
 	}
 	
 	if (key_hit(KEY_LEFT)) {
 		changeX = -1;
+		numStep++;
 	}
 	
 	move(changeX, changeY);
@@ -1011,6 +1038,261 @@ void update() {
 				
 				break;
 		}
+	}
+
+	// OPENING GATES
+	switch (gameState) {
+		case 1:
+		
+			// checking if the correct box has been placed on the dropbox
+			if (correctBox(boxes[1], dropboxes[1])) {
+				gates[2].worldX = 16;
+				gates[2].worldY = 4;
+				
+				gates[3].worldX = 16;
+				gates[3].worldY = 7;
+			} else {
+				gates[2].worldX = 16;
+				gates[2].worldY = 5;
+				
+				gates[3].worldX = 16;
+				gates[3].worldY = 6;
+			}
+			
+			if (correctBox(boxes[0], dropboxes[0])) {
+				gates[0].worldX = 14;
+				gates[0].worldY = 4;
+				
+			gates[1].worldX = 14;
+				gates[1].worldY = 7;
+			} else {
+				gates[0].worldX = 14;
+				gates[0].worldY = 5;
+				
+				gates[1].worldX = 14;
+				gates[1].worldY = 6;
+			}
+		
+			break;
+			
+		case 2: 
+			if (correctBox(boxes[4], dropboxes[0])) {
+				gates[0].worldX = 13;
+				gates[0].worldY = 11;
+				
+				gates[1].worldX = 16;
+				gates[1].worldY = 11;
+				
+				gates[2].worldX = 13;
+				gates[2].worldY = 12;
+				
+				gates[3].worldX = 16;
+				gates[3].worldY = 12;
+			} else {
+				gates[0].worldX = 14;
+				gates[0].worldY = 11;
+				
+				gates[1].worldX = 15;
+				gates[1].worldY = 11;
+				
+				gates[2].worldX = 14;
+				gates[2].worldY = 12;
+				
+				gates[3].worldX = 15;
+				gates[3].worldY = 12;
+			}
+			
+			break;
+			
+		case 3:
+			if (correctBox(boxes[0], dropboxes[0]) || correctBox(boxes[1], dropboxes[0])) { // all possible boxes must be checked
+				// player can push box0 into box1 - box1 gets deleted and box0 becomes the new box
+				// same thing happens for pushing box1 into box0
+			
+				gates[0].worldX = 17;
+				gates[0].worldY = 3;
+				
+				gates[1].worldX = 19;
+				gates[1].worldY = 5;
+			} else {
+				gates[0].worldX = 17;
+				gates[0].worldY = 4;
+				
+				gates[1].worldX = 18;
+				gates[1].worldY = 5;
+			}
+			
+			if (correctBox(boxes[3], dropboxes[1]) || correctBox(boxes[2], dropboxes[1])) {
+				gates[5].worldX = 11;
+				gates[5].worldY = 9;
+				
+				gates[2].worldX = 12;
+				gates[2].worldY = 13;
+			} else {
+				gates[5].worldX = 10;
+				gates[5].worldY = 9;
+				
+				gates[2].worldX = 11;
+			gates[2].worldY = 13;
+			}
+			
+			if (correctBox(boxes[5], dropboxes[2]) || correctBox(boxes[7], dropboxes[2]) || correctBox(boxes[4], dropboxes[2])) {
+				gates[3].worldX = 10 ;
+				gates[3].worldY = 13;
+			} else {
+				gates[3].worldX = 9;
+			gates[3].worldY = 13;
+			}
+			
+			if (correctBox(boxes[7], dropboxes[3]) || correctBox(boxes[4], dropboxes[3]) || correctBox(boxes[6], dropboxes[3])) {
+				gates[4].worldX = 7;
+				gates[4].worldY = 11;
+			} else {
+				gates[4].worldX = 6;
+				gates[4].worldY = 11;
+			}
+			
+			break;
+			
+		case 4:
+			if (correctBox(boxes[0], dropboxes[0]) || correctBox(boxes[1], dropboxes[0])) {
+				gates[0].worldX = 17;
+				gates[0].worldY = 3;
+			} else {
+				gates[0].worldX = 17;
+				gates[0].worldY = 4;
+			}
+			
+			if (correctBox(boxes[4], dropboxes[1]) || correctBox(boxes[5], dropboxes[1])) {
+				gates[1].worldX = 23;
+				gates[1].worldY = 11;
+			} else {
+				gates[1].worldX = 24;
+				gates[1].worldY = 11;
+			}
+			
+			if (correctBox(boxes[6], dropboxes[2]) || correctBox(boxes[7], dropboxes[2])) {
+				gates[2].worldX = 23;
+				gates[2].worldY = 13;
+				
+				gates[3].worldX = 21;
+				gates[3].worldY = 13;
+			} else {
+			gates[2].worldX = 24;
+				gates[2].worldY = 13;
+				
+				gates[3].worldX = 20;
+				gates[3].worldY = 13;
+			}
+			
+			break;
+		
+		case 5:
+			
+			break;
+		
+		case 6:
+			if (correctBox(boxes[0], dropboxes[0]) || correctBox(boxes[1], dropboxes[0])) {
+				gates[0].worldX = 7;
+				gates[0].worldY = 3;
+				
+				gates[1].worldX = 7;
+				gates[1].worldY = 6;
+			} else {
+				gates[0].worldX = 7;
+				gates[0].worldY = 4;
+				
+				gates[1].worldX = 7;
+				gates[1].worldY = 5;
+			}
+				if (correctBox(boxes[3], dropboxes[1]) || correctBox(boxes[4], dropboxes[1])) {
+				gates[2].worldX = 13;
+				gates[2].worldY = 3;
+				
+				gates[3].worldX = 13;
+				gates[3].worldY = 6;
+			} else {
+				gates[2].worldX = 13;
+				gates[2].worldY = 4;
+				
+				gates[3].worldX = 13;
+				gates[3].worldY = 5;
+			}
+				if (correctBox(boxes[5], dropboxes[2]) || correctBox(boxes[6], dropboxes[2])) {
+				gates[4].worldX = 19;
+				gates[4].worldY = 3;
+				
+				gates[5].worldX = 19;
+				gates[5].worldY = 6;
+			} else {
+				gates[4].worldX = 19;
+				gates[4].worldY = 4;
+				
+				gates[5].worldX = 19;
+				gates[5].worldY = 5;
+			}
+			break;
+	
+		case 7:
+			if (correctBox(boxes[0], dropboxes[0]) || correctBox(boxes[1], dropboxes[0])) {
+				gates[0].worldX = 9;
+				gates[0].worldY = 3;
+				
+			} else {
+				gates[0].worldX = 10;
+				gates[0].worldY = 3;
+
+			}
+				if (correctBox(boxes[2], dropboxes[1]) || correctBox(boxes[3], dropboxes[1])) {
+				gates[3].worldX = 8;
+				gates[3].worldY = 10;
+				
+			} else {
+				gates[3].worldX = 9;
+				gates[3].worldY = 10;
+
+			}
+			if (correctBox(boxes[4], dropboxes[2]) || correctBox(boxes[5], dropboxes[2])) {
+				gates[5].worldX = 16;
+				gates[5].worldY = 5;
+				
+				gates[6].worldX = 16;
+				gates[6].worldY = 9;
+				
+			} else {
+				gates[5].worldX = 16;
+				gates[5].worldY = 6;
+				
+				gates[6].worldX = 16;
+				gates[6].worldY = 8;
+
+			}
+			if (correctBox(boxes[8], dropboxes[3]) || correctBox(boxes[9], dropboxes[3])) {
+				gates[7].worldX = 17;
+				gates[7].worldY = 20;
+				
+				gates[8].worldX = 15;
+				gates[8].worldY = 16;
+				
+			} else {
+				gates[7].worldX = 17;
+				gates[7].worldY = 19;
+				
+				gates[8].worldX = 15;
+				gates[8].worldY = 17;
+
+			}
+			if (correctBox(boxes[11], dropboxes[4]) || correctBox(boxes[12], dropboxes[4])) {
+				gates[9].worldX = 10;
+				gates[9].worldY = 19;
+				
+			} else {
+				gates[9].worldX = 11;
+				gates[9].worldY = 19;
+
+			}
+			break;
+		
 	}
 }
 
@@ -1103,7 +1385,8 @@ int main() {
 	gameState = 0;
 	
 	init();
-	char coordinates[50];
+	char Score[20];
+	char coordinates[20];
 	menuSelection = 0;
 	
 	int menuState= 0;
@@ -1350,6 +1633,10 @@ int main() {
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
+
+				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
+				tte_write("#{P:8,40}");
+				tte_write(Score);
 				
 				break;
 				
@@ -1367,6 +1654,10 @@ int main() {
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
+
+				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
+				tte_write("#{P:8,40}");
+				tte_write(Score);
 				
 				break;
 			case 4: // stage 3 game state
@@ -1399,6 +1690,10 @@ int main() {
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
+
+				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
+				tte_write("#{P:8,40}");
+				tte_write(Score);
 				
 				break;
 			case 6: // stage 5 game state
@@ -1449,6 +1744,10 @@ int main() {
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
+
+				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
+				tte_write("#{P:8,40}");
+				tte_write(Score);
 				
 				break;
 			case 9: // stage 8 game state
@@ -1465,6 +1764,10 @@ int main() {
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
+
+				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
+				tte_write("#{P:8,40}");
+				tte_write(Score);
 				
 				break;
 		}
