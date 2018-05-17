@@ -105,10 +105,11 @@ int xDistance;
 int yDistance;
 int nextBuffer; // to keep count 
 int currBox;
+int menuState = 0;
 
 int pScore = 0;
 int numStep = 0;
-int hScore = 0;
+int hScore = 99999;
 int currentState = 0;
 
 unsigned short world_grid[32][32];
@@ -854,8 +855,10 @@ void initStage6(){
 	player.x = 3;
 	player.y = 3;
 	
-	end.worldX = 16;
-	end.worldY = 16;
+	/*end.worldX = 16;
+	end.worldY = 16;*/
+	end.worldX = 0;
+	end.worldY = 0;
 	
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
@@ -872,7 +875,7 @@ void initStage6(){
 	
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
 }
-/*svoid initStage7(){
+/*void initStage7(){
 	int i;
 	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
 		boxes[i].worldX = -64;
@@ -1024,8 +1027,15 @@ void update() {
 				
 				break;
 			case 7: //level 6
-				gameState = 6;
-				initStage7();
+				if (hScore > numStep) {
+					hScore = numStep;
+				}
+				
+				gameState = 0;
+				menuState = 0;
+				numStep = 0;
+				
+				// END OF GAME
 				
 				break;
 			/*case 9: //level 9
@@ -1387,9 +1397,8 @@ int main() {
 	init();
 	char Score[20];
 	char coordinates[20];
+	char highScore[20];
 	menuSelection = 0;
-	
-	int menuState= 0;
 
 	while(1) {
 	
@@ -1413,8 +1422,12 @@ int main() {
 						tte_write("#{cx:0x0000}Project Block Boi");
 						tte_write("#{P:56,84}");
 						tte_write("#{cx:0x0000}->Level Select<-");
+
 						tte_write("#{P:56,100}");
-						tte_write("#{cx:0x0000}Highscore: 00000");
+						sprintf(highScore, "#{cx:0x0000}Highscore: %d", hScore);
+						
+						tte_write(highScore);
+						
 					
 						break;
 						
@@ -1576,37 +1589,6 @@ int main() {
 						
 						break;
 				}
-				
-				/*int i;
-				for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
-					boxes[i].screenX= -64;
-					boxes[i].screenY = -64;
-					
-					obj_set_pos(boxes[i].sprite, boxes[i].screenX, boxes[i].screenY);
-					obj_set_attr(boxes[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(boxes[i].pb) | boxes[i].tid | ATTR2_PRIO(1));
-				}
-				
-				for (i = 0; i < NUMBER_DBOXES; i++) {
-					dropboxes[i].screenX = -64;
-					dropboxes[i].screenY = -64;
-					
-					obj_set_pos(dropboxes[i].sprite, dropboxes[i].screenX, dropboxes[i].screenY);
-					obj_set_attr(dropboxes[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(dropboxes[i].pb) | dropboxes[i].tid | ATTR2_PRIO(1));
-				}
-				
-				for (i = 0; i < NUMBER_GATES; i++) {
-					gates[i].screenX = -64;
-					gates[i].screenY = -64;
-					
-					obj_set_pos(gates[i].sprite, gates[i].screenX, gates[i].screenY);
-					obj_set_attr(gates[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(gates[i].pb) | gates[i].tid | ATTR2_PRIO(1));
-				}
-				
-				obj_set_pos(player.sprite, -64, -64);
-				obj_set_attr(player.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(player.pb) | player.tid | ATTR2_PRIO(1));
-				
-				obj_set_pos(end.sprite, -64, -64);
-				obj_set_attr(end.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(end.pb) | end.tid | ATTR2_PRIO(1));*/
 				
 				break;
 				
