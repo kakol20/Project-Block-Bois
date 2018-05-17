@@ -1395,7 +1395,7 @@ int main() {
 	
 		switch(gameState) {
 			case 0:
-				REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_OBJ | DCNT_OBJ_1D;
+				REG_DISPCNT = DCNT_MODE0 | DCNT_BG0;
 				
 				tte_init_se_default(0, BG_CBB(0)|BG_SBB(31));
 
@@ -1599,7 +1599,38 @@ int main() {
 						
 						break;
 				}
-
+				
+				int i;
+				for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+					boxes[i].screenX= -64;
+					boxes[i].screenY = -64;
+					
+					obj_set_pos(boxes[i].sprite, boxes[i].screenX, boxes[i].screenY);
+					obj_set_attr(boxes[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(boxes[i].pb) | boxes[i].tid | ATTR2_PRIO(1));
+				}
+				
+				for (i = 0; i < NUMBER_DBOXES; i++) {
+					dropboxes[i].screenX = -64;
+					dropboxes[i].screenY = -64;
+					
+					obj_set_pos(dropboxes[i].sprite, dropboxes[i].screenX, dropboxes[i].screenY);
+					obj_set_attr(dropboxes[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(dropboxes[i].pb) | dropboxes[i].tid | ATTR2_PRIO(1));
+				}
+				
+				for (i = 0; i < NUMBER_GATES; i++) {
+					gates[i].screenX = -64;
+					gates[i].screenY = -64;
+					
+					obj_set_pos(gates[i].sprite, gates[i].screenX, gates[i].screenY);
+					obj_set_attr(gates[i].sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(gates[i].pb) | gates[i].tid | ATTR2_PRIO(1));
+				}
+				
+				obj_set_pos(player.sprite, -64, -64);
+				obj_set_attr(player.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(player.pb) | player.tid | ATTR2_PRIO(1));
+				
+				obj_set_pos(end.sprite, -64, -64);
+				obj_set_attr(end.sprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(end.pb) | end.tid | ATTR2_PRIO(1));
+				
 				break;
 				
 			case 1: // tutorial game state
@@ -1785,6 +1816,65 @@ int main() {
 				tte_write("#{P:8,40}");
 				tte_write(Score);
 				
+				break;
+				
+				case 10:
+				vid_vsync();
+				tte_write("#{es}");
+				
+				key_poll(); // checks for key inputs
+				
+				draw();
+				
+					tte_write("#{P:104,56}");//56: 72
+					tte_write("#{cx:0x0000}Pause");
+					
+					tte_write("#{P:64,72}");//104: 48
+					tte_write("#{cx:0x0000}Enter to Resume");
+					
+					tte_write("#{P:48,120}");//152: 48
+					tte_write("#{cx:0x0000}Press V: Main menu");
+					
+					//Have to set the key for "Back to main menu".
+					//and set the proper position.
+			
+					if(key_hit(KEY_START))
+					{
+						gameState = currentState;
+					}
+					if(key_hit(KEY_L))
+					{
+						gameState = 0;
+						menuState = 0;
+						
+							int i;
+							for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+								boxes[i].worldX = -64;
+								boxes[i].worldY = -64;
+							}
+							
+							for (i = 0; i < NUMBER_DBOXES; i++) {
+								dropboxes[i].worldX = -64;
+								dropboxes[i].worldY = -64;
+							}
+							
+							for (i = 0; i < NUMBER_GATES; i++) {
+								gates[i].worldX = -64;
+								gates[i].worldY = -64;
+							}
+							
+							player.x = 6;
+							player.y = 5;
+							
+							end.worldX = 3;
+							end.worldY = 13;
+							
+							backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+							backgroundY = -72 + (8 * player.y);
+					}
+					
+					
+					
 				break;
 		}
 	}
