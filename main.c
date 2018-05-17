@@ -1532,7 +1532,7 @@ void update() {
 				gates[3].worldY = 13;
 			}
 			
-			if (correctBox(boxes[6], dropboxes[2]) || correctBox(boxes[7], dropboxes[2])) {
+			if (correctBox(boxes[5], dropboxes[3]) || correctBox(boxes[6], dropboxes[2])) {
 				
 				gates[4].worldX = 5;
 				gates[4].worldY = 11;
