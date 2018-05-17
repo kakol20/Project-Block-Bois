@@ -1617,6 +1617,10 @@ int main() {
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
 				
+				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
+				tte_write("#{P:8,40}");
+				tte_write(Score);
+				
 				break;
 				
 			case 2: // stage 1 game state
@@ -1675,6 +1679,10 @@ int main() {
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
 				
+				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
+				tte_write("#{P:8,40}");
+				tte_write(Score);
+				
 				break;
 			case 5: // stage 4 game state
 				vid_vsync();
@@ -1712,6 +1720,10 @@ int main() {
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
 				
+				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
+				tte_write("#{P:8,40}");
+				tte_write(Score);
+				
 				break;
 			case 7: // stage 6 game state
 				vid_vsync();
@@ -1728,6 +1740,10 @@ int main() {
 				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
 				tte_write("#{P:8, 24}");
 				tte_write(coordinates);
+				
+				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
+				tte_write("#{P:8,40}");
+				tte_write(Score);
 				
 				break;
 			case 8: // stage 7 game state
