@@ -743,8 +743,8 @@ void initStage3() {
 	gates[2].worldX = 20;
 	gates[2].worldY = 13;
 	
-	end.worldX = 23;
-	end.worldY = 20;
+	end.worldX = 17;
+	end.worldY = 17;
 	
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
@@ -1372,6 +1372,7 @@ void update() {
 				gameState = 0;
 				menuState = 0;
 				numStep = 0;
+				attractModeInit();
 				
 				// END OF GAME
 				
