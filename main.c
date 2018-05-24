@@ -1841,7 +1841,7 @@ int main() {
 	while(1) {
 	
 		switch(gameState) {
-			case 0:
+			case 0: 
 				REG_DISPCNT = DCNT_MODE0 | DCNT_BG0;
 				
 				tte_init_se_default(0, BG_CBB(0)|BG_SBB(31));
@@ -1865,11 +1865,10 @@ int main() {
 						sprintf(highScore, "#{cx:0x0000}Highscore: %d", hScore);
 						
 						tte_write(highScore);
-						
-					
+
 						break;
 						
-					case 1: 
+					case 1: // LEVEL SELECTION
 						tte_write("#{es}");
 						
 						if (levelSelection != 2) {
@@ -1954,30 +1953,6 @@ int main() {
 							tte_write("#{cx:0x0000}Lvl6");
 						}
 						
-						/*if (levelSelection == 31) {
-							tte_write("#{P: 56, 96}");
-							tte_write("#{cx:0x0000}>Lvl7<");
-						} else {
-							tte_write("#{P: 64, 96}");
-							tte_write("#{cx:0x0000}Lvl7");
-						}
-						
-						if (levelSelection == 32) {
-							tte_write("#{P: 96, 96}");
-							tte_write("#{cx:0x0000}>Lvl8<");
-						} else {
-							tte_write("#{P: 104, 96}");
-							tte_write("#{cx:0x0000}Lvl8");
-						}
-						
-						if (levelSelection == 33) {
-							tte_write("#{P: 136s, 96}");
-							tte_write("#{cx:0x0000}>Lvl9<");
-						} else {
-							tte_write("#{P: 144, 96}");
-							tte_write("#{cx:0x0000}Lvl9");
-						}*/
-						
 						if (key_hit(KEY_START)) {
 							if (levelSelection == 2) {
 								gameState = 1;
@@ -2014,15 +1989,6 @@ int main() {
 								initStage6();
 							}
 							
-							/*if (levelSelection == 31) {
-								gameState = 8;
-								initStage7();
-							}
-							
-							if (levelSelection == 32) {
-								gameState = 9;
-								initStage9();
-							}*/
 						}
 						
 						break;
@@ -2030,7 +1996,7 @@ int main() {
 				
 				break;
 				
-			case 1: // tutorial game state
+			case 1: // TUTORIAL
 				vid_vsync();
 				tte_write("#{es}");//clear the screens
 				
@@ -2051,7 +2017,7 @@ int main() {
 				
 				break;
 				
-			case 2: // stage 1 game state
+			case 2: // LEVEL 1
 				vid_vsync();
 				tte_write("#{es}");
 				
@@ -2072,7 +2038,7 @@ int main() {
 				
 				break;
 				
-			case 3: // stage 2 game state
+			case 3: // LEVEL 2
 				vid_vsync();
 				tte_write("#{es}");
 				
@@ -2092,7 +2058,7 @@ int main() {
 				tte_write(Score);
 				
 				break;
-			case 4: // stage 3 game state
+			case 4: // LEVEL 3
 				vid_vsync();
 				tte_write("#{es}");
 				
@@ -2112,7 +2078,7 @@ int main() {
 				tte_write(Score);
 				
 				break;
-			case 5: // stage 4 game state
+			case 5: // LEVEL 4
 				vid_vsync();
 				tte_write("#{es}");
 				
@@ -2132,7 +2098,7 @@ int main() {
 				tte_write(Score);
 				
 				break;
-			case 6: // stage 5 game state
+			case 6: // LEVEL 5
 				vid_vsync();
 				tte_write("#{es}");
 				
@@ -2153,7 +2119,7 @@ int main() {
 				tte_write(Score);
 				
 				break;
-			case 7: // stage 6 game state
+			case 7: // LEVEL 6
 				vid_vsync();
 				tte_write("#{es}");
 				
@@ -2174,48 +2140,8 @@ int main() {
 				tte_write(Score);
 				
 				break;
-			/*case 8: // stage 7 game state
-				vid_vsync();
-				tte_write("#{es}");
 				
-				// input();
-				update();
-				draw();
-				
-				tte_write("#{P:8,8}");
-				tte_write("#{cx:0x0000}Stage 7");
-				
-				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
-				tte_write("#{P:8, 24}");
-				tte_write(coordinates);
-
-				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
-				tte_write(Score);
-				
-				break;
-			case 9: // stage 8 game state
-				vid_vsync();
-				tte_write("#{es}");
-				
-				// input();
-				update();
-				draw();
-				
-				tte_write("#{P:8,8}");
-				tte_write("#{cx:0x0000}Stage 8");
-				
-				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
-				tte_write("#{P:8, 24}");
-				tte_write(coordinates);
-
-				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
-				tte_write(Score);
-				
-				break;*/
-				
-			case 10:
+			case 10: // PAUSE MENU
 				vid_vsync();
 				tte_write("#{es}");
 				
