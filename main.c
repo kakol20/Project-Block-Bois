@@ -75,6 +75,8 @@ void initStage9();
 void createGrid(const unsigned short *map);
 void addBackground(const unsigned short *wallTiles, const unsigned short *wallMap, const unsigned short *floorTiles, const unsigned short *floorMap);
 void move(int changeX, int changeY);
+void attractModeInit();
+void attractModeUdate(int step);
 bool merge(int boxToMerge);
 bool isOdd(int n);
 bool correctBox(Box box, Box dropbox);
@@ -388,6 +390,200 @@ void init() {
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_OBJ | DCNT_OBJ_1D;
 
 	oam_init(obj_buffer, 128);
+}
+
+void attractModeInit() {
+	// AN ARRAY OF COORDINATES IN ORDER OF MOVEMENT
+	list[0].x = 4;
+	list[0].y = 5;
+	
+	list[1].x = 5;
+	list[1].y = 5;
+	
+	list[2].x = 6;
+	list[2].y = 5;
+	
+	list[3].x = 7;
+	list[3].y = 5;
+	
+	list[4].x = 7; // PUSH BOX UP
+	list[4].y = 4;
+	
+	list[5].x = 6;
+	list[5].y = 4;
+	
+	list[6].x = 6;
+	list[6].y = 3;
+	
+	list[7].x = 7; // PUSH BOX RIGHT
+	list[7].y = 3;
+	
+	list[8].x = 8; // PUSH BOX RIGHT
+	list[8].y = 3;
+	
+	list[9].x = 9; // PUSH BOX RIGHT
+	list[9].y = 3;
+	
+	list[10].x = 10; // PUSH BOX RIGHT
+	list[10].y = 3;
+	
+	list[11].x = 11; // PUSH BOX RIGHT
+	list[11].y = 3;
+	
+	list[12].x = 12; // PLACE BOX ON DROPBOX - OPENS FIRST GATES
+	list[12].y = 3;
+	
+	list[13].x = 11;
+	list[13].y = 3;
+	
+	list[14].x = 10;
+	list[14].y = 3;
+	
+	list[15].x = 9;
+	list[15].y = 3;
+	
+	list[16].x = 8;
+	list[16].y = 3;
+	
+	list[17].x = 7;
+	list[17].y = 3;
+	
+	list[18].x = 7;
+	list[18].y = 4;
+	
+	list[19].x = 7;
+	list[19].y = 5;
+	
+	list[20].x = 7;
+	list[20].y = 6;
+	
+	list[21].x = 7; // PUSH BOX DOWN
+	list[21].y = 7;
+	
+	list[22].x = 6;
+	list[22].y = 7;
+	
+	list[23].x = 6;
+	list[23].y = 8;
+	
+	list[24].x = 7; // PUSH BOX RIGHT
+	list[24].y = 8;
+	
+	list[25].x = 8; // PUSH BOX RIGHT
+	list[25].y = 8;
+	
+	list[26].x = 9; // PUSH BOX RIGHT
+	list[26].y = 8;
+	
+	list[27].x = 10; // PUSH BOX RIGHT
+	list[27].y = 8;
+	
+	list[28].x = 11; // PUSH BOX RIGHT
+	list[28].y = 8;
+	
+	list[29].x = 12; // PLACE BOX ON DROPBOX - OPENS SECOND GATES
+	list[29].y = 8;
+	
+	list[30].x = 11;
+	list[30].y = 8;
+	
+	list[31].x = 11;
+	list[31].y = 7;
+	
+	list[32].x = 11;
+	list[32].y = 6;
+	
+	list[33].x = 12;
+	list[33].y = 6;
+	
+	list[34].x = 13;
+	list[34].y = 6;
+	
+	list[35].x = 14;
+	list[35].y = 6;
+	
+	list[36].x = 15;
+	list[36].y = 6;
+	
+	list[37].x = 16;
+	list[37].y = 6;
+	
+	list[38].x = 17;
+	list[38].y = 6;
+	
+	list[38].x = 18; // END
+	list[38].y = 6;
+	
+	// ADDING SPRITES AND BACKGROUND
+	player.x = list[0].x;
+	player.x = list[0].y;
+	
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	}
+	
+	boxes[0].pb = 1;
+	boxes[0].value = 0;
+	boxes[0].worldX = 7;
+	boxes[0].worldY = 4;
+	
+	boxes[1].pb = 5;
+	boxes[1].value = 0;
+	boxes[1].worldX = 7;
+	boxes[1].worldY = 7;
+	
+	dropboxes[0].pb = 1;
+	dropboxes[0].value = 0;
+	dropboxes[0].worldX = 13;
+	dropboxes[0].worldY = 3;
+	
+	dropboxes[1].pb = 5;
+	dropboxes[1].value = 0;
+	dropboxes[1].worldX = 13;
+	dropboxes[1].worldY = 8;
+	
+	gates[0].worldX = 14;
+	gates[0].worldY = 5;
+	
+	gates[1].worldX = 14;
+	gates[1].worldY = 6;
+	
+	gates[2].worldX = 16;
+	gates[2].worldY = 6;
+	
+	gates[3].worldX = 16;
+	gates[3].worldY = 5;
+	
+	end.worldX = 18;
+	end.worldY = 6;
+
+	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+	backgroundY = -72 + (8 * player.y);
+	
+	// BACKGROUND - adding background
+
+	tte_init_se_default(0, BG_CBB(0) | BG_SBB(31));
+	
+	addBackground(StageTutPnPWALLSTiles, StageTutPnPWALLSMap, StageTutPnPTiles, StageTutPnPMap);
+	
+	// WORLD GRID
+
+	createGrid(StageTutPnPWALLSMap);	
+}
+
+void attractModeUdate(int step) {
+	
 }
 
 void initTutorial() { // replace any existing map with the this level
@@ -1836,13 +2032,15 @@ int main() {
 	char Score[20];
 	char coordinates[20];
 	char highScore[20];
-	menuSelection = 0;
+	
+	menuSelection = 0
+	
+	attractModeInit();
 
 	while(1) {
 	
 		switch(gameState) {
 			case 0: 
-				REG_DISPCNT = DCNT_MODE0 | DCNT_BG0;
 				
 				tte_init_se_default(0, BG_CBB(0)|BG_SBB(31));
 
@@ -1851,6 +2049,9 @@ int main() {
 				
 				switch (menuState) {
 					case 0: // Main Menu
+					
+						REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+
 						if (key_hit(KEY_START)) {
 							menuState = 1;
 						}
@@ -1869,6 +2070,8 @@ int main() {
 						break;
 						
 					case 1: // LEVEL SELECTION
+						REG_DISPCNT = DCNT_MODE0 | DCNT_BG0;
+					
 						tte_write("#{es}");
 						
 						if (levelSelection != 2) {

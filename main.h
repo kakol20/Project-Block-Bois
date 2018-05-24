@@ -37,4 +37,9 @@ typedef struct Sprite {
 	u32 tid;
 } Sprite;
 
+typedef struct coordinates {
+	int x;
+	int y;
+} list[128];
+
 #endif // MAIN_H
