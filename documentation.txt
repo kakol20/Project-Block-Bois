@@ -1,0 +1,6 @@
+Technical documentation
+- What each function does - diagram - https://msdn.microsoft.com/en-us/library/kw1ee768.aspx
+    - Parameters
+        - Describe parameters
+    - Return value if any
+    - Any requirements?

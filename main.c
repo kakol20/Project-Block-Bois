@@ -705,7 +705,7 @@ void initStage3() {
 	boxes[2].worldY = 11;
 	
 	boxes[3].pb = 3;
-	boxes[3].value = 3;
+	boxes[3].value = 2;
 	boxes[3].worldX = 16;
 	boxes[3].worldY = 12;
 	
@@ -740,8 +740,6 @@ void initStage3() {
 	
 	end.worldX = 23;
 	end.worldY = 20;
-	
-	
 	
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
@@ -1032,8 +1030,8 @@ void initStage5() {
 	boxes[13].pb = 1;
 	boxes[13].value = 0;
 	
-	end.worldX = 16;
-	end.worldY = 16;
+	end.worldX = 11;
+	end.worldY = 21;
 	
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
@@ -1194,8 +1192,6 @@ void initStage6(){
 	
 	end.worldX = 11;
 	end.worldY = 21;
-	end.worldX = 16;
-	end.worldY = 16;
 	
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
@@ -1389,7 +1385,7 @@ void update() {
 
 	// OPENING GATES
 	switch (gameState) {
-		case 1:
+		case 1: // TUTORIAL
 		
 			// checking if the correct box has been placed on the dropbox
 			if (correctBox(boxes[1], dropboxes[1])) {
@@ -1422,7 +1418,7 @@ void update() {
 		
 			break;
 			
-		case 2: 
+		case 2: // LEVEL 1
 			if (correctBox(boxes[4], dropboxes[0])) {
 				gates[0].worldX = 13;
 				gates[0].worldY = 11;
@@ -1451,7 +1447,7 @@ void update() {
 			
 			break;
 			
-		case 3:
+		case 3: // LEVEL 2
 			if (correctBox(boxes[0], dropboxes[0]) || correctBox(boxes[1], dropboxes[0])) { // all possible boxes must be checked
 				// player can push box0 into box1 - box1 gets deleted and box0 becomes the new box
 				// same thing happens for pushing box1 into box0
@@ -1491,7 +1487,7 @@ void update() {
 				gates[3].worldY = 13;
 			}
 			
-			if (correctBox(boxes[7], dropboxes[3]) || correctBox(boxes[4], dropboxes[3]) || correctBox(boxes[6], dropboxes[3])) {
+			if (correctBox(boxes[7], dropboxes[3]) || correctBox(boxes[5], dropboxes[3]) || correctBox(boxes[6], dropboxes[3])) {
 				gates[4].worldX = 7;
 				gates[4].worldY = 11;
 			} else {
@@ -1501,7 +1497,7 @@ void update() {
 			
 			break;
 			
-		case 4:
+		case 4: // LEVEL 3
 			if (correctBox(boxes[0], dropboxes[0]) || correctBox(boxes[1], dropboxes[0])) {
 				gates[0].worldX = 17;
 				gates[0].worldY = 3;
@@ -1510,7 +1506,7 @@ void update() {
 				gates[0].worldY = 4;
 			}
 			
-			if (correctBox(boxes[4], dropboxes[1]) || correctBox(boxes[5], dropboxes[1])) {
+			if (correctBox(boxes[2], dropboxes[1]) || correctBox(boxes[3], dropboxes[1])) {
 				gates[1].worldX = 23;
 				gates[1].worldY = 11;
 			} else {
@@ -1518,7 +1514,7 @@ void update() {
 				gates[1].worldY = 11;
 			}
 			
-			if (correctBox(boxes[6], dropboxes[2]) || correctBox(boxes[7], dropboxes[2])) {
+			if (correctBox(boxes[5], dropboxes[2]) || correctBox(boxes[4], dropboxes[2])) {
 				gates[2].worldX = 23;
 				gates[2].worldY = 13;
 				
@@ -1532,7 +1528,7 @@ void update() {
 				gates[3].worldY = 13;
 			}
 			
-			if (correctBox(boxes[5], dropboxes[3]) || correctBox(boxes[6], dropboxes[2])) {
+			/*if (correctBox(boxes[5], dropboxes[3]) || correctBox(boxes[6], dropboxes[3])) {
 				
 				gates[4].worldX = 5;
 				gates[4].worldY = 11;
@@ -1542,11 +1538,11 @@ void update() {
 				gates[4].worldX = 6;
 				gates[4].worldY = 11;
 				
-			}
+			}*/
 			
 			break;
 		
-		case 5:
+		case 5: // LEVEL 4
 			if (correctBox(boxes[0], dropboxes[0]) || correctBox(boxes[1], dropboxes[0])) {
 				gates[0].worldX = 16;
 				gates[0].worldY = 4;
@@ -1643,7 +1639,7 @@ void update() {
 			
 			break;
 		
-		case 6:
+		case 6: // LEVEL 5
 			if (correctBox(boxes[0], dropboxes[0]) || correctBox(boxes[1], dropboxes[0])) {
 				gates[0].worldX = 7;
 				gates[0].worldY = 3;
@@ -1685,7 +1681,7 @@ void update() {
 			}
 			break;
 	
-		case 7:
+		case 7: // LEVEL 6
 			if (correctBox(boxes[0], dropboxes[0]) || correctBox(boxes[1], dropboxes[0])) {
 				gates[0].worldX = 9;
 				gates[0].worldY = 3;
