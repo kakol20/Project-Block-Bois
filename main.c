@@ -117,6 +117,13 @@ int numStep = 0;
 int hScore = 99999;
 int currentState = 0;
 
+bool lvl1Played = false;
+bool lvl2Played = false;
+bool lvl3Played = false;
+bool lvl4Played = false;
+bool lvl5Played = false;
+bool lvl6Played = false;
+
 unsigned short world_grid[32][32];
 
 bool isOdd(int n) {
@@ -1338,30 +1345,42 @@ void update() {
 				gameState = 2;
 				initStage1();
 				
+				lvl1Played = true;
+				
 				break;
 			case 2: // level 1
 				gameState = 3;
 				initStage2();
+				
+				lvl2Played = true;
 				
 				break;
 			case 3: // level 2
 				gameState = 4;
 				initStage3();
 				
+				lvl3Played = true;
+				
 				break;
 			case 4: //level 3
 				gameState = 5;
 				initStage4();
+				
+				lvl4Played = true;
 				
 				break;
 			case 5: //level 4
 				gameState = 6;
 				initStage5();
 				
+				lvl5Played = true;
+				
 				break;
 			case 6: //level 5
 				gameState = 7;
 				initStage6();
+				
+				lvl6Played = true;
 				
 				break;
 			case 7: //level 6
@@ -2028,7 +2047,9 @@ void attractModeInit() {
 	
 	// WORLD GRID
 
-	createGrid(StageTutPnPWALLSMap);	
+	createGrid(StageTutPnPWALLSMap);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;	
 }
 
 void attractModeUdate(int step) {
@@ -2214,50 +2235,110 @@ int main() {
 						
 						if (levelSelection == 11) {
 							tte_write("#{P: 56, 72}");
-							tte_write("#{cx:0x0000}>Lvl1<");
+							
+							if (lvl1Played) {
+								tte_write("#{cx:0x0000}>Lvl1<");
+							} else {
+								tte_write("#{cx:0x8000}>Lvl1<");
+							}
 						} else {
 							tte_write("#{P: 64, 72}");
-							tte_write("#{cx:0x0000}Lvl1");
+							
+							if (lvl1Played) {
+								tte_write("#{cx:0x0000}Lvl1");
+							} else {
+								tte_write("#{cx:0x8000}Lvl1");
+							}
 						}
 						
 						if (levelSelection == 12) {
 							tte_write("#{P: 96, 72}");
-							tte_write("#{cx:0x0000}>Lvl2<");
+							
+							if (lvl2Played) {
+								tte_write("#{cx:0x0000}>Lvl2<");
+							} else {
+								tte_write("#{cx:0x8000}>Lvl2<");
+							}
 						} else {
 							tte_write("#{P: 104, 72}");
-							tte_write("#{cx:0x0000}Lvl2");
+							
+							if (lvl2Played) {
+								tte_write("#{cx:0x0000}Lvl2");
+							} else {
+								tte_write("#{cx:0x8000}Lvl2");
+							}
 						}
 						
 						if (levelSelection == 13) {
 							tte_write("#{P: 136, 72}");
-							tte_write("#{cx:0x0000}>Lvl3<");
+							
+							if (lvl3Played) {
+								tte_write("#{cx:0x0000}>Lvl3<");
+							} else {
+								tte_write("#{cx:0x8000}>Lvl3<");
+							}
 						} else {
 							tte_write("#{P: 144, 72}");
-							tte_write("#{cx:0x0000}Lvl3");
+							
+							if (lvl3Played) {
+								tte_write("#{cx:0x0000}Lvl3");
+							} else {
+								tte_write("#{cx:0x8000}Lvl3");
+							}
 						}
 						
 						if (levelSelection == 21) {
 							tte_write("#{P: 56, 88}");
-							tte_write("#{cx:0x0000}>Lvl4<");
+							
+							if (lvl4Played) {
+								tte_write("#{cx:0x0000}>Lvl4<");
+							} else {
+								tte_write("#{cx:0x8000}>Lvl4<");
+							}
 						} else {
 							tte_write("#{P: 64, 88}");
-							tte_write("#{cx:0x0000}Lvl4");
+							
+							if (lvl4Played) {
+								tte_write("#{cx:0x0000}Lvl4");
+							} else {
+								tte_write("#{cx:0x8000}Lvl4");
+							}
 						}
 						
 						if (levelSelection == 22) {
 							tte_write("#{P: 96, 88}");
-							tte_write("#{cx:0x0000}>Lvl5<");
+							
+							if (lvl5Played) {
+								tte_write("#{cx:0x0000}>Lvl5<");
+							} else {
+								tte_write("#{cx:0x8000}>Lvl5<");
+							}
 						} else {
 							tte_write("#{P: 104, 88}");
-							tte_write("#{cx:0x0000}Lvl5");
+							
+							if (lvl5Played) {
+								tte_write("#{cx:0x0000}Lvl5");
+							} else {
+								tte_write("#{cx:0x8000}Lvl5");
+							}
 						}
 						
 						if (levelSelection == 23) {
 							tte_write("#{P: 136, 88}");
-							tte_write("#{cx:0x0000}>Lvl6<");
+							
+							if (lvl6Played) {
+								tte_write("#{cx:0x0000}>Lvl6<");
+							} else {
+								tte_write("#{cx:0x8000}>Lvl6<");
+							}
 						} else {
 							tte_write("#{P: 144, 88}");
-							tte_write("#{cx:0x0000}Lvl6");
+							
+							if (lvl6Played) {
+								tte_write("#{cx:0x0000}Lvl6");
+							} else {
+								tte_write("#{cx:0x8000}Lvl6");
+							}
 						}
 						
 						if (key_hit(KEY_START)) {
@@ -2266,32 +2347,32 @@ int main() {
 								initTutorial();
 							}
 							
-							if (levelSelection == 11) {
+							if ((levelSelection == 11) && lvl1Played) {
 								gameState = 2;
 								initStage1();
 							}
 							
-							if (levelSelection == 12) {
+							if ((levelSelection == 12) && lvl2Played) {
 								gameState = 3;
 								initStage2();
 							}
 							
-							if (levelSelection == 13) {
+							if ((levelSelection == 13) && lvl3Played) {
 								gameState = 4;
 								initStage3();
 							}
 							
-							if (levelSelection == 21) {
+							if ((levelSelection == 21) && lvl4Played) {
 								gameState = 5;
 								initStage4();
 							}
 							
-							if (levelSelection == 22) {
+							if ((levelSelection == 22) && lvl5Played) {
 								gameState = 6;
 								initStage5();
 							}
 							
-							if (levelSelection == 23) {
+							if ((levelSelection == 23) && lvl6Played) {
 								gameState = 7;
 								initStage6();
 							}
@@ -2477,30 +2558,32 @@ int main() {
 						gameState = 0;
 						menuState = 0;
 						
-							int i;
-							for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
-								boxes[i].worldX = -64;
-								boxes[i].worldY = -64;
-							}
-							
-							for (i = 0; i < NUMBER_DBOXES; i++) {
-								dropboxes[i].worldX = -64;
-								dropboxes[i].worldY = -64;
-							}
-							
-							for (i = 0; i < NUMBER_GATES; i++) {
-								gates[i].worldX = -64;
-								gates[i].worldY = -64;
-							}
-							
-							player.x = 6;
-							player.y = 5;
-							
-							end.worldX = 3;
-							end.worldY = 13;
-							
-							backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
-							backgroundY = -72 + (8 * player.y);
+						int i;
+						for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+							boxes[i].worldX = -64;
+							boxes[i].worldY = -64;
+						}
+						
+						for (i = 0; i < NUMBER_DBOXES; i++) {
+							dropboxes[i].worldX = -64;
+							dropboxes[i].worldY = -64;
+						}
+						
+						for (i = 0; i < NUMBER_GATES; i++) {
+							gates[i].worldX = -64;
+							gates[i].worldY = -64;
+						}
+						
+						player.x = 6;
+						player.y = 5;
+						
+						end.worldX = 3;
+						end.worldY = 13;
+						
+						backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+						backgroundY = -72 + (8 * player.y);
+						
+						attractModeInit();
 					}
 					
 					
