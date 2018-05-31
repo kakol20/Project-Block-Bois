@@ -1345,30 +1345,42 @@ void update() {
 				gameState = 2;
 				initStage1();
 				
+				lvl1Played = true;
+				
 				break;
 			case 2: // level 1
 				gameState = 3;
 				initStage2();
+				
+				lvl2Played = true;
 				
 				break;
 			case 3: // level 2
 				gameState = 4;
 				initStage3();
 				
+				lvl3Played = true;
+				
 				break;
 			case 4: //level 3
 				gameState = 5;
 				initStage4();
+				
+				lvl4Played = true;
 				
 				break;
 			case 5: //level 4
 				gameState = 6;
 				initStage5();
 				
+				lvl5Played = true;
+				
 				break;
 			case 6: //level 5
 				gameState = 7;
 				initStage6();
+				
+				lvl6Played = true;
 				
 				break;
 			case 7: //level 6
@@ -2035,7 +2047,9 @@ void attractModeInit() {
 	
 	// WORLD GRID
 
-	createGrid(StageTutPnPWALLSMap);	
+	createGrid(StageTutPnPWALLSMap);
+	
+	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;	
 }
 
 void attractModeUdate(int step) {
@@ -2544,30 +2558,32 @@ int main() {
 						gameState = 0;
 						menuState = 0;
 						
-							int i;
-							for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
-								boxes[i].worldX = -64;
-								boxes[i].worldY = -64;
-							}
-							
-							for (i = 0; i < NUMBER_DBOXES; i++) {
-								dropboxes[i].worldX = -64;
-								dropboxes[i].worldY = -64;
-							}
-							
-							for (i = 0; i < NUMBER_GATES; i++) {
-								gates[i].worldX = -64;
-								gates[i].worldY = -64;
-							}
-							
-							player.x = 6;
-							player.y = 5;
-							
-							end.worldX = 3;
-							end.worldY = 13;
-							
-							backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
-							backgroundY = -72 + (8 * player.y);
+						int i;
+						for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+							boxes[i].worldX = -64;
+							boxes[i].worldY = -64;
+						}
+						
+						for (i = 0; i < NUMBER_DBOXES; i++) {
+							dropboxes[i].worldX = -64;
+							dropboxes[i].worldY = -64;
+						}
+						
+						for (i = 0; i < NUMBER_GATES; i++) {
+							gates[i].worldX = -64;
+							gates[i].worldY = -64;
+						}
+						
+						player.x = 6;
+						player.y = 5;
+						
+						end.worldX = 3;
+						end.worldY = 13;
+						
+						backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
+						backgroundY = -72 + (8 * player.y);
+						
+						attractModeInit();
 					}
 					
 					
