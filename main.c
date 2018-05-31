@@ -1761,7 +1761,7 @@ void update() {
 				gates[6].worldY = 8;
 
 			}
-			if (correctBox(boxes[8], dropboxes[3]) || correctBox(boxes[9], dropboxes[3])) {
+			if (correctBox(boxes[8], dropboxes[3]) || correctBox(boxes[7], dropboxes[3]) || correctBox(boxes[9], dropboxes[3])) {
 				gates[7].worldX = 17;
 				gates[7].worldY = 20;
 				
@@ -1998,6 +1998,23 @@ void attractModeInit() {
 	list[38].y = 6;
 	
 	// ADDING SPRITES AND BACKGROUND
+	int i;
+	for (i = 0; i < NUMBER_BOXES; i++) { // reset every box to out of the map
+		boxes[i].worldX = -64;
+		boxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_DBOXES; i++) {
+		dropboxes[i].worldX = -64;
+		dropboxes[i].worldY = -64;
+	}
+	
+	for (i = 0; i < NUMBER_GATES; i++) {
+		gates[i].worldX = -64;
+		gates[i].worldY = -64;
+	}
+
+	
 	player.x = 4;
 	player.y = 5;
 	

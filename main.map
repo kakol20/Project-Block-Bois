@@ -183,12 +183,12 @@ Linker script and memory map
  *(.plt)
                 0x0800021c                . = ALIGN (0x4)
 
-.text           0x08000220     0xca10
+.text           0x08000220     0xca60
  *(EXCLUDE_FILE(*.iwram*) .text)
  .text          0x08000220        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb/gba_crt0.o
  .text          0x08000220        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crti.o
  .text          0x08000220       0xd0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
- .text          0x080002f0     0x2c34 main.o
+ .text          0x080002f0     0x2c84 main.o
                 0x080002f0                isOdd
                 0x08000304                merge
                 0x080003c8                collision
@@ -201,354 +201,354 @@ Linker script and memory map
                 0x08000cd4                initStage1
                 0x08000e50                initStage2
                 0x08001074                initStage3
-                0x08001230                initStage4
-                0x080014fc                initStage5
-                0x080017a4                initStage6
-                0x08001ac4                draw
-                0x08001e80                attractModeInit
-                0x08002110                update
-                0x08002e0c                attractModeUdate
- .text          0x08002f24        0x0 boxes/BoxClear.o
- .text          0x08002f24        0x0 boxes/Box1.o
- .text          0x08002f24        0x0 boxes/Box2.o
- .text          0x08002f24        0x0 boxes/Box3.o
- .text          0x08002f24        0x0 boxes/Box4.o
- .text          0x08002f24        0x0 boxes/Box5.o
- .text          0x08002f24        0x0 boxes/Box6.o
- .text          0x08002f24        0x0 boxes/Box7.o
- .text          0x08002f24        0x0 boxes/Box8.o
- .text          0x08002f24        0x0 boxes/Box9.o
- .text          0x08002f24        0x0 dropbox/DBox1clear.o
- .text          0x08002f24        0x0 dropbox/DBox2clear.o
- .text          0x08002f24        0x0 dropbox/DBox3clear.o
- .text          0x08002f24        0x0 dropbox/DBox4clear.o
- .text          0x08002f24        0x0 dropbox/DBox5clear.o
- .text          0x08002f24        0x0 dropbox/DBox6clear.o
- .text          0x08002f24        0x0 dropbox/DBox7clear.o
- .text          0x08002f24        0x0 dropbox/DBox8clear.o
- .text          0x08002f24        0x0 dropbox/DBox9clear.o
- .text          0x08002f24        0x0 dropbox/DBoxclear.o
- .text          0x08002f24        0x0 levels/StageTutPnP.o
- .text          0x08002f24        0x0 levels/StageTutPnPWALLS.o
- .text          0x08002f24        0x0 levels/Stage1Color.o
- .text          0x08002f24        0x0 levels/Stage1ColorWalls.o
- .text          0x08002f24        0x0 levels/Stage2ColorCombo.o
- .text          0x08002f24        0x0 levels/Stage2ColorComboWALL.o
- .text          0x08002f24        0x0 levels/Stage3NumberCombo.o
- .text          0x08002f24        0x0 levels/Stage3NumberComboWalls.o
- .text          0x08002f24        0x0 levels/Stage4.o
- .text          0x08002f24        0x0 levels/Stage4Walls.o
- .text          0x08002f24        0x0 levels/Stage5new.o
- .text          0x08002f24        0x0 levels/Stage5newWalls.o
- .text          0x08002f24        0x0 levels/Stage6Both.o
- .text          0x08002f24        0x0 levels/Stage6BothWalls.o
- .text          0x08002f24        0x0 levels/Stage7Both.o
- .text          0x08002f24        0x0 levels/Stage7BothWalls.o
- .text          0x08002f24        0x0 levels/Stage9Both.o
- .text          0x08002f24        0x0 levels/Stage9Walls.o
- .text          0x08002f24        0x0 other/EndZone.o
- .text          0x08002f24        0x0 player.o
- .text          0x08002f24        0x0 other/MovingBlocks.o
- .text          0x08002f24       0xac tonclib/lib\libtonc.a(tonc_input.o)
-                0x08002f24                key_poll
-                0x08002f7c                key_wait_till_hit
-                0x08002fa0                key_repeat
-                0x08002fac                key_repeat_mask
-                0x08002fbc                key_repeat_limits
- .text          0x08002fd0       0xcc tonclib/lib\libtonc.a(tonc_oam.o)
-                0x08002fd0                oam_init
-                0x0800301c                obj_copy
-                0x08003048                obj_hide_multi
-                0x08003070                obj_unhide_multi
- .text          0x0800309c      0x15c tonclib/lib\libtonc.a(tte_init_se.o)
-                0x0800309c                tte_init_se
- .text          0x080031f8      0x9e0 tonclib/lib\libtonc.a(tte_main.o)
-                0x080031f8                dummy_drawg
-                0x080031fc                dummy_erase
-                0x08003200                tte_set_context
-                0x0800321c                tte_set_color_attr
-                0x0800322c                tte_set_color_attrs
-                0x08003248                tte_set_color
-                0x0800326c                tte_set_colors
-                0x080032a8                tte_init_base
-                0x0800333c                utf8_decode_char
-                0x080033ec                tte_cmd_skip
-                0x08003400                tte_cmd_next
-                0x0800343c                tte_putc
-                0x0800348c                tte_erase_rect
-                0x080034a8                tte_erase_screen
-                0x080034cc                tte_erase_line
-                0x080034f4                tte_cmd_default
-                0x080039b0                tte_write
-                0x08003a9c                tte_write_ex
-                0x08003acc                tte_get_text_size
-                0x08003bb8                tte_set_margins
- .text          0x08003bd8       0x8c tonclib/lib\libtonc.a(tonc_bios.o)
-                0x08003bd8                SoftReset
-                0x08003bdc                RegisterRamReset
-                0x08003be0                Halt
-                0x08003be4                Stop
-                0x08003be8                IntrWait
-                0x08003bec                VBlankIntrWait
-                0x08003bf0                Div
-                0x08003bf4                DivArm
-                0x08003bf8                Sqrt
-                0x08003bfc                ArcTan
-                0x08003c00                ArcTan2
-                0x08003c04                CpuSet
-                0x08003c08                CpuFastSet
-                0x08003c0c                BiosCheckSum
-                0x08003c10                BgAffineSet
-                0x08003c14                ObjAffineSet
-                0x08003c18                BitUnPack
-                0x08003c1c                LZ77UnCompWram
-                0x08003c20                LZ77UnCompVram
-                0x08003c24                HuffUnComp
-                0x08003c28                RLUnCompWram
-                0x08003c2c                RLUnCompVram
-                0x08003c30                Diff8bitUnFilterWram
-                0x08003c34                Diff8bitUnFilterVram
-                0x08003c38                Diff16bitUnFilter
-                0x08003c3c                SoundBias
-                0x08003c40                SoundDriverInit
-                0x08003c44                SoundDriverMode
-                0x08003c48                SoundDriverMain
-                0x08003c4c                SoundDriverVSync
-                0x08003c50                SoundChannelClear
-                0x08003c54                MidiKey2Freq
-                0x08003c58                MultiBoot
-                0x08003c5c                SoundDriverVSyncOff
-                0x08003c60                SoundDriverVSyncOn
- .text          0x08003c64       0x54 tonclib/lib\libtonc.a(tonc_bios_ex.o)
-                0x08003c64                VBlankIntrDelay
-                0x08003c74                DivSafe
-                0x08003c88                Mod
-                0x08003c90                DivAbs
-                0x08003c98                DivArmMod
-                0x08003ca0                DivArmAbs
-                0x08003ca8                CpuFastFill
- .text          0x08003cb8       0x44 tonclib/lib\libtonc.a(tonc_memcpy.o)
-                0x08003cb8                memcpy16
- .text          0x08003cfc        0x0 tonclib/lib\libtonc.a(sys8.o)
- .text          0x08003cfc      0x138 tonclib/lib\libtonc.a(tonc_surface.o)
-                0x08003cfc                srf_init
-                0x08003db4                srf_pal_copy
-                0x08003dd4                srf_get_ptr
- .text          0x08003e34      0x174 tonclib/lib\libtonc.a(se_drawg.o)
-                0x08003e34                se_erase
-                0x08003e64                se_drawg_w8h8
-                0x08003e90                se_drawg_w8h16
-                0x08003ecc                se_drawg
-                0x08003f3c                se_drawg_s
- .text          0x08003fa8      0x4d8 tonclib/lib\libtonc.a(tonc_sbmp16.o)
-                0x08003fa8                sbmp16_get_pixel
-                0x08003fb8                sbmp16_plot
-                0x08003fcc                sbmp16_vline
-                0x08004004                sbmp16_line
-                0x080040e0                sbmp16_hline
-                0x0800410c                sbmp16_frame
-                0x08004198                sbmp16_rect
-                0x080041f8                sbmp16_blit
-                0x08004334                sbmp16_floodfill_internal
-                0x08004458                sbmp16_floodfill
- .text          0x08004480       0x3c tonclib/lib\libtonc.a(tonc_memset.o)
-                0x08004480                memset16
- .text          0x080044bc      0x150 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_divsi3.o)
-                0x080044bc                __divsi3
-                0x080044bc                __aeabi_idiv
-                0x080045ec                __aeabi_idivmod
- .text          0x0800460c        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_dvmd_tls.o)
-                0x0800460c                __aeabi_idiv0
-                0x0800460c                __aeabi_ldiv0
- .text          0x08004610       0x10 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-ctype_.o)
-                0x08004610                __set_ctype
- .text          0x08004620       0x54 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-init.o)
-                0x08004620                __libc_init_array
- .text          0x08004674       0x90 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memcpy-stub.o)
-                0x08004674                memcpy
- .text          0x08004704       0x98 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memset.o)
-                0x08004704                memset
- .text          0x0800479c       0x84 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-sprintf.o)
-                0x0800479c                _sprintf_r
-                0x080047dc                sprintf
- .text          0x08004820      0x190 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strtol.o)
-                0x08004820                _strtol_r
-                0x08004990                strtol
- .text          0x080049b0     0x1728 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfprintf.o)
-                0x080049b0                _svfprintf_r
- .text          0x080060d8       0xe8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wcrtomb.o)
-                0x080060d8                _wcrtomb_r
-                0x08006140                wcrtomb
- .text          0x080061c0       0x40 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wcsrtombs.o)
-                0x080061c0                _wcsrtombs_r
-                0x080061d8                wcsrtombs
- .text          0x08006200      0x2a4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wctomb_r.o)
-                0x08006200                __utf8_wctomb
-                0x080062b4                _wctomb_r
-                0x080062ec                __ascii_wctomb
-                0x0800630c                __sjis_wctomb
-                0x08006388                __eucjp_wctomb
-                0x08006424                __jis_wctomb
- *fill*         0x080064a4        0x4 ff
- .text          0x080064a8     0x10a0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-dtoa.o)
-                0x08006600                _dtoa_r
- .text          0x08007548      0x238 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-freer.o)
-                0x08007548                _malloc_trim_r
-                0x080075ec                _free_r
- .text          0x08007780        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-impure.o)
- .text          0x08007780      0x950 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-locale.o)
-                0x08007e74                _setlocale_r
-                0x08008070                __locale_charset
-                0x08008078                __locale_mb_cur_max
-                0x08008084                __locale_msgcharset
-                0x08008090                __locale_cjk_lang
-                0x0800809c                _localeconv_r
-                0x080080a8                setlocale
-                0x080080c4                localeconv
- .text          0x080080d0      0x51c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mallocr.o)
-                0x080080d0                _malloc_r
- .text          0x080085ec      0x584 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mbtowc_r.o)
-                0x080085ec                __utf8_mbtowc
-                0x0800884c                _mbtowc_r
-                0x08008888                __ascii_mbtowc
-                0x080088b8                __sjis_mbtowc
-                0x08008978                __eucjp_mbtowc
-                0x08008a40                __jis_mbtowc
- .text          0x08008b70       0x98 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memchr-stub.o)
-                0x08008b70                memchr
- .text          0x08008c08        0x8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mlock.o)
-                0x08008c08                __malloc_lock
-                0x08008c0c                __malloc_unlock
- .text          0x08008c10      0x978 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mprec.o)
-                0x08008c10                _Balloc
-                0x08008c64                _Bfree
-                0x08008c7c                __multadd
-                0x08008d28                __s2b
-                0x08008dc4                __hi0bits
-                0x08008dfc                __lo0bits
-                0x08008e5c                __i2b
-                0x08008e74                __multiply
-                0x08008fd8                __pow5mult
-                0x08009088                __lshift
-                0x08009158                __mcmp
-                0x08009194                __mdiff
-                0x08009284                __ulp
-                0x080092cc                __b2d
-                0x08009370                __d2b
-                0x08009428                __ratio
-                0x080094a4                _mprec_log10
-                0x080094e4                __copybits
-                0x0800952c                __any_on
- .text          0x08009588       0x5c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-s_fpclassify.o)
-                0x08009588                __fpclassifyd
- .text          0x080095e4       0x50 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcasecmp.o)
-                0x080095e4                strcasecmp
- .text          0x08009634       0x50 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcat.o)
-                0x08009634                strcat
- .text          0x08009684       0xd4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strchr.o)
-                0x08009684                strchr
- .text          0x08009758       0x14 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcmp.o)
-                0x08009758                strcmp
- .text          0x0800976c       0x10 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcpy.o)
-                0x0800976c                strcpy
- .text          0x0800977c       0x48 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strlcpy.o)
-                0x0800977c                strlcpy
- .text          0x080097c4       0x10 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strlen.o)
-                0x080097c4                strlen
- .text          0x080097d4       0x60 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strncasecmp.o)
-                0x080097d4                strncasecmp
- .text          0x08009834       0xbc q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strncmp.o)
-                0x08009834                strncmp
- .text          0x080098f0       0x60 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strncpy.o)
-                0x080098f0                strncpy
- .text          0x08009950      0xeb4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfiprintf.o)
-                0x08009950                __ssprint_r
-                0x08009a80                _svfiprintf_r
- .text          0x0800a804      0x150 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wcsnrtombs.o)
-                0x0800a804                _wcsnrtombs_r
-                0x0800a924                wcsnrtombs
- .text          0x0800a954       0x64 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-callocr.o)
-                0x0800a954                _calloc_r
- .text          0x0800a9b8       0xa8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-getenv_r.o)
-                0x0800a9b8                _findenv_r
-                0x0800aa50                _getenv_r
- .text          0x0800aa60       0xb0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memmove.o)
-                0x0800aa60                memmove
- .text          0x0800ab10      0x3e8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-reallocr.o)
-                0x0800ab10                _realloc_r
- .text          0x0800aef8        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-environ.o)
- .text          0x0800aef8        0x8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-envlock.o)
-                0x0800aef8                __env_lock
-                0x0800aefc                __env_unlock
- .text          0x0800af00       0x54 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libsysbase.a(sbrk.o)
-                0x0800af00                _sbrk_r
- .text          0x0800af54        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libsysbase.a(malloc_vars.o)
- .text          0x0800af54      0x11c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_udivsi3.o)
-                0x0800af54                __aeabi_uidiv
-                0x0800af54                __udivsi3
-                0x0800b050                __aeabi_uidivmod
- .text          0x0800b070      0x41c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_addsubdf3.o)
-                0x0800b070                __aeabi_drsub
-                0x0800b078                __aeabi_dsub
-                0x0800b078                __subdf3
-                0x0800b07c                __aeabi_dadd
-                0x0800b07c                __adddf3
-                0x0800b38c                __floatunsidf
-                0x0800b38c                __aeabi_ui2d
-                0x0800b3b0                __floatsidf
-                0x0800b3b0                __aeabi_i2d
-                0x0800b3d8                __aeabi_f2d
-                0x0800b3d8                __extendsfdf2
-                0x0800b418                __floatundidf
-                0x0800b418                __aeabi_ul2d
-                0x0800b42c                __floatdidf
-                0x0800b42c                __aeabi_l2d
- .text          0x0800b48c      0x49c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_muldivdf3.o)
-                0x0800b48c                __aeabi_dmul
-                0x0800b48c                __muldf3
-                0x0800b71c                __divdf3
-                0x0800b71c                __aeabi_ddiv
- .text          0x0800b928      0x144 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_cmpdf2.o)
-                0x0800b928                __gtdf2
-                0x0800b928                __gedf2
-                0x0800b930                __ltdf2
-                0x0800b930                __ledf2
-                0x0800b938                __nedf2
-                0x0800b938                __eqdf2
-                0x0800b938                __cmpdf2
-                0x0800b9c0                __aeabi_cdrcmple
-                0x0800b9dc                __aeabi_cdcmpeq
-                0x0800b9dc                __aeabi_cdcmple
-                0x0800b9f4                __aeabi_dcmpeq
-                0x0800ba0c                __aeabi_dcmplt
-                0x0800ba24                __aeabi_dcmple
-                0x0800ba3c                __aeabi_dcmpge
-                0x0800ba54                __aeabi_dcmpgt
- .text          0x0800ba6c       0x5c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_fixdfsi.o)
-                0x0800ba6c                __aeabi_d2iz
-                0x0800ba6c                __fixdfsi
- .text          0x0800bac8       0x3c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_aeabi_uldivmod.o)
-                0x0800bac8                __aeabi_uldivmod
- .text          0x0800bb04       0x7c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(bpabi.o)
-                0x0800bb04                __gnu_ldivmod_helper
-                0x0800bb44                __gnu_uldivmod_helper
- .text          0x0800bb80       0x4c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_muldi3.o)
-                0x0800bb80                __muldi3
-                0x0800bb80                __aeabi_lmul
- .text          0x0800bbcc      0x3d4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_divdi3.o)
-                0x0800bbcc                __divdi3
- .text          0x0800bfa0      0x3a0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_udivdi3.o)
-                0x0800bfa0                __udivdi3
- .text          0x0800c340       0x48 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_clzsi2.o)
-                0x0800c340                __clzsi2
- .text          0x0800c388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
- .text          0x0800c388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtn.o
+                0x08001234                initStage4
+                0x08001500                initStage5
+                0x080017a8                initStage6
+                0x08001ac8                draw
+                0x08001e84                attractModeInit
+                0x0800212c                update
+                0x08002e5c                attractModeUdate
+ .text          0x08002f74        0x0 boxes/BoxClear.o
+ .text          0x08002f74        0x0 boxes/Box1.o
+ .text          0x08002f74        0x0 boxes/Box2.o
+ .text          0x08002f74        0x0 boxes/Box3.o
+ .text          0x08002f74        0x0 boxes/Box4.o
+ .text          0x08002f74        0x0 boxes/Box5.o
+ .text          0x08002f74        0x0 boxes/Box6.o
+ .text          0x08002f74        0x0 boxes/Box7.o
+ .text          0x08002f74        0x0 boxes/Box8.o
+ .text          0x08002f74        0x0 boxes/Box9.o
+ .text          0x08002f74        0x0 dropbox/DBox1clear.o
+ .text          0x08002f74        0x0 dropbox/DBox2clear.o
+ .text          0x08002f74        0x0 dropbox/DBox3clear.o
+ .text          0x08002f74        0x0 dropbox/DBox4clear.o
+ .text          0x08002f74        0x0 dropbox/DBox5clear.o
+ .text          0x08002f74        0x0 dropbox/DBox6clear.o
+ .text          0x08002f74        0x0 dropbox/DBox7clear.o
+ .text          0x08002f74        0x0 dropbox/DBox8clear.o
+ .text          0x08002f74        0x0 dropbox/DBox9clear.o
+ .text          0x08002f74        0x0 dropbox/DBoxclear.o
+ .text          0x08002f74        0x0 levels/StageTutPnP.o
+ .text          0x08002f74        0x0 levels/StageTutPnPWALLS.o
+ .text          0x08002f74        0x0 levels/Stage1Color.o
+ .text          0x08002f74        0x0 levels/Stage1ColorWalls.o
+ .text          0x08002f74        0x0 levels/Stage2ColorCombo.o
+ .text          0x08002f74        0x0 levels/Stage2ColorComboWALL.o
+ .text          0x08002f74        0x0 levels/Stage3NumberCombo.o
+ .text          0x08002f74        0x0 levels/Stage3NumberComboWalls.o
+ .text          0x08002f74        0x0 levels/Stage4.o
+ .text          0x08002f74        0x0 levels/Stage4Walls.o
+ .text          0x08002f74        0x0 levels/Stage5new.o
+ .text          0x08002f74        0x0 levels/Stage5newWalls.o
+ .text          0x08002f74        0x0 levels/Stage6Both.o
+ .text          0x08002f74        0x0 levels/Stage6BothWalls.o
+ .text          0x08002f74        0x0 levels/Stage7Both.o
+ .text          0x08002f74        0x0 levels/Stage7BothWalls.o
+ .text          0x08002f74        0x0 levels/Stage9Both.o
+ .text          0x08002f74        0x0 levels/Stage9Walls.o
+ .text          0x08002f74        0x0 other/EndZone.o
+ .text          0x08002f74        0x0 player.o
+ .text          0x08002f74        0x0 other/MovingBlocks.o
+ .text          0x08002f74       0xac tonclib/lib\libtonc.a(tonc_input.o)
+                0x08002f74                key_poll
+                0x08002fcc                key_wait_till_hit
+                0x08002ff0                key_repeat
+                0x08002ffc                key_repeat_mask
+                0x0800300c                key_repeat_limits
+ .text          0x08003020       0xcc tonclib/lib\libtonc.a(tonc_oam.o)
+                0x08003020                oam_init
+                0x0800306c                obj_copy
+                0x08003098                obj_hide_multi
+                0x080030c0                obj_unhide_multi
+ .text          0x080030ec      0x15c tonclib/lib\libtonc.a(tte_init_se.o)
+                0x080030ec                tte_init_se
+ .text          0x08003248      0x9e0 tonclib/lib\libtonc.a(tte_main.o)
+                0x08003248                dummy_drawg
+                0x0800324c                dummy_erase
+                0x08003250                tte_set_context
+                0x0800326c                tte_set_color_attr
+                0x0800327c                tte_set_color_attrs
+                0x08003298                tte_set_color
+                0x080032bc                tte_set_colors
+                0x080032f8                tte_init_base
+                0x0800338c                utf8_decode_char
+                0x0800343c                tte_cmd_skip
+                0x08003450                tte_cmd_next
+                0x0800348c                tte_putc
+                0x080034dc                tte_erase_rect
+                0x080034f8                tte_erase_screen
+                0x0800351c                tte_erase_line
+                0x08003544                tte_cmd_default
+                0x08003a00                tte_write
+                0x08003aec                tte_write_ex
+                0x08003b1c                tte_get_text_size
+                0x08003c08                tte_set_margins
+ .text          0x08003c28       0x8c tonclib/lib\libtonc.a(tonc_bios.o)
+                0x08003c28                SoftReset
+                0x08003c2c                RegisterRamReset
+                0x08003c30                Halt
+                0x08003c34                Stop
+                0x08003c38                IntrWait
+                0x08003c3c                VBlankIntrWait
+                0x08003c40                Div
+                0x08003c44                DivArm
+                0x08003c48                Sqrt
+                0x08003c4c                ArcTan
+                0x08003c50                ArcTan2
+                0x08003c54                CpuSet
+                0x08003c58                CpuFastSet
+                0x08003c5c                BiosCheckSum
+                0x08003c60                BgAffineSet
+                0x08003c64                ObjAffineSet
+                0x08003c68                BitUnPack
+                0x08003c6c                LZ77UnCompWram
+                0x08003c70                LZ77UnCompVram
+                0x08003c74                HuffUnComp
+                0x08003c78                RLUnCompWram
+                0x08003c7c                RLUnCompVram
+                0x08003c80                Diff8bitUnFilterWram
+                0x08003c84                Diff8bitUnFilterVram
+                0x08003c88                Diff16bitUnFilter
+                0x08003c8c                SoundBias
+                0x08003c90                SoundDriverInit
+                0x08003c94                SoundDriverMode
+                0x08003c98                SoundDriverMain
+                0x08003c9c                SoundDriverVSync
+                0x08003ca0                SoundChannelClear
+                0x08003ca4                MidiKey2Freq
+                0x08003ca8                MultiBoot
+                0x08003cac                SoundDriverVSyncOff
+                0x08003cb0                SoundDriverVSyncOn
+ .text          0x08003cb4       0x54 tonclib/lib\libtonc.a(tonc_bios_ex.o)
+                0x08003cb4                VBlankIntrDelay
+                0x08003cc4                DivSafe
+                0x08003cd8                Mod
+                0x08003ce0                DivAbs
+                0x08003ce8                DivArmMod
+                0x08003cf0                DivArmAbs
+                0x08003cf8                CpuFastFill
+ .text          0x08003d08       0x44 tonclib/lib\libtonc.a(tonc_memcpy.o)
+                0x08003d08                memcpy16
+ .text          0x08003d4c        0x0 tonclib/lib\libtonc.a(sys8.o)
+ .text          0x08003d4c      0x138 tonclib/lib\libtonc.a(tonc_surface.o)
+                0x08003d4c                srf_init
+                0x08003e04                srf_pal_copy
+                0x08003e24                srf_get_ptr
+ .text          0x08003e84      0x174 tonclib/lib\libtonc.a(se_drawg.o)
+                0x08003e84                se_erase
+                0x08003eb4                se_drawg_w8h8
+                0x08003ee0                se_drawg_w8h16
+                0x08003f1c                se_drawg
+                0x08003f8c                se_drawg_s
+ .text          0x08003ff8      0x4d8 tonclib/lib\libtonc.a(tonc_sbmp16.o)
+                0x08003ff8                sbmp16_get_pixel
+                0x08004008                sbmp16_plot
+                0x0800401c                sbmp16_vline
+                0x08004054                sbmp16_line
+                0x08004130                sbmp16_hline
+                0x0800415c                sbmp16_frame
+                0x080041e8                sbmp16_rect
+                0x08004248                sbmp16_blit
+                0x08004384                sbmp16_floodfill_internal
+                0x080044a8                sbmp16_floodfill
+ .text          0x080044d0       0x3c tonclib/lib\libtonc.a(tonc_memset.o)
+                0x080044d0                memset16
+ .text          0x0800450c      0x150 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_divsi3.o)
+                0x0800450c                __divsi3
+                0x0800450c                __aeabi_idiv
+                0x0800463c                __aeabi_idivmod
+ .text          0x0800465c        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_dvmd_tls.o)
+                0x0800465c                __aeabi_idiv0
+                0x0800465c                __aeabi_ldiv0
+ .text          0x08004660       0x10 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-ctype_.o)
+                0x08004660                __set_ctype
+ .text          0x08004670       0x54 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-init.o)
+                0x08004670                __libc_init_array
+ .text          0x080046c4       0x90 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memcpy-stub.o)
+                0x080046c4                memcpy
+ .text          0x08004754       0x98 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memset.o)
+                0x08004754                memset
+ .text          0x080047ec       0x84 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-sprintf.o)
+                0x080047ec                _sprintf_r
+                0x0800482c                sprintf
+ .text          0x08004870      0x190 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strtol.o)
+                0x08004870                _strtol_r
+                0x080049e0                strtol
+ .text          0x08004a00     0x1728 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfprintf.o)
+                0x08004a00                _svfprintf_r
+ .text          0x08006128       0xe8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wcrtomb.o)
+                0x08006128                _wcrtomb_r
+                0x08006190                wcrtomb
+ .text          0x08006210       0x40 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wcsrtombs.o)
+                0x08006210                _wcsrtombs_r
+                0x08006228                wcsrtombs
+ .text          0x08006250      0x2a4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wctomb_r.o)
+                0x08006250                __utf8_wctomb
+                0x08006304                _wctomb_r
+                0x0800633c                __ascii_wctomb
+                0x0800635c                __sjis_wctomb
+                0x080063d8                __eucjp_wctomb
+                0x08006474                __jis_wctomb
+ *fill*         0x080064f4        0x4 ff
+ .text          0x080064f8     0x10a0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-dtoa.o)
+                0x08006650                _dtoa_r
+ .text          0x08007598      0x238 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-freer.o)
+                0x08007598                _malloc_trim_r
+                0x0800763c                _free_r
+ .text          0x080077d0        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-impure.o)
+ .text          0x080077d0      0x950 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-locale.o)
+                0x08007ec4                _setlocale_r
+                0x080080c0                __locale_charset
+                0x080080c8                __locale_mb_cur_max
+                0x080080d4                __locale_msgcharset
+                0x080080e0                __locale_cjk_lang
+                0x080080ec                _localeconv_r
+                0x080080f8                setlocale
+                0x08008114                localeconv
+ .text          0x08008120      0x51c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mallocr.o)
+                0x08008120                _malloc_r
+ .text          0x0800863c      0x584 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mbtowc_r.o)
+                0x0800863c                __utf8_mbtowc
+                0x0800889c                _mbtowc_r
+                0x080088d8                __ascii_mbtowc
+                0x08008908                __sjis_mbtowc
+                0x080089c8                __eucjp_mbtowc
+                0x08008a90                __jis_mbtowc
+ .text          0x08008bc0       0x98 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memchr-stub.o)
+                0x08008bc0                memchr
+ .text          0x08008c58        0x8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mlock.o)
+                0x08008c58                __malloc_lock
+                0x08008c5c                __malloc_unlock
+ .text          0x08008c60      0x978 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mprec.o)
+                0x08008c60                _Balloc
+                0x08008cb4                _Bfree
+                0x08008ccc                __multadd
+                0x08008d78                __s2b
+                0x08008e14                __hi0bits
+                0x08008e4c                __lo0bits
+                0x08008eac                __i2b
+                0x08008ec4                __multiply
+                0x08009028                __pow5mult
+                0x080090d8                __lshift
+                0x080091a8                __mcmp
+                0x080091e4                __mdiff
+                0x080092d4                __ulp
+                0x0800931c                __b2d
+                0x080093c0                __d2b
+                0x08009478                __ratio
+                0x080094f4                _mprec_log10
+                0x08009534                __copybits
+                0x0800957c                __any_on
+ .text          0x080095d8       0x5c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-s_fpclassify.o)
+                0x080095d8                __fpclassifyd
+ .text          0x08009634       0x50 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcasecmp.o)
+                0x08009634                strcasecmp
+ .text          0x08009684       0x50 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcat.o)
+                0x08009684                strcat
+ .text          0x080096d4       0xd4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strchr.o)
+                0x080096d4                strchr
+ .text          0x080097a8       0x14 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcmp.o)
+                0x080097a8                strcmp
+ .text          0x080097bc       0x10 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcpy.o)
+                0x080097bc                strcpy
+ .text          0x080097cc       0x48 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strlcpy.o)
+                0x080097cc                strlcpy
+ .text          0x08009814       0x10 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strlen.o)
+                0x08009814                strlen
+ .text          0x08009824       0x60 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strncasecmp.o)
+                0x08009824                strncasecmp
+ .text          0x08009884       0xbc q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strncmp.o)
+                0x08009884                strncmp
+ .text          0x08009940       0x60 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strncpy.o)
+                0x08009940                strncpy
+ .text          0x080099a0      0xeb4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfiprintf.o)
+                0x080099a0                __ssprint_r
+                0x08009ad0                _svfiprintf_r
+ .text          0x0800a854      0x150 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wcsnrtombs.o)
+                0x0800a854                _wcsnrtombs_r
+                0x0800a974                wcsnrtombs
+ .text          0x0800a9a4       0x64 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-callocr.o)
+                0x0800a9a4                _calloc_r
+ .text          0x0800aa08       0xa8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-getenv_r.o)
+                0x0800aa08                _findenv_r
+                0x0800aaa0                _getenv_r
+ .text          0x0800aab0       0xb0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memmove.o)
+                0x0800aab0                memmove
+ .text          0x0800ab60      0x3e8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-reallocr.o)
+                0x0800ab60                _realloc_r
+ .text          0x0800af48        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-environ.o)
+ .text          0x0800af48        0x8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-envlock.o)
+                0x0800af48                __env_lock
+                0x0800af4c                __env_unlock
+ .text          0x0800af50       0x54 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libsysbase.a(sbrk.o)
+                0x0800af50                _sbrk_r
+ .text          0x0800afa4        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libsysbase.a(malloc_vars.o)
+ .text          0x0800afa4      0x11c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_udivsi3.o)
+                0x0800afa4                __aeabi_uidiv
+                0x0800afa4                __udivsi3
+                0x0800b0a0                __aeabi_uidivmod
+ .text          0x0800b0c0      0x41c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_addsubdf3.o)
+                0x0800b0c0                __aeabi_drsub
+                0x0800b0c8                __aeabi_dsub
+                0x0800b0c8                __subdf3
+                0x0800b0cc                __aeabi_dadd
+                0x0800b0cc                __adddf3
+                0x0800b3dc                __floatunsidf
+                0x0800b3dc                __aeabi_ui2d
+                0x0800b400                __floatsidf
+                0x0800b400                __aeabi_i2d
+                0x0800b428                __aeabi_f2d
+                0x0800b428                __extendsfdf2
+                0x0800b468                __floatundidf
+                0x0800b468                __aeabi_ul2d
+                0x0800b47c                __floatdidf
+                0x0800b47c                __aeabi_l2d
+ .text          0x0800b4dc      0x49c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_muldivdf3.o)
+                0x0800b4dc                __aeabi_dmul
+                0x0800b4dc                __muldf3
+                0x0800b76c                __divdf3
+                0x0800b76c                __aeabi_ddiv
+ .text          0x0800b978      0x144 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_cmpdf2.o)
+                0x0800b978                __gtdf2
+                0x0800b978                __gedf2
+                0x0800b980                __ltdf2
+                0x0800b980                __ledf2
+                0x0800b988                __nedf2
+                0x0800b988                __eqdf2
+                0x0800b988                __cmpdf2
+                0x0800ba10                __aeabi_cdrcmple
+                0x0800ba2c                __aeabi_cdcmpeq
+                0x0800ba2c                __aeabi_cdcmple
+                0x0800ba44                __aeabi_dcmpeq
+                0x0800ba5c                __aeabi_dcmplt
+                0x0800ba74                __aeabi_dcmple
+                0x0800ba8c                __aeabi_dcmpge
+                0x0800baa4                __aeabi_dcmpgt
+ .text          0x0800babc       0x5c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_fixdfsi.o)
+                0x0800babc                __aeabi_d2iz
+                0x0800babc                __fixdfsi
+ .text          0x0800bb18       0x3c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_aeabi_uldivmod.o)
+                0x0800bb18                __aeabi_uldivmod
+ .text          0x0800bb54       0x7c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(bpabi.o)
+                0x0800bb54                __gnu_ldivmod_helper
+                0x0800bb94                __gnu_uldivmod_helper
+ .text          0x0800bbd0       0x4c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_muldi3.o)
+                0x0800bbd0                __muldi3
+                0x0800bbd0                __aeabi_lmul
+ .text          0x0800bc1c      0x3d4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_divdi3.o)
+                0x0800bc1c                __divdi3
+ .text          0x0800bff0      0x3a0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_udivdi3.o)
+                0x0800bff0                __udivdi3
+ .text          0x0800c390       0x48 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_clzsi2.o)
+                0x0800c390                __clzsi2
+ .text          0x0800c3d8        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
+ .text          0x0800c3d8        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtn.o
  *(.text .stub .text.* .gnu.linkonce.t.*)
- .text.startup  0x0800c388      0x7ec main.o
-                0x0800c388                main
- *fill*         0x0800cb74        0x4 ff
+ .text.startup  0x0800c3d8      0x7ec main.o
+                0x0800c3d8                main
+ *fill*         0x0800cbc4        0x4 ff
  .text.startup.stub
-                0x0800cb78       0xac linker stubs
+                0x0800cbc8       0xac linker stubs
  *(.text.*personality*)
  *(.gnu.warning)
  *(.glue_7t)
@@ -557,251 +557,251 @@ Linker script and memory map
  .glue_7        0x00000000        0x0 linker stubs
  *(.vfp11_veneer)
  .vfp11_veneer  0x00000000        0x0 linker stubs
-                0x0800cc24                . = ALIGN (0x4)
-                0x0800cc24                __text_end = .
+                0x0800cc74                . = ALIGN (0x4)
+                0x0800cc74                __text_end = .
 
-.v4_bx          0x0800cc30        0x0
+.v4_bx          0x0800cc80        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x0800cc30        0x0
+.iplt           0x0800cc80        0x0
  .iplt          0x00000000        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb/gba_crt0.o
 
-.fini           0x0800cc30        0xc
+.fini           0x0800cc80        0xc
  *(.fini)
- .fini          0x0800cc30        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crti.o
-                0x0800cc30                _fini
- .fini          0x0800cc34        0x8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtn.o
-                0x0800cc3c                . = ALIGN (0x4)
+ .fini          0x0800cc80        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crti.o
+                0x0800cc80                _fini
+ .fini          0x0800cc84        0x8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtn.o
+                0x0800cc8c                . = ALIGN (0x4)
 
-.rodata         0x0800cc40     0xfc4c
+.rodata         0x0800cc90     0xfc4c
  *(.rodata)
- .rodata        0x0800cc40       0x6c main.o
- .rodata        0x0800ccac      0x220 boxes/BoxClear.o
-                0x0800ccac                BoxClearPal
-                0x0800ceac                BoxClearTiles
- .rodata        0x0800cecc      0x220 boxes/Box1.o
-                0x0800cecc                Box1Pal
-                0x0800d0cc                Box1Tiles
- .rodata        0x0800d0ec      0x220 boxes/Box2.o
-                0x0800d0ec                Box2Pal
-                0x0800d2ec                Box2Tiles
- .rodata        0x0800d30c      0x220 boxes/Box3.o
-                0x0800d30c                Box3Pal
-                0x0800d50c                Box3Tiles
- .rodata        0x0800d52c      0x220 boxes/Box4.o
-                0x0800d52c                Box4Pal
-                0x0800d72c                Box4Tiles
- .rodata        0x0800d74c      0x220 boxes/Box5.o
-                0x0800d74c                Box5Pal
-                0x0800d94c                Box5Tiles
- .rodata        0x0800d96c      0x220 boxes/Box6.o
-                0x0800d96c                Box6Pal
-                0x0800db6c                Box6Tiles
- .rodata        0x0800db8c      0x220 boxes/Box7.o
-                0x0800db8c                Box7Pal
-                0x0800dd8c                Box7Tiles
- .rodata        0x0800ddac      0x220 boxes/Box8.o
-                0x0800ddac                Box8Pal
-                0x0800dfac                Box8Tiles
- .rodata        0x0800dfcc      0x220 boxes/Box9.o
-                0x0800dfcc                Box9Pal
-                0x0800e1cc                Box9Tiles
- .rodata        0x0800e1ec      0x220 dropbox/DBox1clear.o
-                0x0800e1ec                DBox1clearPal
-                0x0800e3ec                DBox1clearTiles
- .rodata        0x0800e40c      0x220 dropbox/DBox2clear.o
-                0x0800e40c                DBox2clearPal
-                0x0800e60c                DBox2clearTiles
- .rodata        0x0800e62c      0x220 dropbox/DBox3clear.o
-                0x0800e62c                DBox3clearPal
-                0x0800e82c                DBox3clearTiles
- .rodata        0x0800e84c      0x220 dropbox/DBox4clear.o
-                0x0800e84c                DBox4clearPal
-                0x0800ea4c                DBox4clearTiles
- .rodata        0x0800ea6c      0x220 dropbox/DBox5clear.o
-                0x0800ea6c                DBox5clearPal
-                0x0800ec6c                DBox5clearTiles
- .rodata        0x0800ec8c      0x220 dropbox/DBox6clear.o
-                0x0800ec8c                DBox6clearPal
-                0x0800ee8c                DBox6clearTiles
- .rodata        0x0800eeac      0x220 dropbox/DBox7clear.o
-                0x0800eeac                DBox7clearPal
-                0x0800f0ac                DBox7clearTiles
- .rodata        0x0800f0cc      0x220 dropbox/DBox8clear.o
-                0x0800f0cc                DBox8clearPal
-                0x0800f2cc                DBox8clearTiles
- .rodata        0x0800f2ec      0x220 dropbox/DBox9clear.o
-                0x0800f2ec                DBox9clearPal
-                0x0800f4ec                DBox9clearTiles
- .rodata        0x0800f50c      0x220 dropbox/DBoxclear.o
-                0x0800f50c                DBoxclearPal
-                0x0800f70c                DBoxclearTiles
- .rodata        0x0800f72c      0xa40 levels/StageTutPnP.o
-                0x0800f72c                StageTutPnPPal
-                0x0800f92c                StageTutPnPMap
-                0x0801012c                StageTutPnPTiles
- .rodata        0x0801016c      0xa40 levels/StageTutPnPWALLS.o
-                0x0801016c                StageTutPnPWALLSPal
-                0x0801036c                StageTutPnPWALLSMap
-                0x08010b6c                StageTutPnPWALLSTiles
- .rodata        0x08010bac      0xa40 levels/Stage1Color.o
-                0x08010bac                Stage1ColorPal
-                0x08010dac                Stage1ColorMap
-                0x080115ac                Stage1ColorTiles
- .rodata        0x080115ec      0xa40 levels/Stage1ColorWalls.o
-                0x080115ec                Stage1ColorWallsPal
-                0x080117ec                Stage1ColorWallsMap
-                0x08011fec                Stage1ColorWallsTiles
- .rodata        0x0801202c      0xa40 levels/Stage2ColorCombo.o
-                0x0801202c                Stage2ColorComboPal
-                0x0801222c                Stage2ColorComboMap
-                0x08012a2c                Stage2ColorComboTiles
- .rodata        0x08012a6c      0xa40 levels/Stage2ColorComboWALL.o
-                0x08012a6c                Stage2ColorComboWALLPal
-                0x08012c6c                Stage2ColorComboWALLMap
-                0x0801346c                Stage2ColorComboWALLTiles
- .rodata        0x080134ac      0xa40 levels/Stage3NumberCombo.o
-                0x080134ac                Stage3NumberComboPal
-                0x080136ac                Stage3NumberComboMap
-                0x08013eac                Stage3NumberComboTiles
- .rodata        0x08013eec      0xa40 levels/Stage3NumberComboWalls.o
-                0x08013eec                Stage3NumberComboWallsPal
-                0x080140ec                Stage3NumberComboWallsMap
-                0x080148ec                Stage3NumberComboWallsTiles
- .rodata        0x0801492c      0xa40 levels/Stage4.o
-                0x0801492c                Stage4Pal
-                0x08014b2c                Stage4Map
-                0x0801532c                Stage4Tiles
- .rodata        0x0801536c      0xa40 levels/Stage4Walls.o
-                0x0801536c                Stage4WallsPal
-                0x0801556c                Stage4WallsMap
-                0x08015d6c                Stage4WallsTiles
- .rodata        0x08015dac      0xa40 levels/Stage5new.o
-                0x08015dac                Stage5newPal
-                0x08015fac                Stage5newMap
-                0x080167ac                Stage5newTiles
- .rodata        0x080167ec      0xa40 levels/Stage5newWalls.o
-                0x080167ec                Stage5newWallsPal
-                0x080169ec                Stage5newWallsMap
-                0x080171ec                Stage5newWallsTiles
- .rodata        0x0801722c      0xa40 levels/Stage6Both.o
-                0x0801722c                Stage6BothPal
-                0x0801742c                Stage6BothMap
-                0x08017c2c                Stage6BothTiles
- .rodata        0x08017c6c      0xa40 levels/Stage6BothWalls.o
-                0x08017c6c                Stage6BothWallsPal
-                0x08017e6c                Stage6BothWallsMap
-                0x0801866c                Stage6BothWallsTiles
- .rodata        0x080186ac      0xa40 levels/Stage7Both.o
-                0x080186ac                Stage7BothPal
-                0x080188ac                Stage7BothMap
-                0x080190ac                Stage7BothTiles
- .rodata        0x080190ec      0xa40 levels/Stage7BothWalls.o
-                0x080190ec                Stage7BothWallsPal
-                0x080192ec                Stage7BothWallsMap
-                0x08019aec                Stage7BothWallsTiles
- .rodata        0x08019b2c      0xa40 levels/Stage9Both.o
-                0x08019b2c                Stage9BothPal
-                0x08019d2c                Stage9BothMap
-                0x0801a52c                Stage9BothTiles
- .rodata        0x0801a56c      0xa40 levels/Stage9Walls.o
-                0x0801a56c                Stage9WallsPal
-                0x0801a76c                Stage9WallsMap
-                0x0801af6c                Stage9WallsTiles
- .rodata        0x0801afac      0x220 other/EndZone.o
-                0x0801afac                EndZonePal
-                0x0801b1ac                EndZoneTiles
- .rodata        0x0801b1cc      0x220 player.o
-                0x0801b1cc                playerPal
-                0x0801b3cc                playerTiles
- .rodata        0x0801b3ec      0x220 other/MovingBlocks.o
-                0x0801b3ec                MovingBlocksPal
-                0x0801b5ec                MovingBlocksTiles
- .rodata        0x0801b60c      0x1f0 tonclib/lib\libtonc.a(tte_main.o)
- .rodata        0x0801b7fc      0x318 tonclib/lib\libtonc.a(sys8.o)
-                0x0801b7fc                sys8Font
-                0x0801b814                sys8Glyphs
- .rodata        0x0801bb14       0x1c tonclib/lib\libtonc.a(tonc_surface.o)
- .rodata        0x0801bb30       0x3c tonclib/lib\libtonc.a(tonc_sbmp16.o)
-                0x0801bb30                bmp16_tab
-                0x0801bb58                m3_surface
- .rodata        0x0801bb6c      0x104 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-ctype_.o)
-                0x0801bb6c                _ctype_
- .rodata        0x0801bc70      0x184 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfprintf.o)
- .rodata        0x0801bdf4        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-impure.o)
-                0x0801bdf4                _global_impure_ptr
- .rodata        0x0801bdf8       0xf0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-locale.o)
- .rodata        0x0801bee8       0xa8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mbtowc_r.o)
- .rodata        0x0801bf90      0x128 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mprec.o)
-                0x0801bfa0                __mprec_tens
-                0x0801c068                __mprec_tinytens
-                0x0801c090                __mprec_bigtens
- .rodata        0x0801c0b8      0x184 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfiprintf.o)
+ .rodata        0x0800cc90       0x6c main.o
+ .rodata        0x0800ccfc      0x220 boxes/BoxClear.o
+                0x0800ccfc                BoxClearPal
+                0x0800cefc                BoxClearTiles
+ .rodata        0x0800cf1c      0x220 boxes/Box1.o
+                0x0800cf1c                Box1Pal
+                0x0800d11c                Box1Tiles
+ .rodata        0x0800d13c      0x220 boxes/Box2.o
+                0x0800d13c                Box2Pal
+                0x0800d33c                Box2Tiles
+ .rodata        0x0800d35c      0x220 boxes/Box3.o
+                0x0800d35c                Box3Pal
+                0x0800d55c                Box3Tiles
+ .rodata        0x0800d57c      0x220 boxes/Box4.o
+                0x0800d57c                Box4Pal
+                0x0800d77c                Box4Tiles
+ .rodata        0x0800d79c      0x220 boxes/Box5.o
+                0x0800d79c                Box5Pal
+                0x0800d99c                Box5Tiles
+ .rodata        0x0800d9bc      0x220 boxes/Box6.o
+                0x0800d9bc                Box6Pal
+                0x0800dbbc                Box6Tiles
+ .rodata        0x0800dbdc      0x220 boxes/Box7.o
+                0x0800dbdc                Box7Pal
+                0x0800dddc                Box7Tiles
+ .rodata        0x0800ddfc      0x220 boxes/Box8.o
+                0x0800ddfc                Box8Pal
+                0x0800dffc                Box8Tiles
+ .rodata        0x0800e01c      0x220 boxes/Box9.o
+                0x0800e01c                Box9Pal
+                0x0800e21c                Box9Tiles
+ .rodata        0x0800e23c      0x220 dropbox/DBox1clear.o
+                0x0800e23c                DBox1clearPal
+                0x0800e43c                DBox1clearTiles
+ .rodata        0x0800e45c      0x220 dropbox/DBox2clear.o
+                0x0800e45c                DBox2clearPal
+                0x0800e65c                DBox2clearTiles
+ .rodata        0x0800e67c      0x220 dropbox/DBox3clear.o
+                0x0800e67c                DBox3clearPal
+                0x0800e87c                DBox3clearTiles
+ .rodata        0x0800e89c      0x220 dropbox/DBox4clear.o
+                0x0800e89c                DBox4clearPal
+                0x0800ea9c                DBox4clearTiles
+ .rodata        0x0800eabc      0x220 dropbox/DBox5clear.o
+                0x0800eabc                DBox5clearPal
+                0x0800ecbc                DBox5clearTiles
+ .rodata        0x0800ecdc      0x220 dropbox/DBox6clear.o
+                0x0800ecdc                DBox6clearPal
+                0x0800eedc                DBox6clearTiles
+ .rodata        0x0800eefc      0x220 dropbox/DBox7clear.o
+                0x0800eefc                DBox7clearPal
+                0x0800f0fc                DBox7clearTiles
+ .rodata        0x0800f11c      0x220 dropbox/DBox8clear.o
+                0x0800f11c                DBox8clearPal
+                0x0800f31c                DBox8clearTiles
+ .rodata        0x0800f33c      0x220 dropbox/DBox9clear.o
+                0x0800f33c                DBox9clearPal
+                0x0800f53c                DBox9clearTiles
+ .rodata        0x0800f55c      0x220 dropbox/DBoxclear.o
+                0x0800f55c                DBoxclearPal
+                0x0800f75c                DBoxclearTiles
+ .rodata        0x0800f77c      0xa40 levels/StageTutPnP.o
+                0x0800f77c                StageTutPnPPal
+                0x0800f97c                StageTutPnPMap
+                0x0801017c                StageTutPnPTiles
+ .rodata        0x080101bc      0xa40 levels/StageTutPnPWALLS.o
+                0x080101bc                StageTutPnPWALLSPal
+                0x080103bc                StageTutPnPWALLSMap
+                0x08010bbc                StageTutPnPWALLSTiles
+ .rodata        0x08010bfc      0xa40 levels/Stage1Color.o
+                0x08010bfc                Stage1ColorPal
+                0x08010dfc                Stage1ColorMap
+                0x080115fc                Stage1ColorTiles
+ .rodata        0x0801163c      0xa40 levels/Stage1ColorWalls.o
+                0x0801163c                Stage1ColorWallsPal
+                0x0801183c                Stage1ColorWallsMap
+                0x0801203c                Stage1ColorWallsTiles
+ .rodata        0x0801207c      0xa40 levels/Stage2ColorCombo.o
+                0x0801207c                Stage2ColorComboPal
+                0x0801227c                Stage2ColorComboMap
+                0x08012a7c                Stage2ColorComboTiles
+ .rodata        0x08012abc      0xa40 levels/Stage2ColorComboWALL.o
+                0x08012abc                Stage2ColorComboWALLPal
+                0x08012cbc                Stage2ColorComboWALLMap
+                0x080134bc                Stage2ColorComboWALLTiles
+ .rodata        0x080134fc      0xa40 levels/Stage3NumberCombo.o
+                0x080134fc                Stage3NumberComboPal
+                0x080136fc                Stage3NumberComboMap
+                0x08013efc                Stage3NumberComboTiles
+ .rodata        0x08013f3c      0xa40 levels/Stage3NumberComboWalls.o
+                0x08013f3c                Stage3NumberComboWallsPal
+                0x0801413c                Stage3NumberComboWallsMap
+                0x0801493c                Stage3NumberComboWallsTiles
+ .rodata        0x0801497c      0xa40 levels/Stage4.o
+                0x0801497c                Stage4Pal
+                0x08014b7c                Stage4Map
+                0x0801537c                Stage4Tiles
+ .rodata        0x080153bc      0xa40 levels/Stage4Walls.o
+                0x080153bc                Stage4WallsPal
+                0x080155bc                Stage4WallsMap
+                0x08015dbc                Stage4WallsTiles
+ .rodata        0x08015dfc      0xa40 levels/Stage5new.o
+                0x08015dfc                Stage5newPal
+                0x08015ffc                Stage5newMap
+                0x080167fc                Stage5newTiles
+ .rodata        0x0801683c      0xa40 levels/Stage5newWalls.o
+                0x0801683c                Stage5newWallsPal
+                0x08016a3c                Stage5newWallsMap
+                0x0801723c                Stage5newWallsTiles
+ .rodata        0x0801727c      0xa40 levels/Stage6Both.o
+                0x0801727c                Stage6BothPal
+                0x0801747c                Stage6BothMap
+                0x08017c7c                Stage6BothTiles
+ .rodata        0x08017cbc      0xa40 levels/Stage6BothWalls.o
+                0x08017cbc                Stage6BothWallsPal
+                0x08017ebc                Stage6BothWallsMap
+                0x080186bc                Stage6BothWallsTiles
+ .rodata        0x080186fc      0xa40 levels/Stage7Both.o
+                0x080186fc                Stage7BothPal
+                0x080188fc                Stage7BothMap
+                0x080190fc                Stage7BothTiles
+ .rodata        0x0801913c      0xa40 levels/Stage7BothWalls.o
+                0x0801913c                Stage7BothWallsPal
+                0x0801933c                Stage7BothWallsMap
+                0x08019b3c                Stage7BothWallsTiles
+ .rodata        0x08019b7c      0xa40 levels/Stage9Both.o
+                0x08019b7c                Stage9BothPal
+                0x08019d7c                Stage9BothMap
+                0x0801a57c                Stage9BothTiles
+ .rodata        0x0801a5bc      0xa40 levels/Stage9Walls.o
+                0x0801a5bc                Stage9WallsPal
+                0x0801a7bc                Stage9WallsMap
+                0x0801afbc                Stage9WallsTiles
+ .rodata        0x0801affc      0x220 other/EndZone.o
+                0x0801affc                EndZonePal
+                0x0801b1fc                EndZoneTiles
+ .rodata        0x0801b21c      0x220 player.o
+                0x0801b21c                playerPal
+                0x0801b41c                playerTiles
+ .rodata        0x0801b43c      0x220 other/MovingBlocks.o
+                0x0801b43c                MovingBlocksPal
+                0x0801b63c                MovingBlocksTiles
+ .rodata        0x0801b65c      0x1f0 tonclib/lib\libtonc.a(tte_main.o)
+ .rodata        0x0801b84c      0x318 tonclib/lib\libtonc.a(sys8.o)
+                0x0801b84c                sys8Font
+                0x0801b864                sys8Glyphs
+ .rodata        0x0801bb64       0x1c tonclib/lib\libtonc.a(tonc_surface.o)
+ .rodata        0x0801bb80       0x3c tonclib/lib\libtonc.a(tonc_sbmp16.o)
+                0x0801bb80                bmp16_tab
+                0x0801bba8                m3_surface
+ .rodata        0x0801bbbc      0x104 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-ctype_.o)
+                0x0801bbbc                _ctype_
+ .rodata        0x0801bcc0      0x184 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfprintf.o)
+ .rodata        0x0801be44        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-impure.o)
+                0x0801be44                _global_impure_ptr
+ .rodata        0x0801be48       0xf0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-locale.o)
+ .rodata        0x0801bf38       0xa8 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mbtowc_r.o)
+ .rodata        0x0801bfe0      0x128 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mprec.o)
+                0x0801bff0                __mprec_tens
+                0x0801c0b8                __mprec_tinytens
+                0x0801c0e0                __mprec_bigtens
+ .rodata        0x0801c108      0x184 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfiprintf.o)
  *all.rodata*(*)
  *(.roda)
  *(.rodata.*)
  .rodata.str1.4
-                0x0801c23c      0x4c7 main.o
+                0x0801c28c      0x4c7 main.o
                                 0x4c8 (size before relaxing)
- *fill*         0x0801c703        0x1 ff
+ *fill*         0x0801c753        0x1 ff
  .rodata.str1.4
-                0x0801c704        0x6 tonclib/lib\libtonc.a(tonc_sbmp16.o)
+                0x0801c754        0x6 tonclib/lib\libtonc.a(tonc_sbmp16.o)
                                   0x8 (size before relaxing)
- *fill*         0x0801c70a        0x2 ff
+ *fill*         0x0801c75a        0x2 ff
  .rodata.str1.4
-                0x0801c70c       0x42 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfprintf.o)
+                0x0801c75c       0x42 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfprintf.o)
                                  0x44 (size before relaxing)
- *fill*         0x0801c74e        0x2 ff
+ *fill*         0x0801c79e        0x2 ff
  .rodata.str1.4
-                0x0801c750       0x10 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-dtoa.o)
+                0x0801c7a0       0x10 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-dtoa.o)
                                  0x14 (size before relaxing)
  .rodata.str1.4
-                0x0801c760        0x2 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-impure.o)
+                0x0801c7b0        0x2 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-impure.o)
                                   0x4 (size before relaxing)
- *fill*         0x0801c762        0x2 ff
+ *fill*         0x0801c7b2        0x2 ff
  .rodata.str1.4
-                0x0801c764      0x128 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-locale.o)
+                0x0801c7b4      0x128 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-locale.o)
                                 0x130 (size before relaxing)
  .rodata.str1.4
                 0x00000000       0x30 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfiprintf.o)
  *(.gnu.linkonce.r*)
-                0x0801c88c                . = ALIGN (0x4)
+                0x0801c8dc                . = ALIGN (0x4)
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0801c88c                __exidx_start = .
+                0x0801c8dc                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0801c88c                __exidx_end = .
+                0x0801c8dc                __exidx_end = .
 
-.ctors          0x0801c88c        0x0
+.ctors          0x0801c8dc        0x0
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *(.ctors)
-                0x0801c88c                . = ALIGN (0x4)
+                0x0801c8dc                . = ALIGN (0x4)
 
-.dtors          0x0801c88c        0x0
+.dtors          0x0801c8dc        0x0
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *(.dtors)
-                0x0801c88c                . = ALIGN (0x4)
+                0x0801c8dc                . = ALIGN (0x4)
 
-.eh_frame       0x0801c88c        0x4
+.eh_frame       0x0801c8dc        0x4
  *(.eh_frame)
- .eh_frame      0x0801c88c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
- .eh_frame      0x0801c88c        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
-                0x0801c890                . = ALIGN (0x4)
+ .eh_frame      0x0801c8dc        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
+ .eh_frame      0x0801c8dc        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
+                0x0801c8e0                . = ALIGN (0x4)
 
 .gcc_except_table
-                0x0801c890        0x0
+                0x0801c8e0        0x0
  *(.gcc_except_table)
-                0x0801c890                . = ALIGN (0x4)
-                0x0801c890                __iwram_lma = .
+                0x0801c8e0                . = ALIGN (0x4)
+                0x0801c8e0                __iwram_lma = .
 
-.iwram          0x03000000       0x84 load address 0x0801c890
+.iwram          0x03000000       0x84 load address 0x0801c8e0
                 0x03000000                __iwram_start__ = ABSOLUTE (.)
  *(.iwram)
  .iwram         0x03000000       0x38 tonclib/lib\libtonc.a(tonc_memcpy.o)
@@ -811,9 +811,9 @@ Linker script and memory map
  *iwram.*(.text)
                 0x03000084                . = ALIGN (0x4)
                 0x03000084                __iwram_end__ = ABSOLUTE (.)
-                0x0801c914                __data_lma = (__iwram_lma + SIZEOF (.iwram))
+                0x0801c964                __data_lma = (__iwram_lma + SIZEOF (.iwram))
 
-.rel.dyn        0x03000084        0x0 load address 0x0801c914
+.rel.dyn        0x03000084        0x0 load address 0x0801c964
  .rel.iplt      0x00000000        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb/gba_crt0.o
 
 .bss            0x03000084     0x190c
@@ -836,7 +836,6 @@ Linker script and memory map
                 0x030000b6                lvl3Played
                 0x030000b7                lvl4Played
                 0x030000b8                lvl5Played
-                0x030000b9                lvl6Played
                 0x030000bc                menuState
                 0x030000c0                menuSelection
                 0x030000c4                pScore
@@ -978,256 +977,258 @@ Linker script and memory map
                 0x03001990                . = ALIGN (0x4)
                 0x03001990                __bss_end__ = ABSOLUTE (.)
 
-.data           0x03001990      0x9f4 load address 0x0801c914
+.data           0x03001990      0x9fc load address 0x0801c964
                 0x03001990                __data_start__ = ABSOLUTE (.)
  *(.data)
  .data          0x03001990        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb/gba_crt0.o
  .data          0x03001990        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crti.o
  .data          0x03001990        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
                 0x03001990                __dso_handle
- .data          0x03001994       0x18 main.o
+ .data          0x03001994       0x1c main.o
                 0x03001994                screenWidth
                 0x03001998                screenHeight
-                0x0300199c                hScore
-                0x030019a0                levelSelection
-                0x030019a4                simplePlayer
-                0x030019a8                obj_aff_buffer
- .data          0x030019ac        0x0 boxes/BoxClear.o
- .data          0x030019ac        0x0 boxes/Box1.o
- .data          0x030019ac        0x0 boxes/Box2.o
- .data          0x030019ac        0x0 boxes/Box3.o
- .data          0x030019ac        0x0 boxes/Box4.o
- .data          0x030019ac        0x0 boxes/Box5.o
- .data          0x030019ac        0x0 boxes/Box6.o
- .data          0x030019ac        0x0 boxes/Box7.o
- .data          0x030019ac        0x0 boxes/Box8.o
- .data          0x030019ac        0x0 boxes/Box9.o
- .data          0x030019ac        0x0 dropbox/DBox1clear.o
- .data          0x030019ac        0x0 dropbox/DBox2clear.o
- .data          0x030019ac        0x0 dropbox/DBox3clear.o
- .data          0x030019ac        0x0 dropbox/DBox4clear.o
- .data          0x030019ac        0x0 dropbox/DBox5clear.o
- .data          0x030019ac        0x0 dropbox/DBox6clear.o
- .data          0x030019ac        0x0 dropbox/DBox7clear.o
- .data          0x030019ac        0x0 dropbox/DBox8clear.o
- .data          0x030019ac        0x0 dropbox/DBox9clear.o
- .data          0x030019ac        0x0 dropbox/DBoxclear.o
- .data          0x030019ac        0x0 levels/StageTutPnP.o
- .data          0x030019ac        0x0 levels/StageTutPnPWALLS.o
- .data          0x030019ac        0x0 levels/Stage1Color.o
- .data          0x030019ac        0x0 levels/Stage1ColorWalls.o
- .data          0x030019ac        0x0 levels/Stage2ColorCombo.o
- .data          0x030019ac        0x0 levels/Stage2ColorComboWALL.o
- .data          0x030019ac        0x0 levels/Stage3NumberCombo.o
- .data          0x030019ac        0x0 levels/Stage3NumberComboWalls.o
- .data          0x030019ac        0x0 levels/Stage4.o
- .data          0x030019ac        0x0 levels/Stage4Walls.o
- .data          0x030019ac        0x0 levels/Stage5new.o
- .data          0x030019ac        0x0 levels/Stage5newWalls.o
- .data          0x030019ac        0x0 levels/Stage6Both.o
- .data          0x030019ac        0x0 levels/Stage6BothWalls.o
- .data          0x030019ac        0x0 levels/Stage7Both.o
- .data          0x030019ac        0x0 levels/Stage7BothWalls.o
- .data          0x030019ac        0x0 levels/Stage9Both.o
- .data          0x030019ac        0x0 levels/Stage9Walls.o
- .data          0x030019ac        0x0 other/EndZone.o
- .data          0x030019ac        0x0 player.o
- .data          0x030019ac        0x0 other/MovingBlocks.o
- .data          0x030019ac        0x8 tonclib/lib\libtonc.a(tonc_input.o)
-                0x030019ac                __key_rpt
- .data          0x030019b4        0x0 tonclib/lib\libtonc.a(tonc_oam.o)
- .data          0x030019b4        0x0 tonclib/lib\libtonc.a(tte_init_se.o)
- .data          0x030019b4        0x4 tonclib/lib\libtonc.a(tte_main.o)
-                0x030019b4                gp_tte_context
- .data          0x030019b8        0x0 tonclib/lib\libtonc.a(tonc_bios.o)
- .data          0x030019b8        0x0 tonclib/lib\libtonc.a(tonc_bios_ex.o)
- .data          0x030019b8        0x0 tonclib/lib\libtonc.a(tonc_memcpy.o)
- .data          0x030019b8        0x0 tonclib/lib\libtonc.a(sys8.o)
- .data          0x030019b8        0x0 tonclib/lib\libtonc.a(tonc_surface.o)
- .data          0x030019b8        0x0 tonclib/lib\libtonc.a(se_drawg.o)
- .data          0x030019b8        0x0 tonclib/lib\libtonc.a(tonc_sbmp16.o)
- .data          0x030019b8        0x0 tonclib/lib\libtonc.a(tonc_memset.o)
- .data          0x030019b8        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_divsi3.o)
- .data          0x030019b8        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_dvmd_tls.o)
- .data          0x030019b8        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-ctype_.o)
-                0x030019b8                __ctype_ptr__
- .data          0x030019bc        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-init.o)
- .data          0x030019bc        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memcpy-stub.o)
- .data          0x030019bc        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memset.o)
- .data          0x030019bc        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-sprintf.o)
- .data          0x030019bc        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strtol.o)
- .data          0x030019bc        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfprintf.o)
- .data          0x030019bc        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wcrtomb.o)
- .data          0x030019bc        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wcsrtombs.o)
- .data          0x030019bc        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wctomb_r.o)
-                0x030019bc                __wctomb
- .data          0x030019c0        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-dtoa.o)
- .data          0x030019c0        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-freer.o)
- .data          0x030019c0      0x430 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-impure.o)
-                0x030019c0                _impure_ptr
- .data          0x03001df0      0x17c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-locale.o)
-                0x03001df0                __default_locale
-                0x03001f10                __mb_cur_max
- .data          0x03001f6c      0x410 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mallocr.o)
-                0x03001f6c                __malloc_av_
-                0x03002374                __malloc_sbrk_base
-                0x03002378                __malloc_trim_threshold
- .data          0x0300237c        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mbtowc_r.o)
-                0x0300237c                __mbtowc
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memchr-stub.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mlock.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mprec.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-s_fpclassify.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcasecmp.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcat.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strchr.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcmp.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcpy.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strlcpy.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strlen.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strncasecmp.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strncmp.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strncpy.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfiprintf.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wcsnrtombs.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-callocr.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-getenv_r.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memmove.o)
- .data          0x03002380        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-reallocr.o)
- .data          0x03002380        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-environ.o)
-                0x03002380                environ
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-envlock.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libsysbase.a(sbrk.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libsysbase.a(malloc_vars.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_udivsi3.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_addsubdf3.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_muldivdf3.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_cmpdf2.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_fixdfsi.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_aeabi_uldivmod.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(bpabi.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_muldi3.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_divdi3.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_udivdi3.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_clzsi2.o)
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
- .data          0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtn.o
+                0x0300199c                lvl6Played
+                0x030019a0                hScore
+                0x030019a4                levelSelection
+                0x030019a8                simplePlayer
+                0x030019ac                obj_aff_buffer
+ .data          0x030019b0        0x0 boxes/BoxClear.o
+ .data          0x030019b0        0x0 boxes/Box1.o
+ .data          0x030019b0        0x0 boxes/Box2.o
+ .data          0x030019b0        0x0 boxes/Box3.o
+ .data          0x030019b0        0x0 boxes/Box4.o
+ .data          0x030019b0        0x0 boxes/Box5.o
+ .data          0x030019b0        0x0 boxes/Box6.o
+ .data          0x030019b0        0x0 boxes/Box7.o
+ .data          0x030019b0        0x0 boxes/Box8.o
+ .data          0x030019b0        0x0 boxes/Box9.o
+ .data          0x030019b0        0x0 dropbox/DBox1clear.o
+ .data          0x030019b0        0x0 dropbox/DBox2clear.o
+ .data          0x030019b0        0x0 dropbox/DBox3clear.o
+ .data          0x030019b0        0x0 dropbox/DBox4clear.o
+ .data          0x030019b0        0x0 dropbox/DBox5clear.o
+ .data          0x030019b0        0x0 dropbox/DBox6clear.o
+ .data          0x030019b0        0x0 dropbox/DBox7clear.o
+ .data          0x030019b0        0x0 dropbox/DBox8clear.o
+ .data          0x030019b0        0x0 dropbox/DBox9clear.o
+ .data          0x030019b0        0x0 dropbox/DBoxclear.o
+ .data          0x030019b0        0x0 levels/StageTutPnP.o
+ .data          0x030019b0        0x0 levels/StageTutPnPWALLS.o
+ .data          0x030019b0        0x0 levels/Stage1Color.o
+ .data          0x030019b0        0x0 levels/Stage1ColorWalls.o
+ .data          0x030019b0        0x0 levels/Stage2ColorCombo.o
+ .data          0x030019b0        0x0 levels/Stage2ColorComboWALL.o
+ .data          0x030019b0        0x0 levels/Stage3NumberCombo.o
+ .data          0x030019b0        0x0 levels/Stage3NumberComboWalls.o
+ .data          0x030019b0        0x0 levels/Stage4.o
+ .data          0x030019b0        0x0 levels/Stage4Walls.o
+ .data          0x030019b0        0x0 levels/Stage5new.o
+ .data          0x030019b0        0x0 levels/Stage5newWalls.o
+ .data          0x030019b0        0x0 levels/Stage6Both.o
+ .data          0x030019b0        0x0 levels/Stage6BothWalls.o
+ .data          0x030019b0        0x0 levels/Stage7Both.o
+ .data          0x030019b0        0x0 levels/Stage7BothWalls.o
+ .data          0x030019b0        0x0 levels/Stage9Both.o
+ .data          0x030019b0        0x0 levels/Stage9Walls.o
+ .data          0x030019b0        0x0 other/EndZone.o
+ .data          0x030019b0        0x0 player.o
+ .data          0x030019b0        0x0 other/MovingBlocks.o
+ .data          0x030019b0        0x8 tonclib/lib\libtonc.a(tonc_input.o)
+                0x030019b0                __key_rpt
+ .data          0x030019b8        0x0 tonclib/lib\libtonc.a(tonc_oam.o)
+ .data          0x030019b8        0x0 tonclib/lib\libtonc.a(tte_init_se.o)
+ .data          0x030019b8        0x4 tonclib/lib\libtonc.a(tte_main.o)
+                0x030019b8                gp_tte_context
+ .data          0x030019bc        0x0 tonclib/lib\libtonc.a(tonc_bios.o)
+ .data          0x030019bc        0x0 tonclib/lib\libtonc.a(tonc_bios_ex.o)
+ .data          0x030019bc        0x0 tonclib/lib\libtonc.a(tonc_memcpy.o)
+ .data          0x030019bc        0x0 tonclib/lib\libtonc.a(sys8.o)
+ .data          0x030019bc        0x0 tonclib/lib\libtonc.a(tonc_surface.o)
+ .data          0x030019bc        0x0 tonclib/lib\libtonc.a(se_drawg.o)
+ .data          0x030019bc        0x0 tonclib/lib\libtonc.a(tonc_sbmp16.o)
+ .data          0x030019bc        0x0 tonclib/lib\libtonc.a(tonc_memset.o)
+ .data          0x030019bc        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_divsi3.o)
+ .data          0x030019bc        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_dvmd_tls.o)
+ .data          0x030019bc        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-ctype_.o)
+                0x030019bc                __ctype_ptr__
+ .data          0x030019c0        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-init.o)
+ .data          0x030019c0        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memcpy-stub.o)
+ .data          0x030019c0        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memset.o)
+ .data          0x030019c0        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-sprintf.o)
+ .data          0x030019c0        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strtol.o)
+ .data          0x030019c0        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfprintf.o)
+ .data          0x030019c0        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wcrtomb.o)
+ .data          0x030019c0        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wcsrtombs.o)
+ .data          0x030019c0        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wctomb_r.o)
+                0x030019c0                __wctomb
+ .data          0x030019c4        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-dtoa.o)
+ .data          0x030019c4        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-freer.o)
+ *fill*         0x030019c4        0x4 ff
+ .data          0x030019c8      0x430 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-impure.o)
+                0x030019c8                _impure_ptr
+ .data          0x03001df8      0x17c q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-locale.o)
+                0x03001df8                __default_locale
+                0x03001f18                __mb_cur_max
+ .data          0x03001f74      0x410 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mallocr.o)
+                0x03001f74                __malloc_av_
+                0x0300237c                __malloc_sbrk_base
+                0x03002380                __malloc_trim_threshold
+ .data          0x03002384        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mbtowc_r.o)
+                0x03002384                __mbtowc
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memchr-stub.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mlock.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-mprec.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-s_fpclassify.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcasecmp.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcat.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strchr.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcmp.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strcpy.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strlcpy.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strlen.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strncasecmp.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strncmp.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-strncpy.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-svfiprintf.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-wcsnrtombs.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-callocr.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-getenv_r.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-memmove.o)
+ .data          0x03002388        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-reallocr.o)
+ .data          0x03002388        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-environ.o)
+                0x03002388                environ
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libc.a(lib_a-envlock.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libsysbase.a(sbrk.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb\libsysbase.a(malloc_vars.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_udivsi3.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_addsubdf3.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_muldivdf3.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_cmpdf2.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_arm_fixdfsi.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_aeabi_uldivmod.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(bpabi.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_muldi3.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_divdi3.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_udivdi3.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb\libgcc.a(_clzsi2.o)
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
+ .data          0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtn.o
  *(.data.*)
  *(.gnu.linkonce.d*)
-                0x03002384                . = ALIGN (0x4)
-                0x0801d308                __preinit_lma = (__data_lma + SIZEOF (.data))
+                0x0300238c                . = ALIGN (0x4)
+                0x0801d360                __preinit_lma = (__data_lma + SIZEOF (.data))
 
-.igot.plt       0x03002384        0x0 load address 0x0801d308
+.igot.plt       0x0300238c        0x0 load address 0x0801d360
  .igot.plt      0x00000000        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/../../../../arm-none-eabi/lib/thumb/gba_crt0.o
 
 .tm_clone_table
-                0x03002384        0x0 load address 0x0801d308
+                0x0300238c        0x0 load address 0x0801d360
  .tm_clone_table
-                0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
+                0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
  .tm_clone_table
-                0x03002384        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
+                0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
 
-.preinit_array  0x03002384        0x0 load address 0x0801d308
-                0x03002384                __preinit_array_start = ABSOLUTE (.)
+.preinit_array  0x0300238c        0x0 load address 0x0801d360
+                0x0300238c                __preinit_array_start = ABSOLUTE (.)
  *(.preinit_array)
-                0x03002384                __preinit_array_end = ABSOLUTE (.)
-                0x0801d308                __init_lma = (__preinit_lma + SIZEOF (.preinit_array))
+                0x0300238c                __preinit_array_end = ABSOLUTE (.)
+                0x0801d360                __init_lma = (__preinit_lma + SIZEOF (.preinit_array))
 
-.init_array     0x03002384        0x4 load address 0x0801d308
-                0x03002384                __init_array_start = ABSOLUTE (.)
+.init_array     0x0300238c        0x4 load address 0x0801d360
+                0x0300238c                __init_array_start = ABSOLUTE (.)
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x03002384        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
-                0x03002388                __init_array_end = ABSOLUTE (.)
-                0x0801d30c                __fini_lma = (__init_lma + SIZEOF (.init_array))
+ .init_array    0x0300238c        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
+                0x03002390                __init_array_end = ABSOLUTE (.)
+                0x0801d364                __fini_lma = (__init_lma + SIZEOF (.init_array))
 
-.fini_array     0x03002388        0x4 load address 0x0801d30c
-                0x03002388                __fini_array_start = ABSOLUTE (.)
+.fini_array     0x03002390        0x4 load address 0x0801d364
+                0x03002390                __fini_array_start = ABSOLUTE (.)
  *(SORT(.fini_array.*))
  *(.fini_array)
- .fini_array    0x03002388        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
-                0x0300238c                __fini_array_end = ABSOLUTE (.)
-                0x0801d310                __jcr_lma = (__fini_lma + SIZEOF (.fini_array))
+ .fini_array    0x03002390        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
+                0x03002394                __fini_array_end = ABSOLUTE (.)
+                0x0801d368                __jcr_lma = (__fini_lma + SIZEOF (.fini_array))
 
-.jcr            0x0300238c        0x4 load address 0x0801d310
+.jcr            0x03002394        0x4 load address 0x0801d368
  *(.jcr)
- .jcr           0x0300238c        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
- .jcr           0x0300238c        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
-                0x03002390                __data_end__ = ABSOLUTE (.)
-                0x0801d314                __iwram_overlay_lma = (__jcr_lma + SIZEOF (.jcr))
-                0x03002390                __iwram_overlay_start = .
+ .jcr           0x03002394        0x0 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtbegin.o
+ .jcr           0x03002394        0x4 q:/devkitpro1.5.3/devkitarm/bin/../lib/gcc/arm-none-eabi/4.7.1/thumb/crtend.o
+                0x03002398                __data_end__ = ABSOLUTE (.)
+                0x0801d36c                __iwram_overlay_lma = (__jcr_lma + SIZEOF (.jcr))
+                0x03002398                __iwram_overlay_start = .
 
-.iwram0         0x03002390        0x0 load address 0x0801d314
+.iwram0         0x03002398        0x0 load address 0x0801d36c
  *(.iwram0)
-                0x03002390                . = ALIGN (0x4)
-                0x0801d314                PROVIDE (__load_start_iwram0, LOADADDR (.iwram0))
-                0x0801d314                PROVIDE (__load_stop_iwram0, (LOADADDR (.iwram0) + SIZEOF (.iwram0)))
+                0x03002398                . = ALIGN (0x4)
+                0x0801d36c                PROVIDE (__load_start_iwram0, LOADADDR (.iwram0))
+                0x0801d36c                PROVIDE (__load_stop_iwram0, (LOADADDR (.iwram0) + SIZEOF (.iwram0)))
 
-.iwram1         0x03002390        0x0
+.iwram1         0x03002398        0x0
  *(.iwram1)
-                0x03002390                . = ALIGN (0x4)
-                0x03002390                PROVIDE (__load_start_iwram1, LOADADDR (.iwram1))
-                0x03002390                PROVIDE (__load_stop_iwram1, (LOADADDR (.iwram1) + SIZEOF (.iwram1)))
+                0x03002398                . = ALIGN (0x4)
+                0x03002398                PROVIDE (__load_start_iwram1, LOADADDR (.iwram1))
+                0x03002398                PROVIDE (__load_stop_iwram1, (LOADADDR (.iwram1) + SIZEOF (.iwram1)))
 
-.iwram2         0x03002390        0x0
+.iwram2         0x03002398        0x0
  *(.iwram2)
-                0x03002390                . = ALIGN (0x4)
-                0x03002390                PROVIDE (__load_start_iwram2, LOADADDR (.iwram2))
-                0x03002390                PROVIDE (__load_stop_iwram2, (LOADADDR (.iwram2) + SIZEOF (.iwram2)))
+                0x03002398                . = ALIGN (0x4)
+                0x03002398                PROVIDE (__load_start_iwram2, LOADADDR (.iwram2))
+                0x03002398                PROVIDE (__load_stop_iwram2, (LOADADDR (.iwram2) + SIZEOF (.iwram2)))
 
-.iwram3         0x03002390        0x0
+.iwram3         0x03002398        0x0
  *(.iwram3)
-                0x03002390                . = ALIGN (0x4)
-                0x03002390                PROVIDE (__load_start_iwram3, LOADADDR (.iwram3))
-                0x03002390                PROVIDE (__load_stop_iwram3, (LOADADDR (.iwram3) + SIZEOF (.iwram3)))
+                0x03002398                . = ALIGN (0x4)
+                0x03002398                PROVIDE (__load_start_iwram3, LOADADDR (.iwram3))
+                0x03002398                PROVIDE (__load_stop_iwram3, (LOADADDR (.iwram3) + SIZEOF (.iwram3)))
 
-.iwram4         0x03002390        0x0
+.iwram4         0x03002398        0x0
  *(.iwram4)
-                0x03002390                . = ALIGN (0x4)
-                0x03002390                PROVIDE (__load_start_iwram4, LOADADDR (.iwram4))
-                0x03002390                PROVIDE (__load_stop_iwram4, (LOADADDR (.iwram4) + SIZEOF (.iwram4)))
+                0x03002398                . = ALIGN (0x4)
+                0x03002398                PROVIDE (__load_start_iwram4, LOADADDR (.iwram4))
+                0x03002398                PROVIDE (__load_stop_iwram4, (LOADADDR (.iwram4) + SIZEOF (.iwram4)))
 
-.iwram5         0x03002390        0x0
+.iwram5         0x03002398        0x0
  *(.iwram5)
-                0x03002390                . = ALIGN (0x4)
-                0x03002390                PROVIDE (__load_start_iwram5, LOADADDR (.iwram5))
-                0x03002390                PROVIDE (__load_stop_iwram5, (LOADADDR (.iwram5) + SIZEOF (.iwram5)))
+                0x03002398                . = ALIGN (0x4)
+                0x03002398                PROVIDE (__load_start_iwram5, LOADADDR (.iwram5))
+                0x03002398                PROVIDE (__load_stop_iwram5, (LOADADDR (.iwram5) + SIZEOF (.iwram5)))
 
-.iwram6         0x03002390        0x0
+.iwram6         0x03002398        0x0
  *(.iwram6)
-                0x03002390                . = ALIGN (0x4)
-                0x03002390                PROVIDE (__load_start_iwram6, LOADADDR (.iwram6))
-                0x03002390                PROVIDE (__load_stop_iwram6, (LOADADDR (.iwram6) + SIZEOF (.iwram6)))
+                0x03002398                . = ALIGN (0x4)
+                0x03002398                PROVIDE (__load_start_iwram6, LOADADDR (.iwram6))
+                0x03002398                PROVIDE (__load_stop_iwram6, (LOADADDR (.iwram6) + SIZEOF (.iwram6)))
 
-.iwram7         0x03002390        0x0
+.iwram7         0x03002398        0x0
  *(.iwram7)
-                0x03002390                . = ALIGN (0x4)
-                0x03002390                PROVIDE (__load_start_iwram7, LOADADDR (.iwram7))
-                0x03002390                PROVIDE (__load_stop_iwram7, (LOADADDR (.iwram7) + SIZEOF (.iwram7)))
+                0x03002398                . = ALIGN (0x4)
+                0x03002398                PROVIDE (__load_start_iwram7, LOADADDR (.iwram7))
+                0x03002398                PROVIDE (__load_stop_iwram7, (LOADADDR (.iwram7) + SIZEOF (.iwram7)))
 
-.iwram8         0x03002390        0x0
+.iwram8         0x03002398        0x0
  *(.iwram8)
-                0x03002390                . = ALIGN (0x4)
-                0x03002390                PROVIDE (__load_start_iwram8, LOADADDR (.iwram8))
-                0x03002390                PROVIDE (__load_stop_iwram8, (LOADADDR (.iwram8) + SIZEOF (.iwram8)))
+                0x03002398                . = ALIGN (0x4)
+                0x03002398                PROVIDE (__load_start_iwram8, LOADADDR (.iwram8))
+                0x03002398                PROVIDE (__load_stop_iwram8, (LOADADDR (.iwram8) + SIZEOF (.iwram8)))
 
-.iwram9         0x03002390        0x0
+.iwram9         0x03002398        0x0
  *(.iwram9)
-                0x03002390                . = ALIGN (0x4)
-                0x03002390                PROVIDE (__load_start_iwram9, LOADADDR (.iwram9))
-                0x03002390                PROVIDE (__load_stop_iwram9, (LOADADDR (.iwram9) + SIZEOF (.iwram9)))
-                0x03002390                __iwram_overlay_end = .
-                0x0801d314                __ewram_lma = (__iwram_overlay_lma + (__iwram_overlay_end - __iwram_overlay_start))
-                0x03002390                __iheap_start = .
+                0x03002398                . = ALIGN (0x4)
+                0x03002398                PROVIDE (__load_start_iwram9, LOADADDR (.iwram9))
+                0x03002398                PROVIDE (__load_stop_iwram9, (LOADADDR (.iwram9) + SIZEOF (.iwram9)))
+                0x03002398                __iwram_overlay_end = .
+                0x0801d36c                __ewram_lma = (__iwram_overlay_lma + (__iwram_overlay_end - __iwram_overlay_start))
+                0x03002398                __iheap_start = .
                 0x02000000                __ewram_start = ORIGIN (ewram)
 
-.ewram          0x02000000       0x14 load address 0x0801d314
+.ewram          0x02000000       0x14 load address 0x0801d36c
  *(.ewram)
  .ewram         0x02000000       0x14 tonclib/lib\libtonc.a(tonc_sbmp16.o)
                 0x02000000                m5_surface
                 0x02000014                . = ALIGN (0x4)
                 0x02000014                __ewram_end = ABSOLUTE (.)
-                0x0801d328                __pad_lma = (__ewram_lma + SIZEOF (.ewram))
+                0x0801d380                __pad_lma = (__ewram_lma + SIZEOF (.ewram))
 
 .sbss           0x02000014        0x0
                 0x02000014                __sbss_start__ = ABSOLUTE (.)
@@ -1237,11 +1238,11 @@ Linker script and memory map
                 0x02000014                __end__ = ABSOLUTE (.)
                 0x02000014                __eheap_start = ABSOLUTE (.)
 
-.pad            0x02000014        0x8 load address 0x0801d328
+.pad            0x02000014        0x8 load address 0x0801d380
                 0x02000014        0x4 LONG 0x52416b64
                 0x02000018        0x4 LONG 0x4d
                 0x0200001c                . = ALIGN (0x4)
-                0x0801d330                __rom_end__ = (__pad_lma + SIZEOF (.pad))
+                0x0801d388                __rom_end__ = (__pad_lma + SIZEOF (.pad))
 
 .stab
  *(.stab)
