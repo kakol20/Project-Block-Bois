@@ -117,12 +117,12 @@ int numStep = 0;
 int hScore = 99999;
 int currentState = 0;
 
-bool lvl1Played = true;
-bool lvl2Played = true;
-bool lvl3Played = true;
-bool lvl4Played = true;
-bool lvl5Played = true;
-bool lvl6Played = true;
+bool lvl1Played = false;
+bool lvl2Played = false;
+bool lvl3Played = false;
+bool lvl4Played = false;
+bool lvl5Played = false;
+bool lvl6Played = false;
 
 unsigned short world_grid[32][32];
 
