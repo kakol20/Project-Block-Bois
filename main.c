@@ -117,12 +117,12 @@ int numStep = 0;
 int hScore = 99999;
 int currentState = 0;
 
-bool lvl1Played = false;
-bool lvl2Played = false;
-bool lvl3Played = false;
-bool lvl4Played = false;
-bool lvl5Played = false;
-bool lvl6Played = false;
+bool lvl1Played = true;
+bool lvl2Played = true;
+bool lvl3Played = true;
+bool lvl4Played = true;
+bool lvl5Played = true;
+bool lvl6Played = true;
 
 unsigned short world_grid[32][32];
 
@@ -2152,7 +2152,7 @@ int main() {
 	
 	init();
 	char Score[20];
-	char coordinates[20];
+	//char coordinates[20];
 	char highScore[20];
 	
 	menuSelection = 0;
@@ -2412,13 +2412,31 @@ int main() {
 				tte_write("#{P:8,8}");
 				tte_write("#{cx:0x0000}Tutorial");
 				
-				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
-				tte_write("#{P:8, 24}");
-				tte_write(coordinates);
+				//sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				//tte_write("#{P:8, 24}");
+				//tte_write(coordinates);
 				
 				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
+				tte_write("#{P:8,24}");
 				tte_write(Score);
+				
+				tte_write("#{P:8, 40}");
+				tte_write("#{cx:0x0000}Use arrow keys to move");
+				
+				tte_write("#{P:8, 56}");
+				tte_write("#{cx:0x0000}A to push box");
+				
+				tte_write("#{P:8, 72}");
+				tte_write("#{cx:0x0000}B to pull box");
+				
+				tte_write("#{P:8, 88}");
+				tte_write("#{cx:0x0000}Use select to pause");
+				
+				tte_write("#{P:8, 104}");
+				tte_write("#{cx:0x0000}Put boxes in dropboxes");
+				
+				tte_write("#{P:8, 112}");
+				tte_write("#{cx:0x0000}to open gates");
 				
 				break;
 				
@@ -2433,13 +2451,14 @@ int main() {
 				tte_write("#{P:8,8}");
 				tte_write("#{cx:0x0000}Stage 1");
 				
-				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
-				tte_write("#{P:8, 24}");
-				tte_write(coordinates);
+				//sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				//tte_write("#{P:8, 24}");
+				//tte_write(coordinates);
 
 				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
+				tte_write("#{P:8,24}");
 				tte_write(Score);
+		
 				
 				break;
 				
@@ -2454,13 +2473,22 @@ int main() {
 				tte_write("#{P:8,8}");
 				tte_write("#{cx:0x0000}Stage 2");
 				
-				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
-				tte_write("#{P:8, 24}");
-				tte_write(coordinates);
+				//sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				//tte_write("#{P:8, 24}");
+				//tte_write(coordinates);
 
 				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
+				tte_write("#{P:8,24}");
 				tte_write(Score);
+				
+				tte_write("#{P:8, 120}");
+				tte_write("#{cx:0x0000}Add primary color");
+				
+				tte_write("#{P:8, 128}");
+				tte_write("#{cx:0x0000}boxes together");
+				
+				tte_write("#{P:8, 136}");
+				tte_write("#{cx:0x0000}to match dropbox");
 				
 				break;
 			case 4: // LEVEL 3
@@ -2474,13 +2502,22 @@ int main() {
 				tte_write("#{P:8,8}");
 				tte_write("#{cx:0x0000}Stage 3");
 				
-				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
-				tte_write("#{P:8, 24}");
-				tte_write(coordinates);
+				//sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				//tte_write("#{P:8, 24}");
+				//tte_write(coordinates);
 				
 				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
+				tte_write("#{P:8,24}");
 				tte_write(Score);
+				
+				tte_write("#{P:8, 120}");
+				tte_write("#{cx:0x0000}Add number");
+				
+				tte_write("#{P:8, 128}");
+				tte_write("#{cx:0x0000}boxes together");
+				
+				tte_write("#{P:8, 136}");
+				tte_write("#{cx:0x0000}to match dropbox");
 				
 				break;
 			case 5: // LEVEL 4
@@ -2494,12 +2531,12 @@ int main() {
 				tte_write("#{P:8,8}");
 				tte_write("#{cx:0x0000}Stage 4");
 				
-				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
-				tte_write("#{P:8, 24}");
-				tte_write(coordinates);
+				//sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				//tte_write("#{P:8, 24}");
+				//tte_write(coordinates);
 
 				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
+				tte_write("#{P:8,24}");
 				tte_write(Score);
 				
 				break;
@@ -2515,12 +2552,12 @@ int main() {
 				tte_write("#{P:8,8}");
 				tte_write("#{cx:0x0000}Stage 5");
 				
-				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
-				tte_write("#{P:8, 24}");
-				tte_write(coordinates);
+				//sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				//tte_write("#{P:8, 24}");
+				//tte_write(coordinates);
 				
 				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
+				tte_write("#{P:8,24}");
 				tte_write(Score);
 				
 				break;
@@ -2536,12 +2573,12 @@ int main() {
 				tte_write("#{P:8,8}");
 				tte_write("#{cx:0x0000}Stage 6");
 				
-				sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
-				tte_write("#{P:8, 24}");
-				tte_write(coordinates);
+				//sprintf(coordinates, "#{cx:0x0000}x: %d, y: %d", player.x, player.y);
+				//tte_write("#{P:8, 24}");
+				//tte_write(coordinates);
 				
 				sprintf(Score, "#{cx:0x0000}Score: %d", numStep);
-				tte_write("#{P:8,40}");
+				tte_write("#{P:8,24}");
 				tte_write(Score);
 				
 				break;
