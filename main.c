@@ -743,8 +743,8 @@ void initStage3() {
 	gates[2].worldX = 20;
 	gates[2].worldY = 13;
 	
-	end.worldX = 17;
-	end.worldY = 17;
+	end.worldX = 22;
+	end.worldY = 19;
 	
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
@@ -1035,8 +1035,8 @@ void initStage5() {
 	boxes[13].pb = 1;
 	boxes[13].value = 0;
 	
-	end.worldX = 11;
-	end.worldY = 21;
+	end.worldX = 17;
+	end.worldY = 17;
 	
 	backgroundX = -116 + (8 * player.x); // changes the background's position based on the player's world position
 	backgroundY = -72 + (8 * player.y);
